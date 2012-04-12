@@ -30,6 +30,7 @@ class MyToken {
 
 //package private TokenID
 enum TokenID {
+	//enums
     MUL, PLUS, MINUS, DIV, ASSIGN,
     EQ, NEQ, LO, LOEQ, HI, HIEQ,
     DOT, COMMA, COLON, LPAR, RPAR, LBRAC, RBRAC, SEMICOLON,
@@ -41,6 +42,7 @@ enum TokenID {
     private static final int startValue = 256;
     private static final Map<TokenID, Integer> ids;
     
+    //generate the enums in the Map<TokenID, Integer> ids
     static {
         ids = new HashMap<TokenID, Integer>();
         for (int i = 0; i < values().length; ++i) {
@@ -52,12 +54,13 @@ enum TokenID {
     public int id() { return ids.get(this); }
 }
 
-//Option und Deklarationen
+//Option und Declaration
 %%
 
 %public
 %class Scanner1
 %standalone
+//need this to use yyline, yycolumn later
 %line
 %column
 
@@ -67,7 +70,7 @@ integer	=	{digit}({digit})*
 ident 	=	{letter}({letter}|{digit}})*
 blank	=	[/t/n/r]
 
-//Lexikalische Regeln
+//lexical rules
 %%
 "*" { new MyToken(MUL, yytext(), yyline, yycolumn); }
 "+" { new MyToken(PLUS, yytext(), yyline, yycolumn); }
@@ -91,35 +94,35 @@ blank	=	[/t/n/r]
 "]" { new MyToken(RBRAC, yytext(), yyline, yycolumn); }
 ";" { new MyToken(SEMICOLON, yytext(), yyline, yycolumn); }
 
-[oO][fF] { new MyToken(OF, yytext(), yyline, yycolumn); }
-[tT][hH][eE][nN] { new MyToken(THEN, yytext(), yyline, yycolumn); }
-[dD][oO] { new MyToken(DO, yytext(), yyline, yycolumn); }
-[pP][rR][iI][nN][tT] { new MyToken(PRINT, yytext(), yyline, yycolumn); }
-[rR][eE][aA][dD] { new MyToken(READ, yytext(), yyline, yycolumn); }
+[oO][fF] 				{ new MyToken(OF, yytext(), yyline, yycolumn); }
+[tT][hH][eE][nN] 		{ new MyToken(THEN, yytext(), yyline, yycolumn); }
+[dD][oO] 				{ new MyToken(DO, yytext(), yyline, yycolumn); }
+[pP][rR][iI][nN][tT] 	{ new MyToken(PRINT, yytext(), yyline, yycolumn); }
+[rR][eE][aA][dD] 		{ new MyToken(READ, yytext(), yyline, yycolumn); }
 
-[eE][nN][dD] { new MyToken(END, yytext(), yyline, yycolumn); }
-[eE][lL][sS][eE] { new MyToken(ELSE, yytext(), yyline, yycolumn); }
-[eE][lL][sS][iI][fF] { new MyToken(ELSIF, yytext(), yyline, yycolumn); }
-[iI][fF] { new MyToken(IF, yytext(), yyline, yycolumn); }
-[wW][hH][iI][lL][eE] { new MyToken(WHILE, yytext(), yyline, yycolumn); }
+[eE][nN][dD] 			{ new MyToken(END, yytext(), yyline, yycolumn); }
+[eE][lL][sS][eE] 		{ new MyToken(ELSE, yytext(), yyline, yycolumn); }
+[eE][lL][sS][iI][fF] 	{ new MyToken(ELSIF, yytext(), yyline, yycolumn); }
+[iI][fF] 				{ new MyToken(IF, yytext(), yyline, yycolumn); }
+[wW][hH][iI][lL][eE] 	{ new MyToken(WHILE, yytext(), yyline, yycolumn); }
 [rR][eE][pP][eE][eA][tT] { new MyToken(REPEAT, yytext(), yyline, yycolumn); }
-[uU][nN][tT][iI][lL] { new MyToken(UNTIL, yytext(), yyline, yycolumn); }
+[uU][nN][tT][iI][lL] 	{ new MyToken(UNTIL, yytext(), yyline, yycolumn); }
 
-[aA][rR][rR][aA][yY] { new MyToken(ARRAY, yytext(), yyline, yycolumn); }
+[aA][rR][rR][aA][yY]	{ new MyToken(ARRAY, yytext(), yyline, yycolumn); }
 [rR][eE][cC][oO][rR][dD] { new MyToken(RECORD, yytext(), yyline, yycolumn); }
-[cC][oO][nN][sS][tT] { new MyToken(CONST, yytext(), yyline, yycolumn); }
-[tT][yY][pP][eE] { new MyToken(TYPE, yytext(), yyline, yycolumn); }
+[cC][oO][nN][sS][tT] 	{ new MyToken(CONST, yytext(), yyline, yycolumn); }
+[tT][yY][pP][eE] 		{ new MyToken(TYPE, yytext(), yyline, yycolumn); }
 
-[vV][aA][rR] { new MyToken(VAR, yytext(), yyline, yycolumn); }
-[pP][rR][oO][cC][eE][dD][uU][rR][eE] { new MyToken(PROCEDURE, yytext(), yyline, yycolumn); }
-[bB][eE][gG][iI][nN] { new MyToken(BEGIN, yytext(), yyline, yycolumn); }
-[mM][oO][dD][uU][lL][eE] { new MyToken(MODULE, yytext(), yyline, yycolumn); }
+[vV][aA][rR] 							{ new MyToken(VAR, yytext(), yyline, yycolumn); }
+[pP][rR][oO][cC][eE][dD][uU][rR][eE] 	{ new MyToken(PROCEDURE, yytext(), yyline, yycolumn); }
+[bB][eE][gG][iI][nN] 					{ new MyToken(BEGIN, yytext(), yyline, yycolumn); }
+[mM][oO][dD][uU][lL][eE] 				{ new MyToken(MODULE, yytext(), yyline, yycolumn); }
 
 {digit}+ { System.out.println("DIGITS " + yytext()); }
 {ident} { System.out.println("ID " + yytext()); }
 
 {blank} {}
-//wenn nichts von oben erkannt wird ist es "nichts"
+//if there is nothing found overhead then it is nothing "nichts"
 . { System.out.println("error (" + yytext() + "," + yyline + "," + yycolumn +")"); System.exit(0);}
 
 
