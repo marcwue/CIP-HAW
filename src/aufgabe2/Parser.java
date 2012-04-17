@@ -1,4 +1,4 @@
-package aufgabe1;
+package aufgabe2;
 
 public class Parser {
 	static MyFlexScanner scanner = null;
@@ -26,11 +26,12 @@ public class Parser {
 	}
 
 	public static void inSymbol() {
-		for (int i = 0; i < argv.length; i++) {
+//		for (int i = 0; i < argv.length; i++) {
+		int i=0;
 			try {
 				scanner = new MyFlexScanner(new java.io.FileReader(argv[i]));
 
-				while ((nextsymbol = scanner.yylex()) != null) {
+				while ((nextsymbol = scanner.yylex()).id() == TokenID.WHITESPACE) {
 					System.out.println(nextsymbol.toString());
 				}
 			} catch (java.io.FileNotFoundException e) {
@@ -39,7 +40,43 @@ public class Parser {
 				System.out.println("Unexpected exception:");
 				e.printStackTrace();
 			}
+//		}
+	}
+
+	public static void program(){
+
+		
+		
+		simpleExpr();
+	}
+	
+	public static void simpleExpr() {
+
+		term();
+	}
+
+	public static void term() {
+		factor();
+	}
+
+	static AbstractNode factor() {
+		//Klammern
+		if (nextsymbol.id() == TokenID.LPAR) {
+			inSymbol();
+			simpleExpr();
+			if (nextsymbol.id() == TokenID.RPAR)
+				inSymbol();
+			else
+				error(" ) expected");
+		} else if (nextsymbol.id() == TokenID.INT) {
+			outInt(Integer.parseInt(nextsymbol.text()));
+			inSymbol();
+		} else if (nextsymbol.id() == TokenID.ID) {
+			outStr(nextsymbol.text());
+			inSymbol();
+			System.out.println("x");
 		}
+		return null;
 	}
 
 	public static void main(String[] argv) {
@@ -50,6 +87,10 @@ public class Parser {
 		} else {
 			Parser.argv = argv;
 			inSymbol();
+			System.out.println(nextsymbol);
+			
+			program();
+
 		}
 	}
 
