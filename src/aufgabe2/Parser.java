@@ -20,20 +20,8 @@ public class Parser {
 	public static final int VARIABLE = 2;
 	public static final int WHILE = 3;
 
-	public static void compile(String str) {
-		System.out.println(str);
-	}
-
-	public static void outStr(String str) {
-		System.out.print(str + " ");
-	}
-
-	public static void outInt(int i) {
-		System.out.print(i + " ");
-	}
-
-	public static void outOp(String op) {
-		System.out.print(op);
+	public static void print(MyToken token) {
+		System.out.println(token);
 	}
 
 	public static void error(String str) {
@@ -58,70 +46,93 @@ public class Parser {
 	}
 
 	public static AbstractNode program() {
-		// while(nextsymbol.id() == TokenID.BEGIN){
-		
-		// }
+		while (nextsymbol.id() == TokenID.BEGIN) {
+			exprSeq();
+		}
 		return null;
+	}
+
+	private static void exprSeq() {
+		if (nextsymbol.id() == TokenID.BEGIN) {
+			print(nextsymbol);
+			inSymbol();
+		} else {
+			error("BEGIN expected\n");
+		}
+		while ((nextsymbol.id() == TokenID.LPAR)
+				|| (nextsymbol.id() == TokenID.ID)
+				|| (nextsymbol.id() == TokenID.INT)) {
+			simpleExpr();
+		}
+		if (nextsymbol.id() == TokenID.END) {
+			print(nextsymbol);
+			inSymbol();
+		} else {
+			error("END expected\n");
+		}
+
+	}
+
+	private static AbstractNode assignment(MyToken ident) {
+
+		inSymbol();
+		AbstractNode simpleExpr = simpleExpr();
+		return new AssignmentNode(ident, simpleExpr);
 	}
 
 	private static AbstractNode statementSequence() {
 
-		
-		
-		simpleExpr();
-		return null;
+		return simpleExpr();
 	}
 
-	private static AbstractNode assignment() {
+	private static AbstractNode simpleExpr() {
 
-		AbstractNode factor;
-		// assignment
-		if (nextsymbol.id() == TokenID.ASSIGN) {
-			inSymbol();
-			factor = factor();
-		}// Semicolon
-//		else if (nextsymbol.id() == TokenID.SEMICOLON) {
-//			inSymbol();
-//			factor();
-//		}
-
-		//new AssignmentNode();
-		return null;
+		return term();
 	}
-	
-	private static void simpleExpr() {
 
-		term();
-	}
-	
-	private static void term() {
-		factor();
+	private static AbstractNode term() {
+
+		return factor();
 	}
 
 	private static AbstractNode factor() {
 		FactorNode f = null;
+		MyToken next;
 		// Klammern
 		if (nextsymbol.id() == TokenID.LPAR) {
+			print(nextsymbol);
 			inSymbol();
 			simpleExpr();
-			if (nextsymbol.id() == TokenID.RPAR)
+			if (nextsymbol.id() == TokenID.RPAR) {
+				print(nextsymbol);
 				inSymbol();
-			else
+			} else {
 				error(" ) expected");
-
+			}
 		}
 		// integer
 		else if (nextsymbol.id() == TokenID.INT) {
-			outInt(Integer.parseInt(nextsymbol.text()));
+			print(nextsymbol);
 			f = new FactorNode(Integer.parseInt(nextsymbol.text()));
 			inSymbol();
 
 		}
 		// identifier
-		else if (nextsymbol.id() == TokenID.ID) {
-			outStr(nextsymbol.text());
+		else if ((next = nextsymbol).id() == TokenID.ID) {
+			print(nextsymbol);
 			f = new FactorNode(nextsymbol.text());
 			inSymbol();
+			if (nextsymbol.id() == TokenID.ASSIGN) {
+				print(nextsymbol);
+				assignment(next);
+				if (nextsymbol.id() == TokenID.SEMICOLON) {
+					print(nextsymbol);
+					inSymbol();
+					simpleExpr();
+				} else {
+					error("SEMICOLON expected\n");
+				}
+			}
 		}
 
 		return f;
@@ -156,8 +167,6 @@ public class Parser {
 		return null;
 	}
 
-	
-
 	public static void main(String[] argv) {
 		System.out.println("MyStandalone Version 0.1");
 
@@ -172,7 +181,6 @@ public class Parser {
 					inSymbol();
 
 					while (nextsymbol.id() != null) {
-						System.out.println(nextsymbol);
 						program();
 					}
 				} catch (java.io.FileNotFoundException e) {
