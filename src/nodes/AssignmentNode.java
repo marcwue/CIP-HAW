@@ -23,7 +23,14 @@ public class AssignmentNode extends AbstractNode{
 		this.ident = ident;
 		this.value = value1;
 	}
-	
-	
+
+	/* (non-Javadoc)
+	 * @see nodes.AbstractNode#toString()
+	 */
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ident.toString() + value.toString();
+	}
 	
 }

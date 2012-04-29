@@ -7,16 +7,16 @@ package nodes;
  * @author Marc Wüseke
  *
  */
-public class TermNode extends AbstractNode {
+public class StatementNode extends AbstractNode{
 
-	AbstractNode term;
+	AbstractNode statement;
 
 	/**
-	 * @param term
+	 * @param statement
 	 */
-	public TermNode(AbstractNode term) {
+	public StatementNode(AbstractNode statement) {
 		super();
-		this.term = term;
+		this.statement = statement;
 	}
 
 	/* (non-Javadoc)
@@ -25,7 +25,7 @@ public class TermNode extends AbstractNode {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return term.toString();
+		return statement.toString();
 	}
 	
 }

@@ -27,6 +27,15 @@ public class ExpressionNode extends AbstractNode{
 		this.relop = relop;
 		this.simpleExp2 = simpleExp2;
 	}
+
+	/* (non-Javadoc)
+	 * @see nodes.AbstractNode#toString()
+	 */
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return simpleExp1.toString() + relop.toString() + simpleExp2.toString();
+	}
 	
 	
 }

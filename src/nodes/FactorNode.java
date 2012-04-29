@@ -9,18 +9,29 @@ package nodes;
  */
 public class FactorNode extends AbstractNode{
 
-	int valueInt;
-	String valueString;
+	Integer valueInt = null;
+	String valueString = null;
 	/**
 	 * @param type
 	 * @param value
 	 */
 	public FactorNode(int value) {
-		this.valueInt = value;
+		valueInt = new Integer(value);
 	}
 
 	public FactorNode(String value) {
 		this.valueString = value;
+	}
+
+	/* (non-Javadoc)
+	 * @see nodes.AbstractNode#toString()
+	 */
+	@Override
+	public String toString() {
+		if (valueInt == null)
+			return valueInt+"";
+		else
+			return valueString;
 	}
 	
 }

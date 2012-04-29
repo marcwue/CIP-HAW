@@ -1,6 +1,6 @@
 package nodes;
 
-public class AbstractNode {
+public abstract class AbstractNode {
 
 	/**
 	 * @param type
@@ -8,5 +8,7 @@ public class AbstractNode {
 	public AbstractNode() {
 		super();
 	}
+	
+	public abstract String toString();
 	
 }

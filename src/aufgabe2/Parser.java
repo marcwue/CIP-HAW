@@ -5,6 +5,7 @@ import nodes.AssignmentNode;
 import nodes.ExpressionNode;
 import nodes.FactorNode;
 import nodes.IfNode;
+import nodes.StatementNode;
 import nodes.TermNode;
 import nodes.WhileNode;
 import sun.security.pkcs.ParsingException;
@@ -71,6 +72,10 @@ public class Parser {
 		// while (nextsymbol.id() == TokenID.WHILE) {
 		// simpleExprRes = whileStatement();
 		// }
+		
+		while (nextsymbol.id() == TokenID.IF) {
+			simpleExprRes = ifStatement();
+		}
 
 		if (nextsymbol.id() == TokenID.END) {
 			print(nextsymbol);
@@ -88,6 +93,13 @@ public class Parser {
 		AbstractNode simpleExpr = simpleExp();
 		return new AssignmentNode(ident, simpleExpr);
 	}
+	
+	private static StatementNode statement(){
+		
+		
+		
+		return new StatementNode(null);
+	}
 
 	private static AbstractNode statementSeq() throws ParsingException {
 
@@ -96,24 +108,24 @@ public class Parser {
 	
 	private static AbstractNode expression() throws ParsingException {
 
-		AbstractNode simpleExp1 = null;
+		AbstractNode simpleExp1 = simpleExp();
 		AbstractNode simpleExp2 = null;
 		MyToken relop = null;
-		
-		inSymbol();
+
 		if(nextsymbol.id() == TokenID.EQ
 				|| nextsymbol.id() == TokenID.NEQ
 				|| nextsymbol.id() == TokenID.LO
 				|| nextsymbol.id() == TokenID.LOEQ
 				|| nextsymbol.id() == TokenID.HI
 				|| nextsymbol.id() == TokenID.HIEQ){
+			print(nextsymbol);
 			relop = nextsymbol;
-			
-			inSymbol();
-			
+		} else {
+			throw new ParsingException("Rel Op expected");
 		}
 		
-		
+		inSymbol();
+		simpleExp2 = simpleExp();
 		
 		return new ExpressionNode(simpleExp1, relop, simpleExp2);
 	}
@@ -173,10 +185,10 @@ public class Parser {
 		}
 		// integer
 		else if (nextsymbol.id() == TokenID.INT) {
+			System.out.println("ddd"+nextsymbol);
 			print(nextsymbol);
 			f = new FactorNode(Integer.parseInt(nextsymbol.text()));
 			inSymbol();
-
 		}
 		// identifier
 		else if ((next = nextsymbol).id() == TokenID.ID) {
@@ -196,42 +208,38 @@ public class Parser {
 			}
 		}
 
+		System.out.println("+"+f);
 		return f;
 	}
 
-	private static IfNode conditionalStatement() throws ParsingException {
+	private static IfNode ifStatement() throws ParsingException {
 		AbstractNode e = null, st1 = null, st2 = null;
 		if (nextsymbol.id() == TokenID.IF) {
+			print(nextsymbol);
 			inSymbol();
 		} else {
 			throw new ParsingException("IF expected");
 		}
 		e = expression();
 		if (nextsymbol.id() == TokenID.THEN) {
+			print(nextsymbol);
 			inSymbol();
 		} else {
 			throw new ParsingException("THEN expected");
 		}
 		st1 = statementSeq();
 		if (nextsymbol.id() == TokenID.ELSE) {
+			print(nextsymbol);
 			inSymbol();
 			st2 = statementSeq();
 		}
 		if (nextsymbol.id() == TokenID.END) {
+			print(nextsymbol);
 			inSymbol();
 		} else {
 			throw new ParsingException("END expected");
 		}
 		return new IfNode(e, st1, st2);
-	}
-
-	private static ConditionNode condition() {
-
-		if (nextsymbol.id() == TokenID.ID || nextsymbol.id() == TokenID.INT) {
-
-		}
-
-		return new ConditionNode();
 	}
 
 	private static WhileNode whileStatement() throws ParsingException {
@@ -242,7 +250,7 @@ public class Parser {
 		} else {
 			throw new ParsingException("WHILE expected " + nextsymbol);
 		}
-		e = exprSeq();
+		e = expression();
 		if (nextsymbol.id() == TokenID.DO) {
 			print(nextsymbol);
 			inSymbol();
@@ -272,8 +280,12 @@ public class Parser {
 					scanner = new MyFlexScanner(new java.io.FileReader(inFile));
 					inSymbol();
 
+					AbstractNode erg;
+					
 					while (nextsymbol != null) {
-						program();
+						erg = program();
+						System.out.println("tree:");
+						erg.toString();
 					}
 				} catch (java.io.FileNotFoundException e) {
 					System.out.println("File not found : \"" + inFile + "\"");
