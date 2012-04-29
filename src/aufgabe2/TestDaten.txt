@@ -1,3 +1,7 @@
 Begin
 	Emil := (3);
+	r := r - w; 
+	q := q + 1;
+	s := s / d;
+	t := q * 1;
 End

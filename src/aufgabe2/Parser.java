@@ -31,7 +31,8 @@ public class Parser {
 	public static void inSymbol() {
 
 		try {
-			while ((nextsymbol = scanner.yylex()).id() == TokenID.WHITESPACE) {
+			while (((nextsymbol = scanner.yylex()) != null)
+					&& (nextsymbol.id() == TokenID.WHITESPACE)) {
 
 			}
 		} catch (java.io.FileNotFoundException e) {
@@ -46,13 +47,15 @@ public class Parser {
 	}
 
 	public static AbstractNode program() {
-		while (nextsymbol.id() == TokenID.BEGIN) {
-			exprSeq();
+		AbstractNode exprSeqRes = null;
+		while (nextsymbol != null && nextsymbol.id() == TokenID.BEGIN) {
+			exprSeqRes = exprSeq();
 		}
-		return null;
+		return exprSeqRes;
 	}
 
-	private static void exprSeq() {
+	private static AbstractNode exprSeq() {
+		AbstractNode simpleExprRes = null;
 		if (nextsymbol.id() == TokenID.BEGIN) {
 			print(nextsymbol);
 			inSymbol();
@@ -62,7 +65,7 @@ public class Parser {
 		while ((nextsymbol.id() == TokenID.LPAR)
 				|| (nextsymbol.id() == TokenID.ID)
 				|| (nextsymbol.id() == TokenID.INT)) {
-			simpleExpr();
+			simpleExprRes = simpleExpr();
 		}
 		if (nextsymbol.id() == TokenID.END) {
 			print(nextsymbol);
@@ -70,7 +73,7 @@ public class Parser {
 		} else {
 			error("END expected\n");
 		}
-
+		return simpleExprRes;
 	}
 
 	private static AbstractNode assignment(MyToken ident) {
@@ -87,12 +90,38 @@ public class Parser {
 
 	private static AbstractNode simpleExpr() {
 
+		MyToken lsy;
+		term();
+		if ((nextsymbol.id() == TokenID.PLUS)
+				|| (nextsymbol.id() == TokenID.MINUS)) {
+			lsy = nextsymbol;
+			inSymbol();
+			simpleExpr();
+			if (lsy.id() == TokenID.PLUS)
+				print(lsy);
+			else
+				print(lsy);
+		}
+
 		return term();
 	}
 
 	private static AbstractNode term() {
 
-		return factor();
+		MyToken lsy;
+		AbstractNode f = factor();
+		if ((nextsymbol.id() == TokenID.MUL)
+				|| (nextsymbol.id() == TokenID.DIV)) {
+			lsy = nextsymbol;
+			inSymbol();
+			term();
+			if (lsy.id() == TokenID.MUL)
+				print(lsy);
+			else
+				print(lsy);
+		}
+
+		return f;
 	}
 
 	private static AbstractNode factor() {
@@ -180,7 +209,7 @@ public class Parser {
 					scanner = new MyFlexScanner(new java.io.FileReader(inFile));
 					inSymbol();
 
-					while (nextsymbol.id() != null) {
+					while (nextsymbol != null) {
 						program();
 					}
 				} catch (java.io.FileNotFoundException e) {
