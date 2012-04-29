@@ -2,7 +2,10 @@ package aufgabe2;
 
 import nodes.AbstractNode;
 import nodes.AssignmentNode;
+import nodes.ExpressionNode;
 import nodes.FactorNode;
+import nodes.IfNode;
+import nodes.TermNode;
 import nodes.WhileNode;
 import sun.security.pkcs.ParsingException;
 
@@ -16,15 +19,12 @@ public class Parser {
 	static MyToken nextsymbol;
 	static String[] argv;
 	static String inFile;
-	public static final int FACTOR = 1;
-	public static final int VARIABLE = 2;
-	public static final int WHILE = 3;
 
 	public static void print(MyToken token) {
 		System.out.println(token);
 	}
 
-	public static void error(String str) {
+	public void error(String str) {
 		System.out.println("Error: " + str);
 	}
 
@@ -46,49 +46,80 @@ public class Parser {
 		}
 	}
 
-	public static AbstractNode program() {
-		AbstractNode exprSeqRes = null;
+	public static AbstractNode program() throws ParsingException {
+		AbstractNode res = null;
 		while (nextsymbol != null && nextsymbol.id() == TokenID.BEGIN) {
-			exprSeqRes = exprSeq();
+			res = exprSeq();
 		}
-		return exprSeqRes;
+		return res;
 	}
 
-	private static AbstractNode exprSeq() {
+	private static AbstractNode exprSeq() throws ParsingException {
 		AbstractNode simpleExprRes = null;
 		if (nextsymbol.id() == TokenID.BEGIN) {
 			print(nextsymbol);
 			inSymbol();
 		} else {
-			error("BEGIN expected\n");
+			throw new ParsingException("BEGIN expected\n");
 		}
 		while ((nextsymbol.id() == TokenID.LPAR)
 				|| (nextsymbol.id() == TokenID.ID)
 				|| (nextsymbol.id() == TokenID.INT)) {
-			simpleExprRes = simpleExpr();
+			simpleExprRes = simpleExp();
 		}
+
+		// while (nextsymbol.id() == TokenID.WHILE) {
+		// simpleExprRes = whileStatement();
+		// }
+
 		if (nextsymbol.id() == TokenID.END) {
 			print(nextsymbol);
 			inSymbol();
 		} else {
-			error("END expected\n");
+			throw new ParsingException("END expected\n");
 		}
 		return simpleExprRes;
 	}
 
-	private static AbstractNode assignment(MyToken ident) {
+	private static AbstractNode assignment(MyToken ident)
+			throws ParsingException {
 
 		inSymbol();
-		AbstractNode simpleExpr = simpleExpr();
+		AbstractNode simpleExpr = simpleExp();
 		return new AssignmentNode(ident, simpleExpr);
 	}
 
-	private static AbstractNode statementSequence() {
+	private static AbstractNode statementSeq() throws ParsingException {
 
-		return simpleExpr();
+		return simpleExp();
+	}
+	
+	private static AbstractNode expression() throws ParsingException {
+
+		AbstractNode simpleExp1 = null;
+		AbstractNode simpleExp2 = null;
+		MyToken relop = null;
+		
+		inSymbol();
+		if(nextsymbol.id() == TokenID.EQ
+				|| nextsymbol.id() == TokenID.NEQ
+				|| nextsymbol.id() == TokenID.LO
+				|| nextsymbol.id() == TokenID.LOEQ
+				|| nextsymbol.id() == TokenID.HI
+				|| nextsymbol.id() == TokenID.HIEQ){
+			relop = nextsymbol;
+			
+			inSymbol();
+			
+		}
+		
+		
+		
+		return new ExpressionNode(simpleExp1, relop, simpleExp2);
 	}
 
-	private static AbstractNode simpleExpr() {
+
+	private static AbstractNode simpleExp() throws ParsingException {
 
 		MyToken lsy;
 		term();
@@ -96,7 +127,7 @@ public class Parser {
 				|| (nextsymbol.id() == TokenID.MINUS)) {
 			lsy = nextsymbol;
 			inSymbol();
-			simpleExpr();
+			simpleExp();
 			if (lsy.id() == TokenID.PLUS)
 				print(lsy);
 			else
@@ -106,10 +137,11 @@ public class Parser {
 		return term();
 	}
 
-	private static AbstractNode term() {
+	
+	private static AbstractNode term() throws ParsingException {
 
 		MyToken lsy;
-		AbstractNode f = factor();
+		AbstractNode t = factor();
 		if ((nextsymbol.id() == TokenID.MUL)
 				|| (nextsymbol.id() == TokenID.DIV)) {
 			lsy = nextsymbol;
@@ -121,22 +153,22 @@ public class Parser {
 				print(lsy);
 		}
 
-		return f;
+		return new TermNode(t);
 	}
 
-	private static AbstractNode factor() {
+	private static AbstractNode factor() throws ParsingException {
 		FactorNode f = null;
 		MyToken next;
 		// Klammern
 		if (nextsymbol.id() == TokenID.LPAR) {
 			print(nextsymbol);
 			inSymbol();
-			simpleExpr();
+			simpleExp();
 			if (nextsymbol.id() == TokenID.RPAR) {
 				print(nextsymbol);
 				inSymbol();
 			} else {
-				error(" ) expected");
+				throw new ParsingException(" ) expected");
 			}
 		}
 		// integer
@@ -157,9 +189,9 @@ public class Parser {
 				if (nextsymbol.id() == TokenID.SEMICOLON) {
 					print(nextsymbol);
 					inSymbol();
-					simpleExpr();
+					simpleExp();
 				} else {
-					error("SEMICOLON expected\n");
+					throw new ParsingException("SEMICOLON expected\n");
 				}
 			}
 		}
@@ -167,33 +199,64 @@ public class Parser {
 		return f;
 	}
 
-	private static AbstractNode whileStatement() throws ParsingException {
-		AbstractNode e = null, st = null;
-		if (nextsymbol.id() == TokenID.WHILE)
+	private static IfNode conditionalStatement() throws ParsingException {
+		AbstractNode e = null, st1 = null, st2 = null;
+		if (nextsymbol.id() == TokenID.IF) {
 			inSymbol();
-		else
-			throw new ParsingException("WHILE expected " + nextsymbol.line()
-					+ nextsymbol.column());
+		} else {
+			throw new ParsingException("IF expected");
+		}
 		e = expression();
-		if (nextsymbol.id() == TokenID.DO) {
+		if (nextsymbol.id() == TokenID.THEN) {
 			inSymbol();
 		} else {
-			throw new ParsingException("DO expected" + nextsymbol.line()
-					+ nextsymbol.column());
+			throw new ParsingException("THEN expected");
 		}
-		st = statementSequence();
-		if (nextsymbol.id() == TokenID.ENDSY) {
+		st1 = statementSeq();
+		if (nextsymbol.id() == TokenID.ELSE) {
+			inSymbol();
+			st2 = statementSeq();
+		}
+		if (nextsymbol.id() == TokenID.END) {
 			inSymbol();
 		} else {
-			throw new ParsingException("END expected" + nextsymbol.line()
-					+ nextsymbol.column());
+			throw new ParsingException("END expected");
 		}
-		return new WhileNode(e, st);
+		return new IfNode(e, st1, st2);
 	}
 
-	private static AbstractNode expression() {
+	private static ConditionNode condition() {
 
-		return null;
+		if (nextsymbol.id() == TokenID.ID || nextsymbol.id() == TokenID.INT) {
+
+		}
+
+		return new ConditionNode();
+	}
+
+	private static WhileNode whileStatement() throws ParsingException {
+		AbstractNode e = null, st = null;
+		if (nextsymbol.id() == TokenID.WHILE) {
+			print(nextsymbol);
+			inSymbol();
+		} else {
+			throw new ParsingException("WHILE expected " + nextsymbol);
+		}
+		e = exprSeq();
+		if (nextsymbol.id() == TokenID.DO) {
+			print(nextsymbol);
+			inSymbol();
+		} else {
+			throw new ParsingException("DO expected " + nextsymbol);
+		}
+		st = statementSeq();
+		if (nextsymbol.id() == TokenID.ENDSY) {
+			print(nextsymbol);
+			inSymbol();
+		} else {
+			throw new ParsingException("END expected " + nextsymbol);
+		}
+		return new WhileNode(e, st);
 	}
 
 	public static void main(String[] argv) {

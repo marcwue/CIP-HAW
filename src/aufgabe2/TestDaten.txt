@@ -4,4 +4,10 @@ Begin
 	q := q + 1;
 	s := s / d;
 	t := q * 1;
+	
+	if a<b then 
+		aaa := 1+2;
+	else
+		bbb := 3-2;
+	end
 End
