@@ -16,7 +16,7 @@ public class Parser {
 	private MyFlexScanner scanner;
 	private MyToken nextSymbol;
 	private String[] argv;
-	private String inFile;
+	private static String inFile;
 
 	public Parser(MyFlexScanner scanner) {
 		this.scanner = scanner;
@@ -26,6 +26,7 @@ public class Parser {
 		AbstractNode tree = null;
 
 		while (nextSymbol != null) {
+			System.out.println("sss");
 			tree = module();
 			inSymbol();
 		}
@@ -285,33 +286,6 @@ public class Parser {
 
 	public static void print(MyToken token) {
 		System.out.println(token);
-	}
-
-	private AbstractNode exprSeq() {
-		AbstractNode simpleExprRes = null;
-		if (nextSymbol.id() == BEGIN) {
-			print(nextSymbol);
-			inSymbol();
-		}
-		while ((nextSymbol.id() == TokenID.LPAR)
-				|| (nextSymbol.id() == TokenID.ID)
-				|| (nextSymbol.id() == TokenID.INT)) {
-			simpleExprRes = simpleExp();
-		}
-
-		// while (nextsymbol.id() == TokenID.WHILE) {
-		// simpleExprRes = whileStatement();
-		// }
-
-		while (nextSymbol.id() == TokenID.IF) {
-			simpleExprRes = ifStatement();
-		}
-
-		if (nextSymbol.id() == TokenID.END) {
-			print(nextSymbol);
-			inSymbol();
-		}
-		return simpleExprRes;
 	}
 
 	private AbstractNode assignment() {
@@ -660,9 +634,9 @@ public class Parser {
 			// will be thrown when next symbol is EOF
 			// in this case null is a good value for afterNextSymbol
 		} catch (java.io.FileNotFoundException e) {
-			System.out.println("File not found : \"" + argv[0] + "\"");
+			System.out.println("File not found : \"" + inFile + "\"");
 		} catch (java.io.IOException e) {
-			System.out.println("IO error scanning file \"" + argv[0] + "\"");
+			System.out.println("IO error scanning file \"" + inFile + "\"");
 			System.out.println(e);
 		} catch (Exception e) {
 			System.out.println("Unexpected exception:");
@@ -722,14 +696,16 @@ public class Parser {
 
 			for (int i = 0; i < argv.length; i++) {
 				try {
+					inFile = argv[i];
+					
 					Parser parser = new Parser(new MyFlexScanner(
-							new java.io.FileReader(argv[0])));
+							new java.io.FileReader(argv[i])));
 
 					AbstractNode erg = parser.parse();
-					erg.toString();
+					System.out.println(erg);
 
 				} catch (java.io.FileNotFoundException e) {
-					System.out.println("File not found : \"" + argv[0] + "\"");
+					System.out.println("File not found : \"" + inFile + "\"");
 				} catch (Exception e) {
 					System.out.println("Unexpected exception:");
 					e.printStackTrace();
