@@ -19,6 +19,7 @@ letter	=	[a-zA-Z]
 integer	=	{digit}({digit})*
 ident 	=	{letter}({letter}|{digit}})*
 blank	=	[ \t\n\r]
+string = \"([^\\\"]|\\.)*\"
 
 //lexical rules
 %%
@@ -70,7 +71,8 @@ blank	=	[ \t\n\r]
 [bB][eE][gG][iI][nN] 					{ return new MyToken(BEGIN, yytext(), yyline, yycolumn); }
 [mM][oO][dD][uU][lL][eE] 				{ return new MyToken(MODULE, yytext(), yyline, yycolumn); }
 
-{integer} { return new MyToken(INT, yytext(), yyline, yycolumn); }
+-?{integer}+ { return new MyToken(INT, yytext(), yyline, yycolumn); }
 {ident} { return new MyToken(ID, yytext(), yyline, yycolumn); }
+{string}    { return new MyToken(STR, yytext(), yyline, yycolumn); }
 
 . { return new MyToken(ERROR, yytext(), yyline, yycolumn); } 
