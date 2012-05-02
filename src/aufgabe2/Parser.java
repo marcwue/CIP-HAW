@@ -22,8 +22,19 @@ public class Parser {
 		this.scanner = scanner;
 	}
 
+	private AbstractNode program() {
+		AbstractNode tree = null;
+
+		while (nextSymbol != null) {
+			tree = module();
+			inSymbol();
+		}
+
+		return tree;
+	}
+
 	public AbstractNode parse() {
-		return module();
+		return program();
 	}
 
 	// IdentList = ident {â€™,â€™ ident}
@@ -166,7 +177,7 @@ public class Parser {
 			do {
 				constIdent = constIdent();
 				read(ASSIGN, "=");
-				exp = expression();
+				exp = (ExpressionNode) expression();
 				read(SEMICOLON, ";");
 				liste.add(new ConstNode(constIdent, exp));
 			} while (test(ID));
@@ -221,7 +232,7 @@ public class Parser {
 		read(SEMICOLON, ";");
 		AbstractNode declaration = declarations();
 		read(BEGIN, "BEGIN");
-		StatemantSequenceNode stmtseq = statementSeq();
+		StatementSequenceNode stmtseq = (StatementSequenceNode) statementSeq();
 		read(END, "END");
 		IdentNode moduleEndName = constIdent();
 		if (!moduleName.equals(moduleEndName)) {
@@ -248,34 +259,39 @@ public class Parser {
 		return new IntNode(Integer.parseInt(read(ID, "identifier").text()));
 	}
 
+	// string
+	private StringNode string() {
+		return new StringNode(read(STR, "string").text());
+	}
+
+	// selector
+	private SelectorNode selector() {
+		IdentNode subject = constIdent();
+		List<AbstractNode> selectors = new LinkedList<AbstractNode>();
+
+		while (test(DOT) || test(LBRAC)) {
+			if (test(DOT)) {
+				read(DOT, ".");
+				selectors.add(constIdent());
+			} else {
+				read(LBRAC, "[");
+				selectors.add(indexExpr());
+				read(RBRAC, "]");
+			}
+		}
+
+		return new SelectorNode(subject, selectors);
+	}
+
 	public static void print(MyToken token) {
 		System.out.println(token);
 	}
 
-	public void inSymbol() {
-		try {
-			while (((nextSymbol = scanner.yylex()) != null)
-					&& (nextSymbol.id() == WHITESPACE)) {
-
-			}
-		} catch (java.io.FileNotFoundException e) {
-			System.out.println("File not found : \"" + inFile + "\"");
-		} catch (java.io.IOException e) {
-			System.out.println("IO error scanning file \"" + inFile + "\"");
-			System.out.println(e);
-		} catch (Exception e) {
-			System.out.println("Unexpected exception:");
-			e.printStackTrace();
-		}
-	}
-
-	private AbstractNode exprSeq() throws ParsingException {
+	private AbstractNode exprSeq() {
 		AbstractNode simpleExprRes = null;
 		if (nextSymbol.id() == BEGIN) {
 			print(nextSymbol);
 			inSymbol();
-		} else {
-			throw new ParsingException("BEGIN expected\n");
 		}
 		while ((nextSymbol.id() == TokenID.LPAR)
 				|| (nextSymbol.id() == TokenID.ID)
@@ -294,17 +310,29 @@ public class Parser {
 		if (nextSymbol.id() == TokenID.END) {
 			print(nextSymbol);
 			inSymbol();
-		} else {
-			throw new ParsingException("END expected\n");
 		}
 		return simpleExprRes;
 	}
 
-	private AbstractNode assignment(MyToken ident) throws ParsingException {
+	private AbstractNode assignment() {
 
-		inSymbol();
-		AbstractNode simpleExpr = simpleExp();
-		return new AssignmentNode(ident, simpleExpr);
+		AssignmentNode node = null;
+		AbstractNode selector = null;
+		AbstractNode expr = null;
+
+		if (testLookAhead(DOT)) {
+			selector = selector();
+
+			read(ASSIGN, ":=");
+			expr = expression();
+			node = new AssignmentNode(selector, expr);
+		} else {
+			selector = constIdent();
+			read(ASSIGN, ":=");
+			expr = expression();
+			node = new AssignmentNode(selector, expr);
+		}
+		return node;
 	}
 
 	// Statement = [Assignment | ProcedureCall | IfStatement | ’PRINT’
@@ -330,46 +358,108 @@ public class Parser {
 			resNode = repeatStatement();
 			return resNode;
 		}
-		if (test(IDENT)) {
-
+		if (test(ID)) {
+			if (testLookAhead(DOT) || testLookAhead(ASSIGN)) {
+				resNode = assignment();
+				return resNode;
+			}
 		}
-		if (test())
-
-			return resNode;
+		if (test(ID)) {
+			if (testLookAhead(LPAR)) {
+				resNode = procedureCall();
+				return resNode;
+			}
+		}
+		return resNode;
 	}
 
-	private AbstractNode statementSeq() throws ParsingException {
+	private AbstractNode repeatStatement() {
+		AbstractNode exp1 = null;
+		AbstractNode stateSeq1 = null;
 
-		return simpleExp();
+		read(REPEAT, "REPEAT");
+		stateSeq1 = statementSeq();
+		read(UNTIL, "UNTIL");
+		exp1 = expression();
+
+		return new RepeatNode(stateSeq1, exp1);
 	}
 
-	private AbstractNode expression() throws ParsingException {
+	private AbstractNode statementSeq() {
+		List<AbstractNode> list = new LinkedList<AbstractNode>();
+		list.add(statement());
+		while (!testLookAhead(END) && !testLookAhead(ELSE)
+				&& !testLookAhead(ELSIF) && !testLookAhead(UNTIL)) {
+			read(SEMICOLON, ";");
+			list.add(statement());
+		}
+		read(SEMICOLON, ";");
+		return new StatementSequenceNode(list);
+	}
 
-		MyToken relop = null;
-		AbstractNode simpleExp1 = simpleExp();
-		AbstractNode simpleExp2 = null;
+	private AbstractNode expression() {
 
-		inSymbol();
-		if (test(EQ) || test(NEQ) || test(LO) || test(LOEQ) || test(HI)
-				|| test(HIEQ)) {
-			relop = nextSymbol;
-		} else {
-			throw new ParsingException("Rel Op expected");
+		AbstractNode res = simpleExp();
+
+		if (test(EQ)) {
+			read(EQ, "=");
+			res = new BinOpNode(EQ, res, simpleExp());
+		}
+		if (test(NEQ)) {
+			read(NEQ, "#");
+			res = new BinOpNode(NEQ, res, simpleExp());
+		}
+		if (test(LO)) {
+			read(LO, "<");
+			res = new BinOpNode(LO, res, simpleExp());
+		}
+		if (test(LOEQ)) {
+			read(LOEQ, "<=");
+			res = new BinOpNode(LOEQ, res, simpleExp());
+		}
+		if (test(HI)) {
+			read(HI, ">");
+			res = new BinOpNode(HI, res, simpleExp());
+		}
+		if (test(HIEQ)) {
+			read(HIEQ, ">=");
+			res = new BinOpNode(HIEQ, res, simpleExp());
 		}
 
-		inSymbol();
-		simpleExp2 = simpleExp();
-
-		return new ExpressionNode(relop, simpleExp1, simpleExp2);
+		return res;
 	}
 
-	private AbstractNode simpleExp() throws ParsingException {
+	private ActualParametersNode actualParameters() {
+		ArrayList<AbstractNode> list = new ArrayList<AbstractNode>();
+
+		list.add(expression());
+		while (test(COMMA)) {
+			read(COMMA, ",");
+			list.add(expression());
+		}
+
+		return new ActualParametersNode(list);
+	}
+
+	private ProcedureCallNode procedureCall() {
+		IdentNode ident = null;
+		AbstractNode actualParameters = null;
+
+		ident = constIdent();
+		read(LPAR, "(");
+		if (!test(RPAR))
+			actualParameters = actualParameters();
+		read(RPAR, ")");
+		return new ProcedureCallNode(ident, actualParameters);
+	}
+
+	private AbstractNode simpleExp() {
 
 		AbstractNode node;
 
 		if (test(MINUS)) {
 			read(MINUS, "-");
-			node = new NegationNode(term());
+			node = new NegativNode(term());
 		} else {
 			node = term();
 		}
@@ -377,17 +467,17 @@ public class Parser {
 		while (test(PLUS) || test(MINUS)) {
 			if (test(PLUS)) {
 				read(PLUS, "+");
-				node = new BinOpNode(PLUS_OP, node, term());
+				node = new BinOpNode(PLUS, node, term());
 			} else if (test(MINUS)) {
 				read(MINUS, "-");
-				node = new BinOpNode(MINUS_OP, node, term());
+				node = new BinOpNode(MINUS, node, term());
 			}
 		}
 
 		return node;
 	}
 
-	private AbstractNode term() throws ParsingException {
+	private AbstractNode term() {
 
 		AbstractNode t = factor();
 
@@ -402,103 +492,90 @@ public class Parser {
 		return t;
 	}
 
-	private AbstractNode factor() throws ParsingException {
-		FactorNode f = null;
-		MyToken next;
-		// Klammern
-		if (nextSymbol.id() == TokenID.LPAR) {
-			print(nextSymbol);
-			inSymbol();
-			simpleExp();
-			if (nextSymbol.id() == TokenID.RPAR) {
-				print(nextSymbol);
-				inSymbol();
+	private AbstractNode factor() {
+		AbstractNode node = null;
+
+		if (test(ID)) {
+			if (testLookAhead(DOT) || testLookAhead(LBRAC)) {
+				node = selector();
 			} else {
-				throw new ParsingException(" ) expected");
+				node = constIdent();
 			}
-		}
-		// integer
-		else if (nextSymbol.id() == TokenID.INT) {
-			System.out.println("ddd" + nextSymbol);
-			print(nextSymbol);
-			f = new FactorNode(Integer.parseInt(nextSymbol.text()));
-			inSymbol();
-		}
-		// identifier
-		else if ((next = nextSymbol).id() == TokenID.ID) {
-			print(nextSymbol);
-			f = new FactorNode(nextSymbol.text());
-			inSymbol();
-			if (nextSymbol.id() == TokenID.ASSIGN) {
-				print(nextSymbol);
-				assignment(next);
-				if (nextSymbol.id() == TokenID.SEMICOLON) {
-					print(nextSymbol);
-					inSymbol();
-					simpleExp();
-				} else {
-					throw new ParsingException("SEMICOLON expected\n");
-				}
-			}
+		} else if (test(INT)) {
+			node = integer();
+		} else if (test(STR)) {
+			node = string();
+		} else if (test(READ)) {
+			read(READ, "READ");
+			node = string();
+		} else if (test(LPAR)) {
+			read(LPAR, "(");
+			node = expression();
+			read(RPAR, ")");
+		} else {
+			failExpectation("identifier, integer, string, read or (expression)");
 		}
 
-		System.out.println("+" + f);
-		return f;
+		return node;
 	}
 
-	private IfNode ifStatement() throws ParsingException {
-		AbstractNode e = null, st1 = null, st2 = null;
-		if (nextSymbol.id() == TokenID.IF) {
-			print(nextSymbol);
-			inSymbol();
+	private IfNode ifStatement() {
+		IfNode node = null;
+		AbstractNode exp1 = null;
+		AbstractNode stateSeq1 = null;
+		AbstractNode stateSeq2 = null;
+		// abwechselnd expr und statementSeq
+		AbstractNode elseifs = null;
+
+		read(IF, "IF");
+		exp1 = expression();
+		read(THEN, "THEN");
+		stateSeq1 = statementSeq();
+		if (test(ELSIF)) {
+			elseifs = ifStatement_();
+		}
+		if (test(END)) {
+			read(END, "END");
+			node = new IfNode(exp1, stateSeq1, elseifs, stateSeq2);
 		} else {
-			throw new ParsingException("IF expected");
+			read(ELSE, "ELSE");
+			stateSeq2 = statementSeq();
+			read(END, "END");
+			node = new IfNode(exp1, stateSeq1, elseifs, stateSeq2);
 		}
-		e = expression();
-		if (nextSymbol.id() == TokenID.THEN) {
-			print(nextSymbol);
-			inSymbol();
-		} else {
-			throw new ParsingException("THEN expected");
-		}
-		st1 = statementSeq();
-		if (nextSymbol.id() == TokenID.ELSE) {
-			print(nextSymbol);
-			inSymbol();
-			st2 = statementSeq();
-		}
-		if (nextSymbol.id() == TokenID.END) {
-			print(nextSymbol);
-			inSymbol();
-		} else {
-			throw new ParsingException("END expected");
-		}
-		return new IfNode(e, st1, st2);
+
+		return node;
+
 	}
 
-	private WhileNode whileStatement() throws ParsingException {
-		AbstractNode e = null, st = null;
-		if (nextSymbol.id() == TokenID.WHILE) {
-			print(nextSymbol);
-			inSymbol();
+	private IfNode ifStatement_() {
+		IfNode node = null;
+		AbstractNode exp1 = null;
+		AbstractNode stateSeq1 = null;
+
+		read(ELSIF, "ELSIF");
+		exp1 = expression();
+		read(THEN, "THEN");
+		stateSeq1 = statementSeq();
+		if (test(ELSIF)) {
+			node = new IfNode(exp1, stateSeq1, ifStatement_(), null);
 		} else {
-			throw new ParsingException("WHILE expected " + nextSymbol);
+			node = new IfNode(exp1, stateSeq1, null, null);
 		}
-		e = expression();
-		if (nextSymbol.id() == TokenID.DO) {
-			print(nextSymbol);
-			inSymbol();
-		} else {
-			throw new ParsingException("DO expected " + nextSymbol);
-		}
-		st = statementSeq();
-		if (nextSymbol.id() == TokenID.ENDSY) {
-			print(nextSymbol);
-			inSymbol();
-		} else {
-			throw new ParsingException("END expected " + nextSymbol);
-		}
-		return new WhileNode(e, st);
+
+		return node;
+	}
+
+	private WhileNode whileStatement() {
+		AbstractNode exp1 = null;
+		AbstractNode stateSeq1 = null;
+
+		read(WHILE, "WHILE");
+		exp1 = expression();
+		read(DO, "DO");
+		stateSeq1 = statementSeq();
+		read(END, "END");
+		return new WhileNode(exp1, stateSeq1);
 	}
 
 	/**
@@ -541,6 +618,59 @@ public class Parser {
 		MyToken curSymbol = nextSymbol;
 		inSymbol();
 		return curSymbol;
+	}
+
+	public void inSymbol() {
+		try {
+			while (((nextSymbol = scanner.yylex()) != null)
+					&& (nextSymbol.id() == WHITESPACE)) {
+
+			}
+		} catch (java.io.FileNotFoundException e) {
+			System.out.println("File not found : \"" + inFile + "\"");
+		} catch (java.io.IOException e) {
+			System.out.println("IO error scanning file \"" + inFile + "\"");
+			System.out.println(e);
+		} catch (Exception e) {
+			System.out.println("Unexpected exception:");
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Check if the token after the next token is of the same type as the
+	 * provided token.
+	 * 
+	 * A token value of null will test if the remaining scanner output is empty.
+	 * 
+	 * @param token
+	 *            the token to test against
+	 * @return true, if the token after the next token is of the same type as
+	 *         the provided token, false otherwise
+	 */
+	boolean testLookAhead(TokenID token) {
+		MyToken afterNextSymbol = null;
+
+		try {
+			afterNextSymbol = scanner.yylex();
+			if (afterNextSymbol != null) {
+				scanner.yypushback(afterNextSymbol.text().length());
+			}
+		} catch (java.lang.Error e) {
+			// will be thrown when next symbol is EOF
+			// in this case null is a good value for afterNextSymbol
+		} catch (java.io.FileNotFoundException e) {
+			System.out.println("File not found : \"" + argv[0] + "\"");
+		} catch (java.io.IOException e) {
+			System.out.println("IO error scanning file \"" + argv[0] + "\"");
+			System.out.println(e);
+		} catch (Exception e) {
+			System.out.println("Unexpected exception:");
+			e.printStackTrace();
+		}
+
+		return afterNextSymbol == null ? token == null
+				: afterNextSymbol.id() == token;
 	}
 
 	/**

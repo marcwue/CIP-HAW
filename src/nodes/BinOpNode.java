@@ -4,13 +4,14 @@
 package nodes;
 
 import aufgabe2.MyToken;
+import aufgabe2.TokenID;
 
 /**
  * @author Marc W�seke
  */
 public class BinOpNode extends AbstractNode {
 
-	MyToken token;
+	TokenID token;
     AbstractNode left;
     AbstractNode right;
 	/**
@@ -18,7 +19,7 @@ public class BinOpNode extends AbstractNode {
 	 * @param left
 	 * @param right
 	 */
-	public BinOpNode(MyToken token, AbstractNode left, AbstractNode right) {
+	public BinOpNode(TokenID token, AbstractNode left, AbstractNode right) {
 		super();
 		this.token = token;
 		this.left = left;

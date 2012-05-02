@@ -3,20 +3,23 @@
  */
 package nodes;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author Marc Wüseke
  *
  */
-public class NegativNode extends AbstractNode{
+public class ActualParametersNode extends AbstractNode{
 
-	AbstractNode negativPart;
+	List<AbstractNode> list = new LinkedList<AbstractNode>();
 
 	/**
-	 * @param negativPart
+	 * @param list
 	 */
-	public NegativNode(AbstractNode negativPart) {
+	public ActualParametersNode(List<AbstractNode> list) {
 		super();
-		this.negativPart = negativPart;
+		this.list = list;
 	}
 
 	/* (non-Javadoc)
@@ -24,7 +27,7 @@ public class NegativNode extends AbstractNode{
 	 */
 	@Override
 	public String toString() {
-		return "NegativNode [negativPart=" + negativPart + "]";
+		return "ActualParametersCall [list=" + list + "]";
 	}
 
 	/* (non-Javadoc)
@@ -34,8 +37,7 @@ public class NegativNode extends AbstractNode{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((negativPart == null) ? 0 : negativPart.hashCode());
+		result = prime * result + ((list == null) ? 0 : list.hashCode());
 		return result;
 	}
 
@@ -50,11 +52,11 @@ public class NegativNode extends AbstractNode{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		NegativNode other = (NegativNode) obj;
-		if (negativPart == null) {
-			if (other.negativPart != null)
+		ActualParametersNode other = (ActualParametersNode) obj;
+		if (list == null) {
+			if (other.list != null)
 				return false;
-		} else if (!negativPart.equals(other.negativPart))
+		} else if (!list.equals(other.list))
 			return false;
 		return true;
 	}

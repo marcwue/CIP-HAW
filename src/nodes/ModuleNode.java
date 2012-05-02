@@ -3,9 +3,9 @@ package nodes;
 public class ModuleNode extends AbstractNode{
     private final IdentNode ident;
     private final AbstractNode declaration;
-    private final StatemantSequenceNode statementSequence;
+    private final StatementSequenceNode statementSequence;
 
-    public ModuleNode(IdentNode ident, AbstractNode declaration, StatemantSequenceNode statementSequence) {
+    public ModuleNode(IdentNode ident, AbstractNode declaration, StatementSequenceNode statementSequence) {
         this.ident = ident;
         this.declaration = declaration;
         this.statementSequence = statementSequence;

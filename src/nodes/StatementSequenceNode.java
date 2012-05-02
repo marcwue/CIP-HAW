@@ -2,10 +2,10 @@ package nodes;
 
 import java.util.List;
 
-public class StatemantSequenceNode {
+public class StatementSequenceNode extends AbstractNode{
     private final List<AbstractNode> list;
 
-    public StatemantSequenceNode(List<AbstractNode> list) {
+    public StatementSequenceNode(List<AbstractNode> list) {
         this.list = list;
     }
 
@@ -21,7 +21,7 @@ public class StatemantSequenceNode {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StatemantSequenceNode that = (StatemantSequenceNode) o;
+        StatementSequenceNode that = (StatementSequenceNode) o;
 
         if (list != null ? !list.equals(that.list) : that.list != null) return false;
 

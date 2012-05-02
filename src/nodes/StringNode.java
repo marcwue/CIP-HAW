@@ -7,16 +7,16 @@ package nodes;
  * @author Marc Wüseke
  *
  */
-public class NegativNode extends AbstractNode{
+public class StringNode extends AbstractNode{
 
-	AbstractNode negativPart;
+	String s;
 
 	/**
-	 * @param negativPart
+	 * @param s
 	 */
-	public NegativNode(AbstractNode negativPart) {
+	public StringNode(String s) {
 		super();
-		this.negativPart = negativPart;
+		this.s = s;
 	}
 
 	/* (non-Javadoc)
@@ -24,7 +24,7 @@ public class NegativNode extends AbstractNode{
 	 */
 	@Override
 	public String toString() {
-		return "NegativNode [negativPart=" + negativPart + "]";
+		return "StringNode [s=" + s + "]";
 	}
 
 	/* (non-Javadoc)
@@ -34,8 +34,7 @@ public class NegativNode extends AbstractNode{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((negativPart == null) ? 0 : negativPart.hashCode());
+		result = prime * result + ((s == null) ? 0 : s.hashCode());
 		return result;
 	}
 
@@ -50,11 +49,11 @@ public class NegativNode extends AbstractNode{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		NegativNode other = (NegativNode) obj;
-		if (negativPart == null) {
-			if (other.negativPart != null)
+		StringNode other = (StringNode) obj;
+		if (s == null) {
+			if (other.s != null)
 				return false;
-		} else if (!negativPart.equals(other.negativPart))
+		} else if (!s.equals(other.s))
 			return false;
 		return true;
 	}
