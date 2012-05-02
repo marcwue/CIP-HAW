@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Marc Wüseke
+ * @author Marc WÃ¼seke
  *
  */
 public enum TokenID {

@@ -4,7 +4,7 @@
 package nodes;
 
 /**
- * @author Marc Wüseke
+ * @author Marc WÃ¼seke
  *
  */
 public class ProcedureCallNode extends AbstractNode {

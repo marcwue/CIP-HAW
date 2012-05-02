@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author Marc Wüseke
+ * @author Marc WÃ¼seke
  *
  */
 public class SelectorNode extends AbstractNode{

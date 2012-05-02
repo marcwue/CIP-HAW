@@ -168,11 +168,14 @@ public class Parser {
 	}
 
 	private AbstractNode declarations() {
-		AbstractNode result = null;
+        List<ConstNode> constList = new LinkedList();
+        List<TypeNode> typeList = new LinkedList();
+        List<VarNode> varListe = new LinkedList();
+        ProcedureDeclarationNode proc = null;
+
 		if (test(CONST)) {
 			read(CONST, "const");
 
-			List<ConstNode> liste = new LinkedList();
 			IdentNode constIdent;
 			ExpressionNode exp;
 			do {
@@ -180,14 +183,14 @@ public class Parser {
 				read(ASSIGN, "=");
 				exp = (ExpressionNode) expression();
 				read(SEMICOLON, ";");
-				liste.add(new ConstNode(constIdent, exp));
+                constList.add(new ConstNode(constIdent, exp));
 			} while (test(ID));
 
-			result = new ConstListNode(liste);
-		} else if (test(TYPE)) {
-			read(TYPE, "type");
+		}
+        if (test(TYPE)) {
+			read(TYPE, "TYPE");
 
-			List<TypeNode> liste = new LinkedList();
+
 			IdentNode ident;
 			AbstractNode type;
 			do {
@@ -195,33 +198,32 @@ public class Parser {
 				read(ASSIGN, "=");
 				type = type();
 				read(SEMICOLON, ";");
-				liste.add(new TypeNode(ident, type));
+                typeList.add(new TypeNode(ident, type));
 			} while (test(TYPE));
+		}
+        if (test(VAR)) {
+			read(VAR, "VAR");
 
-			result = new TypeListNode(liste);
-		} else if (test(VAR)) {
-			read(VAR, "var");
 
-			List<VarNode> liste = new LinkedList();
 
 			IdentListNode identList;
 			AbstractNode type;
 			do {
-				read(COLON, ":");
 				identList = identList();
+                read(COLON, ":");
+                type = type();
 				read(SEMICOLON, ";");
-				type = type();
-				liste.add(new VarNode(identList, type));
+                varListe.add(new VarNode(identList, type));
 			} while (test(VAR));
 
-			result = new VarListNode(liste);
-		} else if (test(PROCEDURE)) {
-			procedureDeclaration();
+		}
+        if (test(PROCEDURE)) {
+			proc = procedureDeclaration();
 			read(SEMICOLON, ";");
 		} else {
 			failExpectation("const, type, var or procedure declaration");
 		}
-		return result;
+		return new DeclarationsNode(new ConstListNode(constList), new TypeListNode(typeList), new VarListNode(varListe), proc);
 	}
 
 	// Module = ’MODULE’ ident ’;’ Declarations
@@ -232,7 +234,7 @@ public class Parser {
 		IdentNode moduleName = constIdent();
 		read(SEMICOLON, ";");
 		AbstractNode declaration = declarations();
-		read(BEGIN, "BEGIN");
+		//read(BEGIN, "BEGIN");
 		StatementSequenceNode stmtseq = (StatementSequenceNode) statementSeq();
 		read(END, "END");
 		IdentNode moduleEndName = constIdent();
@@ -309,10 +311,10 @@ public class Parser {
 		return node;
 	}
 
-	// Statement = [Assignment | ProcedureCall | IfStatement | �PRINT�
+	// Statement = [Assignment | ProcedureCall | IfStatement | PRINT
 	// Expression | WhileStatement | RepeatStatement].
 	private AbstractNode statement() {
-
+              //TODO ProcedureCall
 		AbstractNode resNode = null;
 
 		if (test(IF)) {
@@ -364,8 +366,9 @@ public class Parser {
 		list.add(statement());
 		while (!testLookAhead(END) && !testLookAhead(ELSE)
 				&& !testLookAhead(ELSIF) && !testLookAhead(UNTIL)) {
-			read(SEMICOLON, ";");
 			list.add(statement());
+            System.out.println(list.toString());
+            read(SEMICOLON, ";");
 		}
 		read(SEMICOLON, ";");
 		return new StatementSequenceNode(list);
