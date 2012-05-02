@@ -138,24 +138,20 @@ public class Parser {
 		read(PROCEDURE, "PROCEDURE");
 		IdentNode ident = constIdent();
 		read(LPAR, "(");
-		FormalParametersNode params;
+		FormalParametersNode params = null;
 		if (test(VAR) || test(ID)) {
 			params = formalParameters();
 		}
-		params = formalParameters();
 		read(RPAR, ")");
 		return new ProcedureHeadingNode(ident, params);
 	}
 
 	// ProcedureBody = Declarations 'BEGIN' StatementSequence 'END'
 	private ProcedureBodyNode procedureBody() {
-		// TODO
-		/*
-		 * DeclarationsNode declarations = declarations(); read(BEGIN, "BEGIN");
-		 * StatemantSequenceNode statementSeqNode = statementSeq(); read(END,
-		 * "END"); return new ProcedureBodyNode(declarations, statementSeqNode);
-		 */
-		return null;
+		DeclarationsNode declarations = (DeclarationsNode) declarations();
+        read(BEGIN, "BEGIN");
+		StatementSequenceNode statementSeqNode = statementSeq(); read(END, "END");
+        return new ProcedureBodyNode(declarations, statementSeqNode);
 	}
 
 	// ProcedureDeclaration = ProcedureHeading ’;’
@@ -218,10 +214,9 @@ public class Parser {
 
 		}
         if (test(PROCEDURE)) {
+            //TODO ProcedureDeclaration LIST!
 			proc = procedureDeclaration();
-			read(SEMICOLON, ";");
-		} else {
-			failExpectation("const, type, var or procedure declaration");
+			//read(SEMICOLON, ";");
 		}
 		return new DeclarationsNode(new ConstListNode(constList), new TypeListNode(typeList), new VarListNode(varListe), proc);
 	}
@@ -264,7 +259,7 @@ public class Parser {
 
 	// string
 	private StringNode string() {
-		return new StringNode(read(STR, "string").text());
+		return new StringNode(read(ID, "id").text());
 	}
 
 	// selector
@@ -361,7 +356,7 @@ public class Parser {
 		return new RepeatNode(stateSeq1, exp1);
 	}
 
-	private AbstractNode statementSeq() {
+	private StatementSequenceNode statementSeq() {
 		List<AbstractNode> list = new LinkedList<AbstractNode>();
 		list.add(statement());
 		while (!testLookAhead(END) && !testLookAhead(ELSE)
