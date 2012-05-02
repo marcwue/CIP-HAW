@@ -9,12 +9,12 @@ import aufgabe2.MyToken;
  * Time: 16:50
  * To change this template use File | Settings | File Templates.
  */
-public class ExpressionNode {
+public class ExpressionNode extends AbstractNode{
     MyToken token;
-    SimpleExprNode left;
-    SimpleExprNode right;
+    AbstractNode left;
+    AbstractNode right;
 
-    public ExpressionNode(MyToken token, SimpleExprNode left, SimpleExprNode right) {
+    public ExpressionNode(MyToken token, AbstractNode left, AbstractNode right) {
         this.token = token;
         this.left = left;
         this.right = right;

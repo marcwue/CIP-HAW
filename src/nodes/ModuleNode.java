@@ -1,6 +1,6 @@
 package nodes;
 
-public class ModuleNode {
+public class ModuleNode extends AbstractNode{
     private final IdentNode ident;
     private final AbstractNode declaration;
     private final StatemantSequenceNode statementSequence;
