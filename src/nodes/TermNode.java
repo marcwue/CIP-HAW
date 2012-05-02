@@ -1,31 +1,28 @@
 /**
- * 
+ *
  */
 package nodes;
 
 /**
- * @author Marc Wüseke
- *
+ * @author Marc Wï¿½seke
  */
 public class TermNode extends AbstractNode {
 
-	AbstractNode term;
+    AbstractNode term;
 
-	/**
-	 * @param term
-	 */
-	public TermNode(AbstractNode term) {
-		super();
-		this.term = term;
-	}
+    /**
+     * @param term
+     */
+    public TermNode(AbstractNode term) {
+        super();
+        this.term = term;
+    }
 
-	/* (non-Javadoc)
-	 * @see nodes.AbstractNode#toString()
-	 */
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return term.toString();
-	}
-	
+    @Override
+    public String toString() {
+        return "TermNode{" +
+                "term=" + term +
+                '}';
+    }
+
 }

@@ -1,0 +1,21 @@
+BEGIN insymbol; IF sy = ident
+THEN insymbol
+ELSE
+test([],fsys + [becomes,tosy,downtosy,dosy],5);
+IF sy = becomes
+THEN
+BEGIN
+insymbol;
+expression(fsys + [tosy,downtosy,dosy])
+END
+ELSE test([],fsys + [tosy,downtosy,dosy],58);
+IF (sy = tosy) OR (sy = downtosy)
+THEN
+BEGIN
+insymbol;
+expression(fsys + [dosy])
+END
+ELSE test([],fsys + [dosy],59);
+testsy(dosy,54);
+statement(fsys,statendsys)
+END;

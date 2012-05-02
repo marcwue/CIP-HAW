@@ -1,33 +1,41 @@
 /**
- * 
+ *
  */
 package nodes;
 
 /**
- * @author Marc Wüseke
- *
+ * @author Marc Wï¿½seke
  */
-public class SimpleExprNode extends AbstractNode{
+public class SimpleExprNode extends AbstractNode {
 
-	AbstractNode term;
+    AbstractNode term;
 
-	/**
-	 * @param expr
-	 */
-	public SimpleExprNode(AbstractNode term) {
-		super();
-		this.term = term;
-	}
+    public SimpleExprNode(AbstractNode term) {
+        super();
+        this.term = term;
+    }
 
-	/* (non-Javadoc)
-	 * @see nodes.AbstractNode#toString()
-	 */
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return term.toString();
-	}
-	
-	
-	
+    @Override
+    public String toString() {
+        return "SimpleExprNode{" +
+                "term=" + term +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SimpleExprNode that = (SimpleExprNode) o;
+
+        if (term != null ? !term.equals(that.term) : that.term != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return term != null ? term.hashCode() : 0;
+    }
 }

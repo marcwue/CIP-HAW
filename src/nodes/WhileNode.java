@@ -1,25 +1,31 @@
 /**
- * 
+ *
  */
 package nodes;
 
 /**
- * @author Marc Wüseke
- *
+ * @author Marc WÃ¼seke
  */
 public class WhileNode extends AbstractNode {
 
-	AbstractNode expression;
-	AbstractNode statementSequence;
-	/**
-	 * @param expression
-	 * @param statementSequence
-	 */
-	public WhileNode(AbstractNode expression, AbstractNode statementSequence) {
-		super();
-		this.expression = expression;
-		this.statementSequence = statementSequence;
-	}
-	
-	
+    AbstractNode expression;
+    AbstractNode statementSequence;
+
+    /**
+     * @param expression
+     * @param statementSequence
+     */
+    public WhileNode(AbstractNode expression, AbstractNode statementSequence) {
+        super();
+        this.expression = expression;
+        this.statementSequence = statementSequence;
+    }
+
+    @Override
+    public String toString() {
+        return "WhileNode{" +
+                "expression=" + expression +
+                ", statementSequence=" + statementSequence +
+                '}';
+    }
 }

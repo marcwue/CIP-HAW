@@ -1,37 +1,33 @@
 /**
- * 
+ *
  */
 package nodes;
 
 /**
- * @author Marc Wüseke
- *
+ * @author Marc WÃ¼seke
  */
-public class FactorNode extends AbstractNode{
+public class FactorNode extends AbstractNode {
 
-	Integer valueInt = null;
-	String valueString = null;
-	/**
-	 * @param type
-	 * @param value
-	 */
-	public FactorNode(int value) {
-		valueInt = new Integer(value);
-	}
+    Integer valueInt = null;
+    String valueString = null;
 
-	public FactorNode(String value) {
-		this.valueString = value;
-	}
+    /**
+     * @param value
+     */
+    public FactorNode(int value) {
+        valueInt = new Integer(value);
+    }
 
-	/* (non-Javadoc)
-	 * @see nodes.AbstractNode#toString()
-	 */
-	@Override
-	public String toString() {
-		if (valueInt == null)
-			return valueInt+"";
-		else
-			return valueString;
-	}
-	
+    public FactorNode(String value) {
+        this.valueString = value;
+    }
+
+    @Override
+    public String toString() {
+        return "FactorNode{" +
+                "valueInt=" + valueInt +
+                ", valueString='" + valueString + '\'' +
+                '}';
+    }
+
 }

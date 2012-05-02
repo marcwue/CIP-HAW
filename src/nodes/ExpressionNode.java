@@ -1,41 +1,53 @@
-/**
- * 
- */
 package nodes;
 
 import aufgabe2.MyToken;
 
 /**
- * @author Marc Wüseke
- *
+ * Created by IntelliJ IDEA.
+ * User: terence
+ * Date: 02.05.12
+ * Time: 16:50
+ * To change this template use File | Settings | File Templates.
  */
-public class ExpressionNode extends AbstractNode{
+public class ExpressionNode {
+    MyToken token;
+    SimpleExprNode left;
+    SimpleExprNode right;
 
-	AbstractNode simpleExp1;
-	MyToken relop;
-	AbstractNode simpleExp2;
-	
-	/**
-	 * @param simpleExp1
-	 * @param relop
-	 * @param simpleExp2
-	 */
-	public ExpressionNode(AbstractNode simpleExp1, MyToken relop,
-			AbstractNode simpleExp2) {
-		super();
-		this.simpleExp1 = simpleExp1;
-		this.relop = relop;
-		this.simpleExp2 = simpleExp2;
-	}
+    public ExpressionNode(MyToken token, SimpleExprNode left, SimpleExprNode right) {
+        this.token = token;
+        this.left = left;
+        this.right = right;
+    }
 
-	/* (non-Javadoc)
-	 * @see nodes.AbstractNode#toString()
-	 */
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return simpleExp1.toString() + relop.toString() + simpleExp2.toString();
-	}
-	
-	
+    @Override
+    public String toString() {
+        return "ExpressionNode{" +
+                "token=" + token +
+                ", left=" + left +
+                ", right=" + right +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ExpressionNode that = (ExpressionNode) o;
+
+        if (left != null ? !left.equals(that.left) : that.left != null) return false;
+        if (right != null ? !right.equals(that.right) : that.right != null) return false;
+        if (token != null ? !token.equals(that.token) : that.token != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = token != null ? token.hashCode() : 0;
+        result = 31 * result + (left != null ? left.hashCode() : 0);
+        result = 31 * result + (right != null ? right.hashCode() : 0);
+        return result;
+    }
 }

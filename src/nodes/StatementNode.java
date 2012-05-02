@@ -1,31 +1,28 @@
 /**
- * 
+ *
  */
 package nodes;
 
 /**
- * @author Marc Wüseke
- *
+ * @author Marc Wï¿½seke
  */
-public class StatementNode extends AbstractNode{
+public class StatementNode extends AbstractNode {
 
-	AbstractNode statement;
+    AbstractNode statement;
 
-	/**
-	 * @param statement
-	 */
-	public StatementNode(AbstractNode statement) {
-		super();
-		this.statement = statement;
-	}
+    /**
+     * @param statement
+     */
+    public StatementNode(AbstractNode statement) {
+        super();
+        this.statement = statement;
+    }
 
-	/* (non-Javadoc)
-	 * @see nodes.AbstractNode#toString()
-	 */
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return statement.toString();
-	}
-	
+    @Override
+    public String toString() {
+        return "StatementNode{" +
+                "statement=" + statement +
+                '}';
+    }
+
 }

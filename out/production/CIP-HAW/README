@@ -1,0 +1,9 @@
+EINSTELLUNGEN:
+
+External Tools
+
+Zuvor die Location der java.exe
+und jflex-1.4.3\lib einstellen.
+
+Arguments
+-jar JFlex.jar ${selected_resource_loc}
