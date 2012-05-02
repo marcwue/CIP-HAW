@@ -20,13 +20,13 @@ public class Parser {
 
 	public Parser(MyFlexScanner scanner) {
 		this.scanner = scanner;
+		inSymbol();
 	}
 
 	private AbstractNode program() {
 		AbstractNode tree = null;
 
 		while (nextSymbol != null) {
-			System.out.println("sss");
 			tree = module();
 			inSymbol();
 		}
@@ -683,7 +683,7 @@ public class Parser {
 	}
 
 	static void error(String str) {
-		System.out.print("==> Error: " + str);
+		System.out.println("==> Error: " + str);
 		// throw new ParserException("==> Error: " + str);
 	}
 
