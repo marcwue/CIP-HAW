@@ -149,8 +149,13 @@ public class Parser {
 	// ProcedureBody = Declarations 'BEGIN' StatementSequence 'END'
 	private ProcedureBodyNode procedureBody() {
 		DeclarationsNode declarations = (DeclarationsNode) declarations();
-        read(BEGIN, "BEGIN");
-		StatementSequenceNode statementSeqNode = statementSeq(); read(END, "END");
+
+        read(BEGIN);
+
+        StatementSequenceNode statementSeqNode = statementSeq();
+        System.out.println(statementSeqNode.toString());
+
+        read(END);
         return new ProcedureBodyNode(declarations, statementSeqNode);
 	}
 
@@ -160,6 +165,9 @@ public class Parser {
 		ProcedureHeadingNode head = procedureHeading();
 		read(SEMICOLON, ";");
 		ProcedureBodyNode body = procedureBody();
+        IdentNode procEndName = constIdent();
+        read(SEMICOLON, ";");
+
 		return new ProcedureDeclarationNode(head, body);
 	}
 
@@ -227,11 +235,17 @@ public class Parser {
 	private ModuleNode module() {
 		read(MODULE, "MODULE");
 		IdentNode moduleName = constIdent();
+
 		read(SEMICOLON, ";");
+
 		AbstractNode declaration = declarations();
-		//read(BEGIN, "BEGIN");
+
+		read(BEGIN, "BEGIN");
 		StatementSequenceNode stmtseq = (StatementSequenceNode) statementSeq();
+
+
 		read(END, "END");
+
 		IdentNode moduleEndName = constIdent();
 		if (!moduleName.equals(moduleEndName)) {
 			failExpectation("identifiers of module and end are supposed to be the same");
@@ -254,12 +268,12 @@ public class Parser {
 
 	// integer
 	private IntNode integer() {
-		return new IntNode(Integer.parseInt(read(ID, "identifier").text()));
+		return new IntNode(Integer.parseInt(read(INT, "integer").text()));
 	}
 
 	// string
 	private StringNode string() {
-		return new StringNode(read(ID, "id").text());
+		return new StringNode(read(STR, "str").text());
 	}
 
 	// selector
@@ -359,13 +373,11 @@ public class Parser {
 	private StatementSequenceNode statementSeq() {
 		List<AbstractNode> list = new LinkedList<AbstractNode>();
 		list.add(statement());
-		while (!testLookAhead(END) && !testLookAhead(ELSE)
-				&& !testLookAhead(ELSIF) && !testLookAhead(UNTIL)) {
+		while (test(SEMICOLON)) {
+            read(SEMICOLON, ";");
 			list.add(statement());
             System.out.println(list.toString());
-            read(SEMICOLON, ";");
 		}
-		read(SEMICOLON, ";");
 		return new StatementSequenceNode(list);
 	}
 
@@ -457,8 +469,8 @@ public class Parser {
 			read(MUL, "*");
 			t = new BinOpNode(MUL, t, factor());
 		} else if (test(DIV)) {
-			read(MUL, "*");
-			t = new BinOpNode(MUL, t, factor());
+			read(DIV, "/");
+			t = new BinOpNode(DIV, t, factor());
 		}
 
 		return t;
@@ -580,6 +592,11 @@ public class Parser {
 		expect(expectedToken, expectedString);
 		return read();
 	}
+
+    MyToken read(TokenID expectedToken) {
+        expect(expectedToken, expectedToken.name());
+        return read();
+    }
 
 	/**
 	 * Read the next token from the scanner.
