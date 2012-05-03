@@ -36,4 +36,13 @@ public class ProcedureHeadingNode extends AbstractNode {
         result = 31 * result + (fparams != null ? fparams.hashCode() : 0);
         return result;
     }
+
+
+    public IdentNode getSubject() {
+        return subject;
+    }
+
+    public FormalParametersNode getFparams() {
+        return fparams;
+    }
 }

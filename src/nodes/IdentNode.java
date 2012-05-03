@@ -13,4 +13,21 @@ public class IdentNode extends AbstractNode {
                 "identName='" + identName + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        IdentNode identNode = (IdentNode) o;
+
+        if (identName != null ? !identName.equals(identNode.identName) : identNode.identName != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return identName != null ? identName.hashCode() : 0;
+    }
 }
