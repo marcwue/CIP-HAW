@@ -7,7 +7,14 @@ public class IdentNode extends AbstractNode {
         this.identName = identName;
     }
 
-    @Override
+    /**
+	 * @return the identName
+	 */
+	public String getIdentName() {
+		return identName;
+	}
+
+	@Override
     public String toString() {
         return "IdentNode{" +
                 "identName='" + identName + '\'' +

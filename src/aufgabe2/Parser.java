@@ -1,7 +1,6 @@
 package aufgabe2;
 
 import nodes.*;
-import sun.security.pkcs.ParsingException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

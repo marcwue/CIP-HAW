@@ -7,7 +7,14 @@ public class IntNode extends AbstractNode {
         this.value = value;
     }
 
-    @Override
+    /**
+	 * @return the value
+	 */
+	public int getValue() {
+		return value;
+	}
+
+	@Override
     public String toString() {
         return "IntNode{" +
                 "value=" + value +
