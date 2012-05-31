@@ -9,6 +9,10 @@ public class ConstNode extends AbstractNode {
         this.exp = exp;
     }
 
+    public ExpressionNode getExp() {
+        return exp;
+    }
+
     @Override
     public String toString() {
         return "ConstNode{" +

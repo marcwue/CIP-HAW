@@ -18,7 +18,7 @@
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
@@ -78,6 +78,9 @@
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="terence" />
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CIP-HAW.iml" filepath="$PROJECT_DIR$/CIP-HAW.iml" />
@@ -91,6 +94,15 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+  </component>
+  <component name="libraryTable">
+    <library name="NewOBI">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/Uni/2012 SS/CI/Vorlesung 04/StandAlone/NewOBI.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
   </component>
 </project>
 

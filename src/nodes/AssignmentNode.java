@@ -3,23 +3,30 @@
  */
 package nodes;
 
-import aufgabe2.MyToken;
+import descriptoren.AbstractDescr;
+
+import java.util.HashMap;
 
 /**
  * @author Marc Wüseke
  */
 public class AssignmentNode extends AbstractNode {
 
-    AbstractNode ident;
+    IdentNode ident;
     AbstractNode value;
 
     /**
-     * @param value1
+     * @param value
      * @param ident
      */
-    public AssignmentNode(AbstractNode ident, AbstractNode value1) {
+    public AssignmentNode(AbstractNode ident, AbstractNode value) {
         this.ident = ident;
-        this.value = value1;
+        this.value = value;
+    }
+
+    public AbstractNode compile(HashMap<String, AbstractDescr> symboltable) {
+        ident.compile(symboltable);
+        value.compile(symboltable);
     }
 
     @Override

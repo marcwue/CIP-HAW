@@ -1,5 +1,9 @@
 package nodes;
 
+import descriptoren.AbstractDescr;
+
+import java.util.HashMap;
+
 public class FieldListNode extends AbstractNode {
     private final AbstractNode node;
     private final AbstractNode type;
@@ -8,6 +12,12 @@ public class FieldListNode extends AbstractNode {
         this.node = identList;
         this.type = type;
     }
+
+    @Override
+    public void compile(AbstractDescr d, HashMap<String, AbstractDescr> symbolTable) {
+        node.compile(d, symbolTable);
+    }
+
 
     @Override
     public String toString() {

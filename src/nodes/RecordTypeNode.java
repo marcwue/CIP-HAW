@@ -1,6 +1,10 @@
 package nodes;
 
+import descriptoren.AbstractDescr;
+import descriptoren.RecordDescr;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class RecordTypeNode extends AbstractNode {
@@ -9,6 +13,15 @@ public class RecordTypeNode extends AbstractNode {
     public RecordTypeNode(List<FieldListNode> fieldLists) {
         this.fieldLists = new ArrayList<FieldListNode>(fieldLists);
     }
+
+    public AbstractDescr compile(HashMap<String, AbstractDescr> symbolTable) {
+        RecordDescr d = new RecordDescr();
+        if (fieldLists != null)
+            for(FieldListNode node : fieldLists) {
+                node.compile(d, symbolTable);
+            }
+        return d;
+    };
 
     @Override
     public String toString() {

@@ -3,8 +3,7 @@
  */
 package nodes;
 
-import aufgabe2.MyToken;
-import aufgabe2.TokenID;
+import app.TokenID;
 
 /**
  * @author Marc W�seke

@@ -3,6 +3,10 @@
  */
 package nodes;
 
+import descriptoren.AbstractDescr;
+
+import java.util.HashMap;
+
 /**
  * @author Marc W�seke
  */
@@ -16,6 +20,10 @@ public class StatementNode extends AbstractNode {
     public StatementNode(AbstractNode statement) {
         super();
         this.statement = statement;
+    }
+    
+    public AbstractDescr compile(HashMap<String, AbstractDescr> symbolTable) {
+        return statement.compile(symbolTable);
     }
 
     @Override

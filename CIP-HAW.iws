@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="0b44b587-2127-4e61-8d36-ac859bfa3016" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CIP-HAW.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CIP-HAW.ipr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CIP-HAW.iws" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build.gradle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aufgabe2/MyFlexScanner.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aufgabe2/MyToken.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aufgabe2/Parser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aufgabe2/TokenID.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/symbolTable/SymbolTable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/symbolTable/SymbolTableImpl.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CIP-HAW.iml" afterPath="$PROJECT_DIR$/CIP-HAW.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CIP-HAW.ipr" afterPath="$PROJECT_DIR$/CIP-HAW.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CIP-HAW.iws" afterPath="$PROJECT_DIR$/CIP-HAW.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nodes/AbstractNode.java" afterPath="$PROJECT_DIR$/src/nodes/AbstractNode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nodes/BinOpNode.java" afterPath="$PROJECT_DIR$/src/nodes/BinOpNode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nodes/ExpressionNode.java" afterPath="$PROJECT_DIR$/src/nodes/ExpressionNode.java" />
     </list>
     <ignored path="CIP-HAW.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,21 +34,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/aufgabe2/Parser.java" line="679" class="aufgabe2.Parser" package="aufgabe2">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -95,10 +91,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Parser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/aufgabe2/Parser.java">
+      <file leaf-file-name="VarNode.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/nodes/VarNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="265" column="34" selection-start="6597" selection-end="6597" vertical-scroll-proportion="-5.72">
+            <state line="24" column="2" selection-start="710" selection-end="710" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimpleTypeDescr.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/descriptoren/SimpleTypeDescr.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="13" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssignmentNode.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/nodes/AssignmentNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="16" selection-start="198" selection-end="210" vertical-scroll-proportion="0.15393387">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,10 +120,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestDaten.txt" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TestDaten.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/aufgabe2/TestDaten.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="22" selection-start="197" selection-end="197" vertical-scroll-proportion="0.41878173">
+            <state line="0" column="9" selection-start="9" selection-end="9" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IntConstDescr.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/descriptoren/IntConstDescr.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="22" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RecordDescr.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/descriptoren/RecordDescr.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="3" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -128,27 +160,27 @@
     <option name="LINE_SEPARATORS_CONVERSION" value="ASK" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/aufgabe2/Parser.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/app/Parser.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
+        <option value="$PROJECT_DIR$/src/nodes/RecordTypeNode.java" />
+        <option value="$PROJECT_DIR$/src/nodes/FieldListNode.java" />
+        <option value="$PROJECT_DIR$/src/nodes/AbstractNode.java" />
+        <option value="$PROJECT_DIR$/src/nodes/IfNode.java" />
+        <option value="$PROJECT_DIR$/src/nodes/StatementNode.java" />
+        <option value="$PROJECT_DIR$/src/symbolTable/TypeDescr.java" />
+        <option value="$PROJECT_DIR$/src/symbolTable/RecordDescr.java" />
+        <option value="$PROJECT_DIR$/src/symbolTable/SimpleTypeDescr.java" />
+        <option value="$PROJECT_DIR$/src/symbolTable/ArrayDescr.java" />
         <option value="$PROJECT_DIR$/src/nodes/ArrayTypeNode.java" />
-        <option value="$PROJECT_DIR$/src/nodes/ConstListNode.java" />
-        <option value="$PROJECT_DIR$/src/nodes/TypeListNode.java" />
-        <option value="$PROJECT_DIR$/src/nodes/IdentTypeNode.java" />
-        <option value="$PROJECT_DIR$/src/nodes/TypeNode.java" />
+        <option value="$PROJECT_DIR$/src/nodes/ConstNode.java" />
+        <option value="$PROJECT_DIR$/src/symbolTable/VarDescr.java" />
+        <option value="$PROJECT_DIR$/src/aufgabe2/TestDaten.txt" />
         <option value="$PROJECT_DIR$/src/nodes/VarListNode.java" />
         <option value="$PROJECT_DIR$/src/nodes/VarNode.java" />
-        <option value="$PROJECT_DIR$/src/nodes/ProcedureCallNode.java" />
-        <option value="$PROJECT_DIR$/src/nodes/StringNode.java" />
-        <option value="$PROJECT_DIR$/src/nodes/ActualParametersNode.java" />
-        <option value="$PROJECT_DIR$/src/nodes/NegativNode.java" />
-        <option value="$PROJECT_DIR$/src/aufgabe2/TokenID.java" />
-        <option value="$PROJECT_DIR$/src/nodes/SelectorNode.java" />
-        <option value="$PROJECT_DIR$/src/nodes/RepeatNode.java" />
-        <option value="$PROJECT_DIR$/src/nodes/DeclarationsNode.java" />
-        <option value="$PROJECT_DIR$/src/aufgabe2/Parser.java" />
+        <option value="$PROJECT_DIR$/src/nodes/AssignmentNode.java" />
       </list>
     </option>
   </component>
@@ -157,9 +189,10 @@
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="27" />
-    <option name="width" value="1280" />
-    <option name="height" value="773" />
+    <option name="x" value="1296" />
+    <option name="y" value="34" />
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -203,13 +236,83 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="CIP-HAW" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NewOBI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NewOBI.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CIP-HAW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NewOBI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NewOBI.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cip" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CIP-HAW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NewOBI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NewOBI.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cip" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="descriptor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CIP-HAW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -236,19 +339,91 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CIP-HAW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CIP-HAW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nodes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CIP-HAW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CIP-HAW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="descriptoren" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CIP-HAW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CIP-HAW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="aufgabe2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CIP-HAW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CIP-HAW" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="org.intellij.lang.jflex.options.JFlexConfigurable" />
+    <property name="options.lastSelected" value="File.Encoding" />
     <property name="recentsLimit" value="5" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -262,7 +437,7 @@
   <component name="RunManager" selected="Application.Parser">
     <configuration default="false" name="Parser" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" />
-      <option name="MAIN_CLASS_NAME" value="aufgabe2.Parser" />
+      <option name="MAIN_CLASS_NAME" value="app.Parser" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="src/aufgabe2/TestDaten.txt" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -418,29 +593,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1280" height="773" extended-state="6" />
-    <editor active="false" />
+    <frame x="1296" y="34" width="1680" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3290735" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258786" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908365" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16070008" sideWeight="0.3258786" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2015691" sideWeight="0.6666667" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46485624" sideWeight="0.4972156" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46485624" sideWeight="0.4972156" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5638978" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908365" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258786" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24741448" sideWeight="0.17412141" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24741448" sideWeight="0.6709265" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24920128" sideWeight="0.4972156" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46485624" sideWeight="0.4972156" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3881789" sideWeight="0.4972156" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.96804035" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38178915" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997773" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -495,109 +670,119 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/nodes/ConstListNode.java">
+    <entry file="file://$PROJECT_DIR$/src/nodes/IfNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="11" selection-start="185" selection-end="185" vertical-scroll-proportion="0.2027027" />
+        <state line="48" column="48" selection-start="1284" selection-end="1284" vertical-scroll-proportion="0.6841505">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aufgabe2/TestDatenBack.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/descriptoren/ArrayDescr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="5" selection-start="447" selection-end="447" vertical-scroll-proportion="0.22780374">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/descriptoren/TypeDescr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="22" selection-start="44" selection-end="44" vertical-scroll-proportion="0.03504673">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/descriptoren/VarDescr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="17" selection-start="185" selection-end="194" vertical-scroll-proportion="0.102622576">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/nodes/ConstNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="36" selection-start="291" selection-end="291" vertical-scroll-proportion="0.18814139">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/descriptoren/RecordDescr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="3" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/descriptoren/IntConstDescr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="22" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/descriptoren/SimpleTypeDescr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/nodes/IntNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="17" selection-start="72" selection-end="77" vertical-scroll-proportion="0.051311288">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aufgabe2/TestDaten.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="9" selection-start="9" selection-end="9" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nodes/TypeNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="61" selection-end="132" vertical-scroll-proportion="0.07601351" />
+        <state line="4" column="30" selection-start="114" selection-end="126" vertical-scroll-proportion="0.07009346">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/VarNode.java">
+    <entry file="file://$PROJECT_DIR$/src/nodes/TypeListNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="31" selection-start="91" selection-end="91" vertical-scroll-proportion="0.0" />
+        <state line="4" column="13" selection-start="53" selection-end="53" vertical-scroll-proportion="0.06841505">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nodes/VarListNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="26" selection-start="113" selection-end="113" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/StringNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="18" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/ActualParametersNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="18" selection-start="103" selection-end="103" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/SelectorNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="18" selection-start="103" selection-end="103" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/RepeatNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="18" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/ProcedureCallNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="18" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/DeclarationsNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="74" selection-end="74" vertical-scroll-proportion="0.3125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/aufgabe2/TokenID.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="22" selection-start="679" selection-end="679" vertical-scroll-proportion="0.39716312">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/NegativNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="18" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/aufgabe2/Scanner9.flex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.1013986">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/aufgabe2/MyFlexScanner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/aufgabe2/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="265" column="34" selection-start="6597" selection-end="6597" vertical-scroll-proportion="-5.72">
+        <state line="15" column="21" selection-start="288" selection-end="288" vertical-scroll-proportion="0.25655645">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/aufgabe2/TestDaten.txt">
+    <entry file="file://$PROJECT_DIR$/src/nodes/VarNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="22" selection-start="197" selection-end="197" vertical-scroll-proportion="0.41878173">
+        <state line="24" column="2" selection-start="710" selection-end="710" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/nodes/AssignmentNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="16" selection-start="198" selection-end="210" vertical-scroll-proportion="0.15393387">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -659,6 +844,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -666,6 +852,18 @@
       </state>
       <state key="ProjectJDKs.UI" />
       <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>NewOBI</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
         <settings>
           <splitter-proportions>
             <option name="proportions">
@@ -676,7 +874,6 @@
           </splitter-proportions>
         </settings>
       </state>
-      <state key="ScopeChooserConfigurable.UI" />
     </states>
   </component>
 </project>

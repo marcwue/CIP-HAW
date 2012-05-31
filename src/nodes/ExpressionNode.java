@@ -1,6 +1,6 @@
 package nodes;
 
-import aufgabe2.MyToken;
+import app.MyToken;
 
 /**
  * Created by IntelliJ IDEA.

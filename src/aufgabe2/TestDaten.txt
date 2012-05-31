@@ -1,5 +1,3 @@
 MODULE m;
-VAR i : integer;
-BEGIN
-	i := 1 + 2;
-END m.
+var
+ i, j, k : integer;

@@ -1,5 +1,9 @@
 package nodes;
 
+import descriptoren.*;
+
+import java.util.HashMap;
+
 public class VarNode extends AbstractNode {
     private final IdentListNode ident;
     private final AbstractNode type;
@@ -7,6 +11,19 @@ public class VarNode extends AbstractNode {
     public VarNode(IdentListNode ident, AbstractNode type) {
         this.ident = ident;
         this.type = type;
+    }
+
+    public VarDescr compile(HashMap<String, AbstractDescr> symbolTable) {
+        VarDescr erg = null;
+        if (type instanceof IntNode) {
+            erg = new VarDescr(
+                    0,
+                    new SimpleTypeDescr(1, "intger")
+                    );
+        }// else if(type instanceof ConstNode) {
+//            erg = new VarDescr(0, ((ConstNode) type).getExp().compile());
+//        }
+        return erg;
     }
 
     @Override
