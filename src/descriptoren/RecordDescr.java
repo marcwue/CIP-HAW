@@ -8,10 +8,10 @@ import java.util.Map;
  */
 public class RecordDescr extends TypeDescr {
     private static final long serialVersionUID = 1L;
-    Map<String, AbstractDescr> recsymbolTable;
+    Map<String, AbstractDescr> recSymbolTable;
 
-    public RecordDescr(int fs, HashMap<String, AbstractDescr> fr) {
-        super(fs);
-        recsymbolTable = fr;
+    public RecordDescr(int size, HashMap<String, AbstractDescr> recSymbolTable) {
+        super(size);
+        this.recSymbolTable = recSymbolTable;
     }
 }
