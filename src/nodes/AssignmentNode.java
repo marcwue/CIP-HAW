@@ -19,7 +19,7 @@ public class AssignmentNode extends AbstractNode {
      * @param value
      * @param ident
      */
-    public AssignmentNode(AbstractNode ident, AbstractNode value) {
+    public AssignmentNode(IdentNode ident, AbstractNode value) {
         this.ident = ident;
         this.value = value;
     }

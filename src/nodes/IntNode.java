@@ -28,9 +28,8 @@ public class IntNode extends AbstractNode {
 
         IntNode intNode = (IntNode) o;
 
-        if (value != intNode.value) return false;
+        return value == intNode.value;
 
-        return true;
     }
 
     @Override

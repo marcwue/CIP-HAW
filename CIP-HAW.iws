@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b44b587-2127-4e61-8d36-ac859bfa3016" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aufgabe2/MyFlexScanner.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aufgabe2/MyToken.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aufgabe2/Parser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aufgabe2/TokenID.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/symbolTable/SymbolTable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/symbolTable/SymbolTableImpl.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CIP-HAW.iml" afterPath="$PROJECT_DIR$/CIP-HAW.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CIP-HAW.ipr" afterPath="$PROJECT_DIR$/CIP-HAW.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CIP-HAW.iws" afterPath="$PROJECT_DIR$/CIP-HAW.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nodes/AbstractNode.java" afterPath="$PROJECT_DIR$/src/nodes/AbstractNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nodes/BinOpNode.java" afterPath="$PROJECT_DIR$/src/nodes/BinOpNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nodes/ExpressionNode.java" afterPath="$PROJECT_DIR$/src/nodes/ExpressionNode.java" />
     </list>
     <ignored path="CIP-HAW.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,25 +83,43 @@
       <file leaf-file-name="VarNode.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/nodes/VarNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="2" selection-start="710" selection-end="710" vertical-scroll-proportion="0.0">
+            <state line="29" column="37" selection-start="791" selection-end="791" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimpleTypeDescr.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/descriptoren/SimpleTypeDescr.java">
+      <file leaf-file-name="ProcedureDeclarationNode.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/nodes/ProcedureDeclarationNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="13" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0">
+            <state line="2" column="13" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AssignmentNode.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TypeNode.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/nodes/TypeNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="43" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IntNode.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/nodes/IntNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="8" selection-start="574" selection-end="574" vertical-scroll-proportion="0.78318584">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssignmentNode.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/nodes/AssignmentNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="16" selection-start="198" selection-end="210" vertical-scroll-proportion="0.15393387">
+            <state line="21" column="10" selection-start="285" selection-end="285" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -165,7 +172,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/nodes/RecordTypeNode.java" />
         <option value="$PROJECT_DIR$/src/nodes/FieldListNode.java" />
         <option value="$PROJECT_DIR$/src/nodes/AbstractNode.java" />
         <option value="$PROJECT_DIR$/src/nodes/IfNode.java" />
@@ -181,6 +187,7 @@
         <option value="$PROJECT_DIR$/src/nodes/VarListNode.java" />
         <option value="$PROJECT_DIR$/src/nodes/VarNode.java" />
         <option value="$PROJECT_DIR$/src/nodes/AssignmentNode.java" />
+        <option value="$PROJECT_DIR$/src/nodes/IntNode.java" />
       </list>
     </option>
   </component>
@@ -189,10 +196,10 @@
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1296" />
-    <option name="y" value="34" />
-    <option name="width" value="1680" />
-    <option name="height" value="1050" />
+    <option name="x" value="49" />
+    <option name="y" value="258" />
+    <option name="width" value="934" />
+    <option name="height" value="668" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -236,6 +243,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -413,7 +421,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -593,7 +600,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1296" y="34" width="1680" height="1050" extended-state="6" />
+    <frame x="49" y="258" width="934" height="668" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -601,7 +608,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258786" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908365" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16070008" sideWeight="0.3258786" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2015691" sideWeight="0.6666667" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33773378" sideWeight="0.6666667" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46485624" sideWeight="0.4972156" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -670,100 +677,59 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/nodes/IfNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="48" selection-start="1284" selection-end="1284" vertical-scroll-proportion="0.6841505">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/aufgabe2/TestDatenBack.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/descriptoren/ArrayDescr.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="5" selection-start="447" selection-end="447" vertical-scroll-proportion="0.22780374">
-          <folding />
-        </state>
+        <state line="16" column="5" selection-start="447" selection-end="447" vertical-scroll-proportion="0.22780374" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/descriptoren/TypeDescr.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="22" selection-start="44" selection-end="44" vertical-scroll-proportion="0.03504673">
-          <folding />
-        </state>
+        <state line="2" column="22" selection-start="44" selection-end="44" vertical-scroll-proportion="0.03504673" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/descriptoren/VarDescr.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="185" selection-end="194" vertical-scroll-proportion="0.102622576">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/ConstNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="36" selection-start="291" selection-end="291" vertical-scroll-proportion="0.18814139">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/descriptoren/RecordDescr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="3" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/descriptoren/IntConstDescr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="22" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/descriptoren/SimpleTypeDescr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/IntNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="17" selection-start="72" selection-end="77" vertical-scroll-proportion="0.051311288">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/aufgabe2/TestDaten.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="9" selection-start="9" selection-end="9" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/TypeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="30" selection-start="114" selection-end="126" vertical-scroll-proportion="0.07009346">
-          <folding />
-        </state>
+        <state line="6" column="17" selection-start="185" selection-end="194" vertical-scroll-proportion="0.102622576" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nodes/TypeListNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="53" selection-end="53" vertical-scroll-proportion="0.06841505">
-          <folding />
-        </state>
+        <state line="4" column="13" selection-start="53" selection-end="53" vertical-scroll-proportion="0.06841505" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nodes/VarListNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="21" selection-start="288" selection-end="288" vertical-scroll-proportion="0.25655645">
+        <state line="15" column="21" selection-start="288" selection-end="288" vertical-scroll-proportion="0.25655645" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/descriptoren/SimpleTypeDescr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aufgabe2/TestDaten.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="9" selection-start="9" selection-end="9" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/descriptoren/IntConstDescr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="22" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/descriptoren/RecordDescr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="3" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/nodes/AssignmentNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="10" selection-start="285" selection-end="285" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -772,17 +738,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nodes/VarNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="2" selection-start="710" selection-end="710" vertical-scroll-proportion="0.0">
+        <state line="29" column="37" selection-start="791" selection-end="791" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/nodes/AssignmentNode.java">
+    <entry file="file://$PROJECT_DIR$/src/nodes/ProcedureDeclarationNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="16" selection-start="198" selection-end="210" vertical-scroll-proportion="0.15393387">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="2" column="13" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/nodes/TypeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="43" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/nodes/ConstNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="50" selection-start="332" selection-end="332" vertical-scroll-proportion="0.29188254">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/nodes/IntNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="8" selection-start="574" selection-end="574" vertical-scroll-proportion="0.78318584">
+          <folding />
         </state>
       </provider>
     </entry>
