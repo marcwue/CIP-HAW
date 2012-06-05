@@ -6,7 +6,7 @@ package nodes;
 import app.TokenID;
 
 /**
- * @author Marc W�seke
+ * @author Marc Wüseke
  */
 public class BinOpNode extends AbstractNode {
 

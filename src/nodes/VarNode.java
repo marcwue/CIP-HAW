@@ -1,56 +1,78 @@
 package nodes;
 
-import descriptoren.*;
-
 import java.util.HashMap;
 
+import cip.base.CodeGen;
+import descriptoren.AbstractDescr;
+import descriptoren.VarDescr;
+
 public class VarNode extends AbstractNode {
-    private final IdentListNode ident;
-    private final AbstractNode type;
+	private final AbstractNode identList;
+	private final AbstractNode type;
 
-    public VarNode(IdentListNode ident, AbstractNode type) {
-        this.ident = ident;
-        this.type = type;
-    }
+	public VarNode(IdentListNode ident, AbstractNode type) {
+		this.identList = ident;
+		this.type = type;
+	}
 
-    public VarDescr compile(HashMap<String, AbstractDescr> symbolTable) {
-        VarDescr erg = null;
-        if (type instanceof IntNode) {
-            erg = new VarDescr(
-                    0,
-                    new SimpleTypeDescr(1, "intger")
-                    );
-        }// else if(type instanceof ConstNode) {
-//            erg = new VarDescr(0, ((ConstNode) type).getExp().compile());
-//        }
-        return erg;
-    }
+	public AbstractDescr compile(HashMap<String, AbstractDescr> symbolTable) {
 
-    @Override
-    public String toString() {
-        return "VarNode{" +
-                "ident=" + ident +
-                ", type=" + type +
-                '}';
-    }
+		AbstractDescr typeD = null;
+		if (type instanceof IdentNode) {
+			typeD = searchSymbolTable(CodeGen.level,
+					((IdentNode) type).getIdentName());
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+		} else {
+			// Case of Array and Record
+			typeD = type.compile(symbolTable);
 
-        VarNode varNode = (VarNode) o;
+		}
 
-        if (ident != null ? !ident.equals(varNode.ident) : varNode.ident != null) return false;
-        if (type != null ? !type.equals(varNode.type) : varNode.type != null) return false;
+		if (identList instanceof ListNode) {
+			for (AbstractNode elem : ((ListNode) identList).getList()) {
+				AbstractDescr varD = new VarDescr(CodeGen.level, address, typeD);
+				symbolTable.get(CodeGen.level).put(
+						((IdentNode) elem).getIdentName(), varD);
+				address += typeD.getSize();
 
-        return true;
-    }
+			}
+		} else {
+			AbstractDescr varD = new VarDescr(CodeGen.level, address, typeD);
+			symbolTable.get(CodeGen.level).put(
+					((IdentNode) identList).getIdentName(), varD);
+			address += typeD.getSize();
+			// varD.print();
+		}
+		return null;
+	}
 
-    @Override
-    public int hashCode() {
-        int result = ident != null ? ident.hashCode() : 0;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        return result;
-    }
+	@Override
+	public String toString() {
+		return "VarNode{" + "ident=" + identList + ", type=" + type + '}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		VarNode varNode = (VarNode) o;
+
+		if (identList != null ? !identList.equals(varNode.identList)
+				: varNode.identList != null)
+			return false;
+		if (type != null ? !type.equals(varNode.type) : varNode.type != null)
+			return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = identList != null ? identList.hashCode() : 0;
+		result = 31 * result + (type != null ? type.hashCode() : 0);
+		return result;
+	}
 }

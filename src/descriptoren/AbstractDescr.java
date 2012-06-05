@@ -23,6 +23,5 @@ public abstract class AbstractDescr implements Serializable {
 
     public int getSize() {
         return 0;
-
     }
 }

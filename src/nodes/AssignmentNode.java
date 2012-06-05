@@ -6,34 +6,37 @@ package nodes;
 import descriptoren.AbstractDescr;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Marc Wüseke
  */
 public class AssignmentNode extends AbstractNode {
 
-    IdentNode ident;
-    AbstractNode value;
+    AbstractNode selector;
+    AbstractNode expression;
 
     /**
-     * @param value
-     * @param ident
+     * @param expression
+     * @param selector
      */
-    public AssignmentNode(IdentNode ident, AbstractNode value) {
-        this.ident = ident;
-        this.value = value;
+    public AssignmentNode(AbstractNode selector, AbstractNode expression) {
+        this.selector = selector;
+        this.expression = expression;
     }
 
-    public AbstractNode compile(HashMap<String, AbstractDescr> symboltable) {
-        ident.compile(symboltable);
-        value.compile(symboltable);
+    public AbstractDescr compile(HashMap<String, AbstractDescr> symbolTable) {
+    	expression.compile(symbolTable);
+    	selector.compile(symbolTable);
+    	write("ASSIGN, 1");
+    	return null;
     }
 
     @Override
     public String toString() {
         return "AssignmentNode{" +
-                "ident=" + ident +
-                ", value=" + value +
+                "ident=" + selector +
+                ", value=" + expression +
                 '}';
     }
 
@@ -44,8 +47,8 @@ public class AssignmentNode extends AbstractNode {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ident == null) ? 0 : ident.hashCode());
-		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		result = prime * result + ((selector == null) ? 0 : selector.hashCode());
+		result = prime * result + ((expression == null) ? 0 : expression.hashCode());
 		return result;
 	}
 
@@ -61,19 +64,17 @@ public class AssignmentNode extends AbstractNode {
 		if (getClass() != obj.getClass())
 			return false;
 		AssignmentNode other = (AssignmentNode) obj;
-		if (ident == null) {
-			if (other.ident != null)
+		if (selector == null) {
+			if (other.selector != null)
 				return false;
-		} else if (!ident.equals(other.ident))
+		} else if (!selector.equals(other.selector))
 			return false;
-		if (value == null) {
-			if (other.value != null)
+		if (expression == null) {
+			if (other.expression != null)
 				return false;
-		} else if (!value.equals(other.value))
+		} else if (!expression.equals(other.expression))
 			return false;
 		return true;
 	}
-    
-    
 
 }

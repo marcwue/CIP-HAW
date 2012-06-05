@@ -18,7 +18,7 @@ public class Parser {
 	private MyToken nextSymbol;
 	private static String inFile;
     
-    private final static String nodeFile = "nodeFile.txt";
+//    private final static String nodeFile = "nodeFile.txt";
 
 	public Parser(MyFlexScanner scanner) {
 		this.scanner = scanner;
@@ -42,7 +42,7 @@ public class Parser {
 
 	// IdentList = ident {’,’ ident}
 	private IdentListNode identList() {
-		List<IdentNode> idents = new ArrayList<>();
+		List<IdentNode> idents = new ArrayList<IdentNode>();
 		if (test(ID)) {
 			idents.add(constIdent());
 			while (test(COMMA)) {
@@ -61,14 +61,14 @@ public class Parser {
 	}
 
 	// ArrayType = = 'ARRAY' '[' IndexExpression ']' 'OF' Type
-	private ArrayTypeNode arrayType() {
+	private ArrayNode arrayType() {
 		read(ARRAY, "ARRAY");
 		read(LBRAC, "[");
 		AbstractNode node = indexExpr();
 		read(RBRAC, "]");
 		read(OF, "OF");
 		AbstractNode t = type();
-		return new ArrayTypeNode(node, t);
+		return new ArrayNode(node, t);
 	}
 
 	// FieldList = IdentList ’:’ Type]
@@ -309,7 +309,6 @@ public class Parser {
 
 		if (testLookAhead(DOT)) {
 			selector = selector();
-
 			read(ASSIGN, ":=");
 			expr = expression();
 			node = new AssignmentNode(selector, expr);
@@ -417,7 +416,7 @@ public class Parser {
 	}
 
 	private ActualParametersNode actualParameters() {
-		ArrayList<AbstractNode> list = new ArrayList<>();
+		ArrayList<AbstractNode> list = new ArrayList<AbstractNode>();
 
 		list.add(expression());
 		while (test(COMMA)) {
@@ -706,40 +705,37 @@ public class Parser {
 		// throw new ParserException("==> Error: " + str);
 	}
 
-	public static void main(String[] argv) {
-		System.out.println("MyStandalone Version 0.1");
-
-		if (argv.length == 0) {
-			System.out.println("Usage : java MyStandalone <inputfile>");
-		} else {
-
-			for (int i = 0; i < argv.length; i++) {
-				try {
-					inFile = argv[i];
-					
-					Parser parser = new Parser(new MyFlexScanner(
-							new java.io.FileReader(argv[i])));
-
-					AbstractNode erg = parser.parse();
-					System.out.println(erg);
-
-                    ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(nodeFile));
-                    os.writeObject(erg);
-                    os.flush();
-
-
-				} catch (java.io.FileNotFoundException e) {
-					System.out.println("File not found : \"" + inFile + "\"");
-				} catch (Exception e) {
-					System.out.println("Unexpected exception:");
-					e.printStackTrace();
-				}
-			}
-
-		}
-	}
-	/**
-	 * x := Selector "X"; x := integer "X"; x := string "X"; x := read "X";
-	 */
+//	public static void main(String[] argv) {
+//		System.out.println("MyStandalone Version 0.1");
+//
+//		if (argv.length == 0) {
+//			System.out.println("Usage : java MyStandalone <inputfile>");
+//		} else {
+//
+//			for (int i = 0; i < argv.length; i++) {
+//				try {
+//					inFile = argv[i];
+//					
+//					Parser parser = new Parser(new MyFlexScanner(
+//							new java.io.FileReader(argv[i])));
+//
+//					AbstractNode erg = parser.parse();
+//					System.out.println(erg);
+//
+//                    ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(nodeFile));
+//                    os.writeObject(erg);
+//                    os.flush();
+//
+//
+//				} catch (java.io.FileNotFoundException e) {
+//					System.out.println("File not found : \"" + inFile + "\"");
+//				} catch (Exception e) {
+//					System.out.println("Unexpected exception:");
+//					e.printStackTrace();
+//				}
+//			}
+//
+//		}
+//	}
 
 }

@@ -11,7 +11,7 @@ import java.util.List;
  *
  */
 public class SelectorNode extends AbstractNode{
-	IdentNode subject;
+	IdentNode identNode;
 	List<AbstractNode> selectors = new LinkedList<AbstractNode>();
 	/**
 	 * @param subject
@@ -19,28 +19,8 @@ public class SelectorNode extends AbstractNode{
 	 */
 	public SelectorNode(IdentNode subject, List<AbstractNode> selectors) {
 		super();
-		this.subject = subject;
+		this.identNode = subject;
 		this.selectors = selectors;
-	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "SelectorNode [subject=" + subject + ", selectors=" + selectors
-				+ "]";
-	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((selectors == null) ? 0 : selectors.hashCode());
-		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
-		return result;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
@@ -59,12 +39,56 @@ public class SelectorNode extends AbstractNode{
 				return false;
 		} else if (!selectors.equals(other.selectors))
 			return false;
-		if (subject == null) {
-			if (other.subject != null)
+		if (identNode == null) {
+			if (other.identNode != null)
 				return false;
-		} else if (!subject.equals(other.subject))
+		} else if (!identNode.equals(other.identNode))
 			return false;
 		return true;
+	}
+	/**
+	 * @return the identNode
+	 */
+	public IdentNode getIdentNode() {
+		return identNode;
+	}
+	/**
+	 * @return the selectors
+	 */
+	public List<AbstractNode> getSelectors() {
+		return selectors;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((selectors == null) ? 0 : selectors.hashCode());
+		result = prime * result + ((identNode == null) ? 0 : identNode.hashCode());
+		return result;
+	}
+	/**
+	 * @param identNode the identNode to set
+	 */
+	public void setIdentNode(IdentNode identNode) {
+		this.identNode = identNode;
+	}
+	/**
+	 * @param selectors the selectors to set
+	 */
+	public void setSelectors(List<AbstractNode> selectors) {
+		this.selectors = selectors;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "SelectorNode [subject=" + identNode + ", selectors=" + selectors
+				+ "]";
 	}
 	
 	

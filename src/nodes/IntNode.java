@@ -1,5 +1,12 @@
 package nodes;
 
+import java.util.HashMap;
+
+import cip.base.CodeGen;
+
+import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
+
 public class IntNode extends AbstractNode {
     private final int value;
 
@@ -7,6 +14,11 @@ public class IntNode extends AbstractNode {
         this.value = value;
     }
 
+    public AbstractDescr compile(SymbolTable symbolTable){
+    	write("PUSHI, "+value);
+    	return super.compile(symbolTable); 
+    }
+    
     /**
 	 * @return the value
 	 */

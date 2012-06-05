@@ -1,0 +1,8 @@
+MODULE Sample;
+	VAR z : integer;
+
+    BEGIN
+
+        z := 0;
+
+END Sample

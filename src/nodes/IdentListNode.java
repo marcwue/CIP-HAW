@@ -2,13 +2,24 @@ package nodes;
 
 import java.util.List;
 
+import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
+
 public class IdentListNode extends AbstractNode {
-    private List<IdentNode> list;
+    
+	private List<IdentNode> list;
 
     public IdentListNode(List<IdentNode> list) {
         this.list = list;
     }
 
+    public AbstractDescr compile(SymbolTable symbolTable, AbstractDescr descr){
+    	for(IdentNode node : list){
+    		symbolTable.declare(node.getIdentName(), descr);
+    	}
+    	return null;
+    }
+    
     @Override
     public String toString() {
         return "IdentListNode{" +

@@ -5,24 +5,25 @@ import descriptoren.AbstractDescr;
 import java.util.HashMap;
 
 public class FieldListNode extends AbstractNode {
-    private final AbstractNode node;
+    private final AbstractNode identList;
     private final AbstractNode type;
 
     public FieldListNode(AbstractNode identList, AbstractNode type) {
-        this.node = identList;
+        this.identList = identList;
         this.type = type;
     }
 
     @Override
-    public void compile(AbstractDescr d, HashMap<String, AbstractDescr> symbolTable) {
-        node.compile(d, symbolTable);
+    public AbstractDescr compile(AbstractDescr d, HashMap<String, AbstractDescr> symbolTable) {
+//        identList.compile(d, symbolTable);
+    	return null;
     }
 
 
     @Override
     public String toString() {
         return "FieldListNode{" +
-                "node=" + node +
+                "node=" + identList +
                 ", type=" + type +
                 '}';
     }
@@ -34,7 +35,7 @@ public class FieldListNode extends AbstractNode {
 
         FieldListNode that = (FieldListNode) o;
 
-        if (node != null ? !node.equals(that.node) : that.node != null) return false;
+        if (identList != null ? !identList.equals(that.identList) : that.identList != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
 
         return true;
@@ -42,7 +43,7 @@ public class FieldListNode extends AbstractNode {
 
     @Override
     public int hashCode() {
-        int result = node != null ? node.hashCode() : 0;
+        int result = identList != null ? identList.hashCode() : 0;
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }

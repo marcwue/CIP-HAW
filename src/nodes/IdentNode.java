@@ -1,13 +1,30 @@
 package nodes;
 
+import java.util.HashMap;
+
+import cip.base.CodeGen;
+
+import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
+import descriptoren.VarDescr;
+
 public class IdentNode extends AbstractNode {
     private final String identName;
 
     public IdentNode(String identName) {
         this.identName = identName;
     }
+    
+    /* (non-Javadoc)
+	 * @see nodes.AbstractNode#compile(java.util.HashMap)
+	 */
+	@Override
+	public AbstractDescr compile(SymbolTable symbolTable) {
+		write("PUSHI, "+symbolTable.addressOf(identName));
+		return null;
+	}
 
-    /**
+	/**
 	 * @return the identName
 	 */
 	public String getIdentName() {

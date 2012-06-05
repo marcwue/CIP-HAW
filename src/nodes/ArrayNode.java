@@ -7,11 +7,11 @@ import descriptoren.IntConstDescr;
 
 import java.util.HashMap;
 
-public class ArrayTypeNode extends AbstractNode {
+public class ArrayNode extends AbstractNode {
     private final AbstractNode expression;
     private final AbstractNode basetype;
 
-    public ArrayTypeNode(AbstractNode expression, AbstractNode type) {
+    public ArrayNode(AbstractNode expression, AbstractNode type) {
         this.expression = expression;
         this.basetype = type;
 
@@ -30,8 +30,8 @@ public class ArrayTypeNode extends AbstractNode {
                             ).getIdentName()
                     )
             ).getIntVal();
-        if (basetype instanceof ArrayTypeNode) {
-            basedescr = ((ArrayTypeNode) basetype).compile(symbolTable);
+        if (basetype instanceof ArrayNode) {
+            basedescr = ((ArrayNode) basetype).compile(symbolTable);
         } else if (basetype instanceof RecordTypeNode) {
             basedescr = ((RecordTypeNode) basetype).compile(symbolTable);
         } else {
@@ -52,7 +52,7 @@ public class ArrayTypeNode extends AbstractNode {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        ArrayTypeNode that = (ArrayTypeNode) o;
+        ArrayNode that = (ArrayNode) o;
 
         if (expression != null ? !expression.equals(that.expression) : that.expression != null)
             return false;
