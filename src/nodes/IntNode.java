@@ -30,7 +30,7 @@ public class IntNode extends AbstractNode {
     public String toString() {
         return "IntNode{" +
                 "value=" + value +
-                '}';
+                "}";
     }
 
     @Override

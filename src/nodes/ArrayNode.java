@@ -4,6 +4,7 @@ import cip.base.CodeGen;
 import descriptoren.AbstractDescr;
 import descriptoren.ArrayDescr;
 import descriptoren.IntConstDescr;
+import descriptoren.SymbolTable;
 
 import java.util.HashMap;
 
@@ -17,7 +18,7 @@ public class ArrayNode extends AbstractNode {
 
     }
 
-    public ArrayDescr compile(HashMap<String, AbstractDescr> symbolTable) {
+    public ArrayDescr compile(SymbolTable symbolTable) {
         AbstractDescr basedescr = null;
         int numelem;
         if (expression instanceof IntNode)

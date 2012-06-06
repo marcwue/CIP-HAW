@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import cip.base.CodeGen;
 import descriptoren.AbstractDescr;
+import descriptoren.SimpleTypeDescr;
+import descriptoren.SymbolTable;
 import descriptoren.VarDescr;
 
 public class VarNode extends AbstractNode {
@@ -15,34 +17,27 @@ public class VarNode extends AbstractNode {
 		this.type = type;
 	}
 
-	public AbstractDescr compile(HashMap<String, AbstractDescr> symbolTable) {
+	public AbstractDescr compile(SymbolTable symbolTable) {
 
-		AbstractDescr typeD = null;
+		AbstractDescr d = null;
 		if (type instanceof IdentNode) {
-			typeD = searchSymbolTable(CodeGen.level,
-					((IdentNode) type).getIdentName());
-
-		} else {
-			// Case of Array and Record
-			typeD = type.compile(symbolTable);
-
-		}
-
-		if (identList instanceof ListNode) {
-			for (AbstractNode elem : ((ListNode) identList).getList()) {
-				AbstractDescr varD = new VarDescr(CodeGen.level, address, typeD);
-				symbolTable.get(CodeGen.level).put(
-						((IdentNode) elem).getIdentName(), varD);
-				address += typeD.getSize();
-
+			String s = ((IdentNode) type).getIdentName();
+			SimpleTypeDescr sd = null;
+			if (s.equalsIgnoreCase("integer")) {
+				sd = new SimpleTypeDescr("INTEGER");
+			} else if (s.equalsIgnoreCase("boolean")) {
+				sd = new SimpleTypeDescr("BOOLEAN");
+			} else if (s.equalsIgnoreCase("string")) {
+				sd = new SimpleTypeDescr("STRING");
+			} else {
+				System.out.println(
+						"ToDo: Typedef in VarDeclarationNode");
 			}
+			d = sd;
 		} else {
-			AbstractDescr varD = new VarDescr(CodeGen.level, address, typeD);
-			symbolTable.get(CodeGen.level).put(
-					((IdentNode) identList).getIdentName(), varD);
-			address += typeD.getSize();
-			// varD.print();
+			d = type.compile(symbolTable);
 		}
+		identList.compile(symbolTable, d);
 		return null;
 	}
 

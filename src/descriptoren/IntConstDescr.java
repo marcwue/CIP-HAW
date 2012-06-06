@@ -3,8 +3,7 @@ package descriptoren;
 public class IntConstDescr extends AbstractDescr {
     private int value;
 
-    public IntConstDescr(int size, int value) {
-        super(size);
+    public IntConstDescr(int value) {
         this.value = value;
     }
 }

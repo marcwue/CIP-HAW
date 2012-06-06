@@ -11,8 +11,7 @@ public class StatementSequenceNode extends AbstractNode{
 
     @Override
     public String toString() {
-        return "StatemantSequenceNode{" +
-                "list=" + list +
+        return "StatemantSequenceNode{\n" + list +
                 '}';
     }
 

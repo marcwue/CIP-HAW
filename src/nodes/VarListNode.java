@@ -2,6 +2,7 @@ package nodes;
 
 
 import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,16 +14,20 @@ public class VarListNode extends AbstractNode{
         this.list = list;
     }
 
-    public void compile(HashMap<String, AbstractDescr> symboltable) {
+    public AbstractDescr compile(SymbolTable symboltable) {
         for(VarNode node : list) {
             node.compile(symboltable);
         }
+        return null;
     }
 
     @Override
     public String toString() {
-        return "VarListNode{" +
-                "list=" + list +
+    	String s = "";
+		for (VarNode iN : list) {
+			s += "\n" + iN.toString();
+		}
+        return "VarListNode{" + s + "\n" +
                 '}';
     }
 

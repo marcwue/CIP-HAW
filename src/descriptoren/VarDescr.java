@@ -4,11 +4,10 @@ public class VarDescr extends AbstractDescr {
     private static final long serialVersionUID = 1L;
     private int addr;
     private boolean isVarPar;
-    private TypeDescr type;
+    private AbstractDescr type;
 
-    public VarDescr(int addr, TypeDescr type) {
+    public VarDescr(int addr, AbstractDescr type) {
         // ToDo size berechnen
-        super(0);
         this.isVarPar = false;
         this.addr = addr;
         this.type = type;
@@ -28,6 +27,10 @@ public class VarDescr extends AbstractDescr {
 
     public AbstractDescr getType() {
         return type;
+    }
+    
+    public int getSize(){
+    	return -1;
     }
 
 }

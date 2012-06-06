@@ -21,11 +21,11 @@ public class DeclarationsNode extends AbstractNode{
 
     @Override
     public String toString() {
-        return "DeclarationsNode{" +
-                "con=" + con +
-                ", type=" + type +
-                ", var=" + var +
-                ", proc=" + proc +
+        return "DeclarationsNode{" + "\n" +
+                "con=" + con + "\n" +
+                "type=" + type + "\n" +
+                "var=" + var + "\n" +
+                "proc=" + proc + "\n" +
                 '}';
     }
 

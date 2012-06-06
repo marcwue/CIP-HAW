@@ -1,6 +1,7 @@
 package nodes;
 
 import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
 
 import java.util.HashMap;
 
@@ -14,7 +15,7 @@ public class FieldListNode extends AbstractNode {
     }
 
     @Override
-    public AbstractDescr compile(AbstractDescr d, HashMap<String, AbstractDescr> symbolTable) {
+    public AbstractDescr compile(SymbolTable symbolTable, AbstractDescr d) {
 //        identList.compile(d, symbolTable);
     	return null;
     }

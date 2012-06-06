@@ -2,6 +2,7 @@ package nodes;
 
 import descriptoren.AbstractDescr;
 import descriptoren.RecordDescr;
+import descriptoren.SymbolTable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,11 +15,11 @@ public class RecordTypeNode extends AbstractNode {
         this.fieldLists = new ArrayList<FieldListNode>(fieldLists);
     }
 
-    public AbstractDescr compile(HashMap<String, AbstractDescr> symbolTable) {
-        RecordDescr d = new RecordDescr();
+    public AbstractDescr compile(SymbolTable symbolTable) {
+        RecordDescr d = new RecordDescr(symbolTable);
         if (fieldLists != null)
             for(FieldListNode node : fieldLists) {
-                node.compile(d, symbolTable);
+                node.compile(symbolTable, d);
             }
         return d;
     };

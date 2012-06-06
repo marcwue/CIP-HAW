@@ -1,12 +1,15 @@
 package descriptoren;
 
-public class SimpleTypeDescr extends TypeDescr {
-    private String name;
+public class SimpleTypeDescr extends AbstractDescr {
 
-    public SimpleTypeDescr(int size, String name) {
-        super(size);
-        this.name = name;
-    }
+	private String name;
+
+	/**
+	 * @param name
+	 */
+	public SimpleTypeDescr(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * @return the name
@@ -15,7 +18,9 @@ public class SimpleTypeDescr extends TypeDescr {
 		return name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -23,7 +28,9 @@ public class SimpleTypeDescr extends TypeDescr {
 		return "SimpleTypeDescr [name=" + name + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -34,7 +41,9 @@ public class SimpleTypeDescr extends TypeDescr {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -53,11 +62,10 @@ public class SimpleTypeDescr extends TypeDescr {
 			return false;
 		return true;
 	}
-	
+
 	@Override
-	public int getSize(){
-		return size;
+	public int getSize() {
+		return 1;
 	}
-    
-    
+
 }

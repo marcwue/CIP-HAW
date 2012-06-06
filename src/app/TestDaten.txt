@@ -1,8 +1,8 @@
 MODULE Sample;
-	VAR z : integer;
+	VAR x, y, z : integer;
 
     BEGIN
 
-        z := 0;
+        z := 5;
 
 END Sample

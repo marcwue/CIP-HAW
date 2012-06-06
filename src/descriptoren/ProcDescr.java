@@ -18,7 +18,6 @@ public class ProcDescr extends AbstractDescr {
 	 */
 	public ProcDescr(int size, String name, int startAddress,
 			int lengthParaBlock, int framesize, VarDescr params) {
-		super(size);
 		this.name = name;
 		StartAddress = startAddress;
 		this.lengthParaBlock = lengthParaBlock;

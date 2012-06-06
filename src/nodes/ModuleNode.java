@@ -13,10 +13,10 @@ public class ModuleNode extends AbstractNode{
 
     @Override
     public String toString() {
-        return "ModuleNode{" +
-                "ident=" + ident +
-                ", declaration=" + declaration +
-                ", statementSequence=" + statementSequence +
+        return "ModuleNode{\n" +
+                "ident=" + ident + "\n" +
+                "declaration=" + declaration + "\n" +
+                "statementSequence=" + statementSequence + "\n" +
                 '}';
     }
 

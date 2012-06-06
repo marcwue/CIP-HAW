@@ -17,12 +17,26 @@ public class SymbolTable {
 	private int currentAddress = 0;
 	private SymbolTable parentTable;
 
+	public SymbolTable() {
+		super();
+	}
+	
 	/**
 	 * @param parentTable
 	 */
 	public SymbolTable(SymbolTable parentTable) {
 		super();
 		this.parentTable = parentTable;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "SymbolTable [descriptorMap=" + descriptorMap + ", addressMap="
+				+ addressMap + ", currentAddress=" + currentAddress
+				+ ", parentTable=" + parentTable + "]";
 	}
 
 	public void declare(String ident, AbstractDescr descr) {
@@ -43,7 +57,7 @@ public class SymbolTable {
 	public AbstractDescr descriptorFor(String ident) {
 		// built-in types
 		if (ident.equalsIgnoreCase("integer")) {
-			return new SimpleTypeDescr(1, "INTEGER");
+			return new SimpleTypeDescr("INTEGER");
 		}
 
 		AbstractDescr d = descriptorMap.get(ident);

@@ -6,12 +6,11 @@ import java.util.Map;
 /**
  * @author Marc Wüseke
  */
-public class RecordDescr extends TypeDescr {
+public class RecordDescr extends AbstractDescr {
     private static final long serialVersionUID = 1L;
-    Map<String, AbstractDescr> recSymbolTable;
+    SymbolTable recSymbolTable;
 
-    public RecordDescr(int size, HashMap<String, AbstractDescr> recSymbolTable) {
-        super(size);
+    public RecordDescr(SymbolTable recSymbolTable) {
         this.recSymbolTable = recSymbolTable;
     }
 }

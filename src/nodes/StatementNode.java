@@ -4,6 +4,7 @@
 package nodes;
 
 import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
 
 import java.util.HashMap;
 
@@ -22,13 +23,13 @@ public class StatementNode extends AbstractNode {
         this.statement = statement;
     }
     
-    public AbstractDescr compile(HashMap<String, AbstractDescr> symbolTable) {
+    public AbstractDescr compile(SymbolTable symbolTable) {
         return statement.compile(symbolTable);
     }
 
     @Override
     public String toString() {
-        return "StatementNode{" +
+        return "StatementNode{\n" +
                 "statement=" + statement +
                 '}';
     }

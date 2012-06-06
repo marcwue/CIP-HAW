@@ -4,6 +4,7 @@
 package nodes;
 
 import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class AssignmentNode extends AbstractNode {
         this.expression = expression;
     }
 
-    public AbstractDescr compile(HashMap<String, AbstractDescr> symbolTable) {
+    public AbstractDescr compile(SymbolTable symbolTable) {
     	expression.compile(symbolTable);
     	selector.compile(symbolTable);
     	write("ASSIGN, 1");
@@ -34,10 +35,10 @@ public class AssignmentNode extends AbstractNode {
 
     @Override
     public String toString() {
-        return "AssignmentNode{" +
-                "ident=" + selector +
-                ", value=" + expression +
-                '}';
+        return "AssignmentNode{\n" +
+                "ident=" + selector + "\n" +
+                "value=" + expression + "\n" +
+                "}\n";
     }
 
 	/* (non-Javadoc)

@@ -11,8 +11,11 @@ public class TypeListNode extends AbstractNode {
 
     @Override
     public String toString() {
-        return "TypeListNode{" +
-                "list=" + list +
+    	String s = "";
+		for (TypeNode iN : list) {
+			s += "\n" + iN.toString();
+		}
+        return "TypeListNode{" + s +
                 '}';
     }
 
