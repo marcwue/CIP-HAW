@@ -17,6 +17,7 @@ public class IdentListNode extends AbstractNode {
 		for (IdentNode node : list) {
 			symbolTable.declare(node.getIdentName(), descr);
 		}
+		System.out.println("ident list node #####################");
 		return null;
 	}
 

@@ -57,6 +57,20 @@ public class StringNode extends AbstractNode{
 			return false;
 		return true;
 	}
+
+	/**
+	 * @return the s
+	 */
+	public String getValue() {
+		return s;
+	}
+
+	/**
+	 * @param s the s to set
+	 */
+	public void setValue(String s) {
+		this.s = s;
+	}
 	
 	
 }

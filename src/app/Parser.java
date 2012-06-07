@@ -17,8 +17,8 @@ public class Parser {
 	private MyFlexScanner scanner;
 	private MyToken nextSymbol;
 	private static String inFile;
-    
-//    private final static String nodeFile = "nodeFile.txt";
+
+	// private final static String nodeFile = "nodeFile.txt";
 
 	public Parser(MyFlexScanner scanner) {
 		this.scanner = scanner;
@@ -87,9 +87,14 @@ public class Parser {
 	private RecordTypeNode recordType() {
 		read(RECORD, "RECORD");
 		List<FieldListNode> fieldLists = new ArrayList<FieldListNode>();
-		fieldLists.add((FieldListNode) fieldList());
+		FieldListNode node = fieldList();
+		if(node!=null)
+			fieldLists.add(node);
 		while (test(SEMICOLON)) {
-			fieldLists.add((FieldListNode) fieldList());
+			read(SEMICOLON,";");
+			node = fieldList();
+			if(node!=null)
+				fieldLists.add(node);
 		}
 		read(END, "END");
 		return new RecordTypeNode(fieldLists);
@@ -152,13 +157,13 @@ public class Parser {
 	private ProcedureBodyNode procedureBody() {
 		DeclarationsNode declarations = (DeclarationsNode) declarations();
 
-        read(BEGIN);
+		read(BEGIN);
 
-        StatementSequenceNode statementSeqNode = statementSeq();
-        System.out.println(statementSeqNode.toString());
+		StatementSequenceNode statementSeqNode = statementSeq();
+		System.out.println(statementSeqNode.toString());
 
-        read(END);
-        return new ProcedureBodyNode(declarations, statementSeqNode);
+		read(END);
+		return new ProcedureBodyNode(declarations, statementSeqNode);
 	}
 
 	// ProcedureDeclaration = ProcedureHeading ’;’
@@ -167,17 +172,17 @@ public class Parser {
 		ProcedureHeadingNode head = procedureHeading();
 		read(SEMICOLON, ";");
 		ProcedureBodyNode body = procedureBody();
-        IdentNode procEndName = constIdent();
-        read(SEMICOLON, ";");
+		IdentNode procEndName = constIdent();
+		read(SEMICOLON, ";");
 
 		return new ProcedureDeclarationNode(head, body);
 	}
 
 	private AbstractNode declarations() {
-        List<ConstNode> constList = new LinkedList();
-        List<TypeNode> typeList = new LinkedList();
-        List<VarNode> varListe = new LinkedList();
-        ProcedureDeclarationNode proc = null;
+		List<ConstNode> constList = new LinkedList<ConstNode>();
+		List<TypeNode> typeList = new LinkedList<TypeNode>();
+		List<VarNode> varListe = new LinkedList<VarNode>();
+		List<AbstractNode> procListe = new LinkedList<AbstractNode>();
 
 		if (test(CONST)) {
 			read(CONST, "const");
@@ -189,13 +194,12 @@ public class Parser {
 				read(ASSIGN, "=");
 				exp = (ExpressionNode) expression();
 				read(SEMICOLON, ";");
-                constList.add(new ConstNode(constIdent, exp));
+				constList.add(new ConstNode(constIdent, exp));
 			} while (test(ID));
 
 		}
-        if (test(TYPE)) {
+		if (test(TYPE)) {
 			read(TYPE, "TYPE");
-
 
 			IdentNode ident;
 			AbstractNode type;
@@ -204,31 +208,29 @@ public class Parser {
 				read(ASSIGN, "=");
 				type = type();
 				read(SEMICOLON, ";");
-                typeList.add(new TypeNode(ident, type));
+				typeList.add(new TypeNode(ident, type));
 			} while (test(TYPE));
 		}
-        if (test(VAR)) {
+		if (test(VAR)) {
 			read(VAR, "VAR");
-
-
 
 			IdentListNode identList;
 			AbstractNode type;
 			do {
 				identList = identList();
-                read(COLON, ":");
-                type = type();
+				read(COLON, ":");
+				type = type();
 				read(SEMICOLON, ";");
-                varListe.add(new VarNode(identList, type));
+				varListe.add(new VarNode(identList, type));
 			} while (test(VAR));
 
 		}
-        if (test(PROCEDURE)) {
-            //TODO ProcedureDeclaration LIST!
-			proc = procedureDeclaration();
-			//read(SEMICOLON, ";");
+		while (test(PROCEDURE)) {
+			procListe.add(procedureHeading());
+			read(SEMICOLON, ";");
 		}
-		return new DeclarationsNode(new ConstListNode(constList), new TypeListNode(typeList), new VarListNode(varListe), proc);
+		return new DeclarationsNode(new ConstListNode(constList),
+				new TypeListNode(typeList), new VarListNode(varListe), new ProcedureDeclarationList(procListe));
 	}
 
 	// Module = ’MODULE’ ident ’;’ Declarations
@@ -245,7 +247,6 @@ public class Parser {
 		read(BEGIN, "BEGIN");
 		StatementSequenceNode stmtseq = (StatementSequenceNode) statementSeq();
 
-
 		read(END, "END");
 
 		IdentNode moduleEndName = constIdent();
@@ -259,7 +260,7 @@ public class Parser {
 	private AbstractNode indexExpr() {
 		AbstractNode node = null;
 		if (test(ID)) {
-			node = constIdent();
+			node = new ContentNode(constIdent());
 		} else if (test(INT)) {
 			node = integer();
 		} else {
@@ -276,6 +277,11 @@ public class Parser {
 	// string
 	private StringNode string() {
 		return new StringNode(read(STR, "str").text());
+	}
+
+	private ReadNode readParser() {
+		read(READ, "READ");
+		return test(STR) ? new ReadNode(string()) : new ReadNode();
 	}
 
 	// selector
@@ -307,7 +313,7 @@ public class Parser {
 		AbstractNode selector;
 		AbstractNode expr;
 
-		if (testLookAhead(DOT)) {
+		if (testLookAhead(DOT) || testLookAhead(LBRAC)) {
 			selector = selector();
 			read(ASSIGN, ":=");
 			expr = expression();
@@ -319,45 +325,6 @@ public class Parser {
 			node = new AssignmentNode(selector, expr);
 		}
 		return node;
-	}
-
-	// Statement = [Assignment | ProcedureCall | IfStatement | PRINT
-	// Expression | WhileStatement | RepeatStatement].
-	private AbstractNode statement() {
-              //TODO ProcedureCall
-		AbstractNode resNode = null;
-
-		if (test(IF)) {
-			resNode = ifStatement();
-			return resNode;
-		}
-		if (test(PRINT)) {
-			read(PRINT, "PRINT");
-            //TODO printNode
-			resNode = expression();
-			return resNode;
-		}
-		if (test(WHILE)) {
-			resNode = whileStatement();
-			return resNode;
-		}
-		if (test(REPEAT)) {
-			resNode = repeatStatement();
-			return resNode;
-		}
-		if (test(ID)) {
-			if (testLookAhead(DOT) || testLookAhead(ASSIGN)) {
-				resNode = assignment();
-				return resNode;
-			}
-		}
-		if (test(ID)) {
-			if (testLookAhead(LPAR)) {
-				resNode = procedureCall();
-				return resNode;
-			}
-		}
-		return resNode;
 	}
 
 	private AbstractNode repeatStatement() {
@@ -372,13 +339,53 @@ public class Parser {
 		return new RepeatNode(stateSeq1, exp1);
 	}
 
+	// Statement = [Assignment | ProcedureCall | IfStatement | PRINT
+	// Expression | WhileStatement | RepeatStatement].
+	private AbstractNode statement() {
+		// TODO ProcedureCall
+		AbstractNode resNode = null;
+
+		if (test(IF)) {
+			resNode = ifStatement();
+			return resNode;
+		} else if (test(PRINT)) {
+			read(PRINT, "PRINT");
+			// TODO printNode
+			resNode = new PrintNode(expression());
+			return resNode;
+		} else if (test(WHILE)) {
+			resNode = whileStatement();
+			return resNode;
+		} else if (test(REPEAT)) {
+			resNode = repeatStatement();
+			return resNode;
+		} else if (test(ID)) {
+			if (testLookAhead(DOT) || testLookAhead(ASSIGN)) {
+				resNode = assignment();
+				return resNode;
+			}
+		}
+		if (test(ID)) {
+			if (testLookAhead(LPAR)) {
+				resNode = procedureCall();
+				return resNode;
+			}
+		}
+		return resNode;
+	}
+
 	private StatementSequenceNode statementSeq() {
 		List<AbstractNode> list = new LinkedList<AbstractNode>();
-		list.add(statement());
+		AbstractNode statement = statement();
+		if (statement != null) {
+			list.add(statement);
+		}
 		while (test(SEMICOLON)) {
-            read(SEMICOLON, ";");
-			list.add(statement());
-            System.out.println(list.toString());
+			read(SEMICOLON, ";");
+			statement = statement();
+			if (statement != null) {
+				list.add(statement);
+			}
 		}
 		return new StatementSequenceNode(list);
 	}
@@ -465,17 +472,18 @@ public class Parser {
 
 	private AbstractNode term() {
 
-		AbstractNode t = factor();
+		AbstractNode factorNode = factor();
 
-		if (test(MUL)) {
-			read(MUL, "*");
-			t = new BinOpNode(MUL, t, factor());
-		} else if (test(DIV)) {
-			read(DIV, "/");
-			t = new BinOpNode(DIV, t, factor());
+		while (test(MUL) || test(DIV)) {
+			if (test(MUL)) {
+				read(MUL, "*");
+				factorNode = new BinOpNode(MUL, factorNode, factor());
+			} else if (test(DIV)) {
+				read(DIV, "/");
+				factorNode = new BinOpNode(DIV, factorNode, factor());
+			}
 		}
-
-		return t;
+		return factorNode;
 	}
 
 	private AbstractNode factor() {
@@ -485,7 +493,7 @@ public class Parser {
 			if (testLookAhead(DOT) || testLookAhead(LBRAC)) {
 				node = selector();
 			} else {
-				node = constIdent();
+				node = new ContentNode(constIdent());
 			}
 		} else if (test(INT)) {
 			node = integer();
@@ -595,10 +603,10 @@ public class Parser {
 		return read();
 	}
 
-    MyToken read(TokenID expectedToken) {
-        expect(expectedToken, expectedToken.name());
-        return read();
-    }
+	MyToken read(TokenID expectedToken) {
+		expect(expectedToken, expectedToken.name());
+		return read();
+	}
 
 	/**
 	 * Read the next token from the scanner.
@@ -685,8 +693,9 @@ public class Parser {
 	/**
 	 * Stop parsing and show the provided error message together with the
 	 * current line and column.
-     * @param expectation
-     */
+	 * 
+	 * @param expectation
+	 */
 	void failExpectation(String expectation) {
 		String location;
 
@@ -705,37 +714,38 @@ public class Parser {
 		// throw new ParserException("==> Error: " + str);
 	}
 
-//	public static void main(String[] argv) {
-//		System.out.println("MyStandalone Version 0.1");
-//
-//		if (argv.length == 0) {
-//			System.out.println("Usage : java MyStandalone <inputfile>");
-//		} else {
-//
-//			for (int i = 0; i < argv.length; i++) {
-//				try {
-//					inFile = argv[i];
-//					
-//					Parser parser = new Parser(new MyFlexScanner(
-//							new java.io.FileReader(argv[i])));
-//
-//					AbstractNode erg = parser.parse();
-//					System.out.println(erg);
-//
-//                    ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(nodeFile));
-//                    os.writeObject(erg);
-//                    os.flush();
-//
-//
-//				} catch (java.io.FileNotFoundException e) {
-//					System.out.println("File not found : \"" + inFile + "\"");
-//				} catch (Exception e) {
-//					System.out.println("Unexpected exception:");
-//					e.printStackTrace();
-//				}
-//			}
-//
-//		}
-//	}
+	// public static void main(String[] argv) {
+	// System.out.println("MyStandalone Version 0.1");
+	//
+	// if (argv.length == 0) {
+	// System.out.println("Usage : java MyStandalone <inputfile>");
+	// } else {
+	//
+	// for (int i = 0; i < argv.length; i++) {
+	// try {
+	// inFile = argv[i];
+	//
+	// Parser parser = new Parser(new MyFlexScanner(
+	// new java.io.FileReader(argv[i])));
+	//
+	// AbstractNode erg = parser.parse();
+	// System.out.println(erg);
+	//
+	// ObjectOutputStream os = new ObjectOutputStream(new
+	// FileOutputStream(nodeFile));
+	// os.writeObject(erg);
+	// os.flush();
+	//
+	//
+	// } catch (java.io.FileNotFoundException e) {
+	// System.out.println("File not found : \"" + inFile + "\"");
+	// } catch (Exception e) {
+	// System.out.println("Unexpected exception:");
+	// e.printStackTrace();
+	// }
+	// }
+	//
+	// }
+	// }
 
 }

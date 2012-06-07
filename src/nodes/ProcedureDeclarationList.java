@@ -3,10 +3,10 @@ package nodes;
 import java.util.List;
 
 public class ProcedureDeclarationList extends AbstractNode {
-    private final List<ProcedureDeclarationNode> list;
+    private final List<AbstractNode> list;
 
-    public ProcedureDeclarationList(List<ProcedureDeclarationNode> list) {
-        this.list = list;
+    public ProcedureDeclarationList(List<AbstractNode> procListe) {
+        this.list = procListe;
     }
 
     @Override

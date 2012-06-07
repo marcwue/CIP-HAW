@@ -10,9 +10,9 @@ public class DeclarationsNode extends AbstractNode{
     private final ConstListNode con;
     private final TypeListNode type;
     private final VarListNode var;
-	private final ProcedureDeclarationNode proc;
+	private final ProcedureDeclarationList proc;
 
-    public DeclarationsNode(ConstListNode con, TypeListNode type, VarListNode var, ProcedureDeclarationNode proc) {
+    public DeclarationsNode(ConstListNode con, TypeListNode type, VarListNode var, ProcedureDeclarationList proc) {
         this.con = con;
         this.type = type;
         this.var = var;

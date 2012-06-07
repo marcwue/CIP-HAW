@@ -5,6 +5,7 @@ package descriptoren;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @author Marc Wüseke
@@ -34,6 +35,11 @@ public class SymbolTable {
 	 */
 	@Override
 	public String toString() {
+		System.out.println("Debug Start");
+		for (Entry<String, AbstractDescr> aD : descriptorMap.entrySet()){
+			System.out.println(aD.toString());
+		}
+		System.out.println("Debug End");
 		return "SymbolTable [descriptorMap=" + descriptorMap + ", addressMap="
 				+ addressMap + ", currentAddress=" + currentAddress
 				+ ", parentTable=" + parentTable + "]";
