@@ -1,9 +1,35 @@
 package descriptoren;
 
 public class IntConstDescr extends AbstractDescr {
-    private int value;
+	int value;
 
-    public IntConstDescr(int value) {
-        this.value = value;
-    }
+	public IntConstDescr(int value) {
+		this.value = value;
+	}
+
+	@Override
+	public int getSize() {
+		return 0;
+	}
+
+	public int value() {
+		return this.value;
+	}
+
+	public boolean equals(Object o) {
+		if (!(o instanceof IntConstDescr))
+			return false;
+		IntConstDescr d = (IntConstDescr) o;
+		return (this.value == d.value());
+	}
+
+	public int hashCode() {
+		int result = 7;
+		result = 31 * result + value;
+		return result;
+	}
+
+	public String toString() {
+		return "IntConstDescriptor[Value == " + value + " ] ";
+	}
 }

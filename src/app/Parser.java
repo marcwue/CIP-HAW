@@ -178,7 +178,7 @@ public class Parser {
 		return new ProcedureDeclarationNode(head, body);
 	}
 
-	private AbstractNode declarations() {
+	private DeclarationsNode declarations() {
 		List<ConstNode> constList = new LinkedList<ConstNode>();
 		List<TypeNode> typeList = new LinkedList<TypeNode>();
 		List<VarNode> varListe = new LinkedList<VarNode>();
@@ -242,14 +242,15 @@ public class Parser {
 
 		read(SEMICOLON, ";");
 
-		AbstractNode declaration = declarations();
+		DeclarationsNode declaration = declarations();
 
 		read(BEGIN, "BEGIN");
-		StatementSequenceNode stmtseq = (StatementSequenceNode) statementSeq();
+		AbstractNode stmtseq = statementSeq();
 
 		read(END, "END");
 
 		IdentNode moduleEndName = constIdent();
+		
 		if (!moduleName.equals(moduleEndName)) {
 			failExpectation("identifiers of module and end are supposed to be the same");
 		}

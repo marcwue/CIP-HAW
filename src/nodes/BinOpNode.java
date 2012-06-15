@@ -3,6 +3,8 @@
  */
 package nodes;
 
+import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
 import app.TokenID;
 
 /**
@@ -11,8 +13,9 @@ import app.TokenID;
 public class BinOpNode extends AbstractNode {
 
 	TokenID token;
-    AbstractNode left;
-    AbstractNode right;
+	AbstractNode left;
+	AbstractNode right;
+
 	/**
 	 * @param token
 	 * @param left
@@ -24,7 +27,63 @@ public class BinOpNode extends AbstractNode {
 		this.left = left;
 		this.right = right;
 	}
-	/* (non-Javadoc)
+
+	public Object getVal() {
+		if (token.equals(TokenID.MUL)) {
+			return (Integer) left.getValue() * (Integer) right.getValue();
+		} else if (token.equals(TokenID.DIV)) {
+			return (Integer) left.getValue() / (Integer) right.getValue();
+		} else if (token.equals(TokenID.MINUS)) {
+			return (Integer) left.getValue() - (Integer) right.getValue();
+		} else if (token.equals(TokenID.PLUS)) {
+			if (left.getValue() instanceof Integer) {
+				return (Integer) left.getValue() + (Integer) right.getValue();
+			}
+			// evtl nicht nötig bzw es ist nicht in oberon spezifiziert
+			else {
+				return (String) left.getValue() + (String) right.getValue();
+			}
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public AbstractDescr compile(SymbolTable symbolTable) {
+		left.compile(symbolTable);
+		if (left instanceof IdentNode)
+			write("CONT, 1");
+		right.compile(symbolTable);
+		if (right instanceof IdentNode)
+			write("CONT, 1");
+
+		if (token.equals(TokenID.MUL)) {
+			write("MUL");
+		} else if (token.equals(TokenID.DIV)) {
+			write("DIV");
+		} else if (token.equals(TokenID.MINUS)) {
+			write("SUB");
+		} else if (token.equals(TokenID.PLUS)) {
+			write("ADD");
+		} else if (token.equals(TokenID.EQ)) {
+			write("EQ");
+		} else if (token.equals(TokenID.HI)) {
+			write("GT");
+		} else if (token.equals(TokenID.HIEQ)) {
+			write("GE");
+		} else if (token.equals(TokenID.LO)) {
+			write("LT");
+		} else if (token.equals(TokenID.LOEQ)) {
+			write("LE");
+		} else if (token.equals(TokenID.NEQ)) {
+			write("NEQ");
+		}
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -32,7 +91,10 @@ public class BinOpNode extends AbstractNode {
 		return "TermNode [token=" + token + ", left=" + left + ", right="
 				+ right + "]";
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -44,7 +106,10 @@ public class BinOpNode extends AbstractNode {
 		result = prime * result + ((token == null) ? 0 : token.hashCode());
 		return result;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -74,5 +139,4 @@ public class BinOpNode extends AbstractNode {
 		return true;
 	}
 
-    
 }

@@ -2,6 +2,9 @@ package nodes;
 
 import java.util.List;
 
+import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
+
 public class ProcedureDeclarationList extends AbstractNode {
     private final List<AbstractNode> list;
 
@@ -9,6 +12,13 @@ public class ProcedureDeclarationList extends AbstractNode {
         this.list = procListe;
     }
 
+    public AbstractDescr compile(SymbolTable symbolTable){
+    	for (AbstractNode procNode : list) {
+			procNode.compile(symbolTable);
+		}
+    	return null;
+    }
+    
     @Override
     public String toString() {
         return "ProcedureDeclarationList{" +

@@ -22,7 +22,7 @@ public class IntNode extends AbstractNode {
     /**
 	 * @return the value
 	 */
-	public int getValue() {
+	public Integer getValue() {
 		return value;
 	}
 

@@ -21,7 +21,7 @@ public class SymbolTable {
 	public SymbolTable() {
 		super();
 	}
-	
+
 	/**
 	 * @param parentTable
 	 */
@@ -30,13 +30,15 @@ public class SymbolTable {
 		this.parentTable = parentTable;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		System.out.println("Debug Start");
-		for (Entry<String, AbstractDescr> aD : descriptorMap.entrySet()){
+		for (Entry<String, AbstractDescr> aD : descriptorMap.entrySet()) {
 			System.out.println(aD.toString());
 		}
 		System.out.println("Debug End");
@@ -54,6 +56,20 @@ public class SymbolTable {
 						+ ident);
 			}
 			currentAddress += descr.getSize();
+		} else {
+			System.out
+					.println("Fehler, zweimal die gleiche Variable deklariert");
+		}
+	}
+
+	public void declareType(String ident, AbstractDescr descr) {
+		if (!(descriptorMap.containsKey(ident))) {
+			descriptorMap.put(ident, descr);
+			addressMap.put(ident, -1);
+			if (descr == null) {
+				System.out.println("---- compile Error-----\n Variable = "
+						+ ident);
+			}
 		} else {
 			System.out
 					.println("Fehler, zweimal die gleiche Variable deklariert");

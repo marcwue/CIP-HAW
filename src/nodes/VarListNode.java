@@ -9,16 +9,21 @@ import java.util.List;
 
 public class VarListNode extends AbstractNode{
     private final List<VarNode> list;
-
+    private int memSize = 0;
+    
     public VarListNode(List<VarNode> list) {
         this.list = list;
     }
 
     public AbstractDescr compile(SymbolTable symboltable) {
-        for(VarNode node : list) {
-            node.compile(symboltable);
+        for(VarNode varNode : list) {
+        	memSize += varNode.compile(symboltable).getSize() * varNode.getSize();
         }
         return null;
+    }
+    
+    public int getSize(){
+    	return memSize;
     }
 
     @Override

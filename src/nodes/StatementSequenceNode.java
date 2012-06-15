@@ -2,33 +2,47 @@ package nodes;
 
 import java.util.List;
 
-public class StatementSequenceNode extends AbstractNode{
-    private final List<AbstractNode> list;
+import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
 
-    public StatementSequenceNode(List<AbstractNode> list) {
-        this.list = list;
-    }
+public class StatementSequenceNode extends AbstractNode {
+	private final List<AbstractNode> list;
 
-    @Override
-    public String toString() {
-        return "StatemantSequenceNode{\n" + list +
-                '}';
-    }
+	public StatementSequenceNode(List<AbstractNode> list) {
+		this.list = list;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	@Override
+	public AbstractDescr compile(SymbolTable syms) {
+		for (AbstractNode n : list) {
+			n.compile(syms);
+		}
 
-        StatementSequenceNode that = (StatementSequenceNode) o;
+		return null;
+	}
 
-        if (list != null ? !list.equals(that.list) : that.list != null) return false;
+	@Override
+	public String toString() {
+		return "StatemantSequenceNode{\n" + list + '}';
+	}
 
-        return true;
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
-    @Override
-    public int hashCode() {
-        return list != null ? list.hashCode() : 0;
-    }
+		StatementSequenceNode that = (StatementSequenceNode) o;
+
+		if (list != null ? !list.equals(that.list) : that.list != null)
+			return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return list != null ? list.hashCode() : 0;
+	}
 }

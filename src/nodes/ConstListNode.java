@@ -2,11 +2,27 @@ package nodes;
 
 import java.util.List;
 
+import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
+
 public class ConstListNode extends AbstractNode {
 	private List<ConstNode> list;
+	int memSize = 0;
 
 	public ConstListNode(List<ConstNode> list) {
 		this.list = list;
+	}
+
+	public int getSize() {
+		return memSize;
+	}
+
+	public AbstractDescr compileReturnAbstractNode(SymbolTable table) {
+		System.out.println(list);
+		for (AbstractNode constNode : list) {
+			memSize += constNode.compile(table).getSize();
+		}
+		return null;
 	}
 
 	@Override

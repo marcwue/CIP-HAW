@@ -28,7 +28,9 @@ public class ContentNode extends AbstractNode {
         this.subject = subject;
     }
 
-    
+    public AbstractNode getSubject(){
+    	return subject;
+    }
     
     /* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
