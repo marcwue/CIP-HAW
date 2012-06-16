@@ -88,12 +88,12 @@ public class Parser {
 		read(RECORD, "RECORD");
 		List<FieldListNode> fieldLists = new ArrayList<FieldListNode>();
 		FieldListNode node = fieldList();
-		if(node!=null)
+		if (node != null)
 			fieldLists.add(node);
 		while (test(SEMICOLON)) {
-			read(SEMICOLON,";");
+			read(SEMICOLON, ";");
 			node = fieldList();
-			if(node!=null)
+			if (node != null)
 				fieldLists.add(node);
 		}
 		read(END, "END");
@@ -145,7 +145,7 @@ public class Parser {
 		read(PROCEDURE, "PROCEDURE");
 		IdentNode ident = constIdent();
 		read(LPAR, "(");
-		FormalParametersNode params = null;
+		FormalParametersNode params = new FormalParametersNode(new ArrayList<FPSectionNode>());;
 		if (test(VAR) || test(ID)) {
 			params = formalParameters();
 		}
@@ -229,8 +229,7 @@ public class Parser {
 			procListe.add(procedureHeading());
 			read(SEMICOLON, ";");
 		}
-		return new DeclarationsNode(new ConstListNode(constList),
-				new TypeListNode(typeList), new VarListNode(varListe), new ProcedureDeclarationList(procListe));
+		return new DeclarationsNode(constList, typeList, varListe, procListe);
 	}
 
 	// Module = ’MODULE’ ident ’;’ Declarations
@@ -250,7 +249,7 @@ public class Parser {
 		read(END, "END");
 
 		IdentNode moduleEndName = constIdent();
-		
+
 		if (!moduleName.equals(moduleEndName)) {
 			failExpectation("identifiers of module and end are supposed to be the same");
 		}
@@ -492,7 +491,7 @@ public class Parser {
 
 		if (test(ID)) {
 			if (testLookAhead(DOT) || testLookAhead(LBRAC)) {
-				node = selector();
+				node = new ContentNode(selector());
 			} else {
 				node = new ContentNode(constIdent());
 			}

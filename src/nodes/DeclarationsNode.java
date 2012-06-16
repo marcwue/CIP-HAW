@@ -3,6 +3,8 @@
  */
 package nodes;
 
+import java.util.List;
+
 import descriptoren.AbstractDescr;
 import descriptoren.SymbolTable;
 
@@ -11,14 +13,30 @@ import descriptoren.SymbolTable;
  * 
  */
 public class DeclarationsNode extends AbstractNode {
-	private final ConstListNode con;
-	private final TypeListNode type;
-	private final VarListNode var;
-	private final ProcedureDeclarationList proc;
-	int memSize = 0;
+	// geht nicht mit listen da dann die getSize
+	// nicht funktionert aufgrund nullPointerException
+	// private final ConstListNode con;
+	// private final TypeListNode type;
+	// private final VarListNode var;
+	// private final ProcedureDeclarationList proc;
+	private final List<? extends AbstractNode> con;
+	private final List<? extends AbstractNode> type;
+	private final List<? extends AbstractNode> var;
+	private final List<? extends AbstractNode> proc;
 
-	public DeclarationsNode(ConstListNode con, TypeListNode type,
-			VarListNode var, ProcedureDeclarationList proc) {
+	int memSize = 0;
+	
+	/**
+	 * @param con
+	 * @param type
+	 * @param var
+	 * @param proc
+	 */
+	public DeclarationsNode(List<? extends AbstractNode> con,
+			List<? extends AbstractNode> type,
+			List<? extends AbstractNode> var, 
+			List<? extends AbstractNode> proc) {
+		super();
 		this.con = con;
 		this.type = type;
 		this.var = var;
@@ -70,16 +88,33 @@ public class DeclarationsNode extends AbstractNode {
 	}
 
 	public AbstractDescr compile(SymbolTable table) {
-		
-		memSize += con.compile(table).getSize();
-		
-		memSize += type.compile(table).getSize();
-		
-		memSize += var.compile(table).getSize();
-		
-		memSize += proc.compile(table).getSize();
+		// wird nicht gehen wegen der getSize() auf
+		// nullPointer
+		// memSize += con.compile(table).getSize();
+		//
+		// memSize += type.compile(table).getSize();
+		//
+		// memSize += var.compile(table).getSize();
+		//
+		// memSize += proc.compile(table).getSize();
+
+		for (AbstractNode constNode : con) {
+			memSize += constNode.compile(table).getSize();
+		}
+		for (AbstractNode typeNode : type) {
+			memSize += typeNode.compile(table).getSize();
+		}
+		for (AbstractNode varNode : var) {
+			memSize += varNode.compile(table).getSize() * varNode.getSize(); 
+			// TODO:
+			// unschön.
+			// besser:
+			// identlistdescriptor
+		}
+		for (AbstractNode procNode : proc) {
+			procNode.compile(table);
+		}
 
 		return null;
-
 	}
 }

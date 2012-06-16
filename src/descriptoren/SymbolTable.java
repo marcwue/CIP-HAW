@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import app.TokenID;
+
 /**
  * @author Marc Wüseke
  * 
@@ -37,14 +39,13 @@ public class SymbolTable {
 	 */
 	@Override
 	public String toString() {
-		System.out.println("Debug Start");
 		for (Entry<String, AbstractDescr> aD : descriptorMap.entrySet()) {
 			System.out.println(aD.toString());
 		}
-		System.out.println("Debug End");
-		return "SymbolTable [descriptorMap=" + descriptorMap + ", addressMap="
-				+ addressMap + ", currentAddress=" + currentAddress
-				+ ", parentTable=" + parentTable + "]";
+		return "SymbolTable [\ndescriptorMap=" + descriptorMap 
+				+ "\naddressMap=" + addressMap 
+				+ "\ncurrentAddress=" + currentAddress
+				+ "\nparentTable=" + parentTable + "\n]";
 	}
 
 	public void declare(String ident, AbstractDescr descr) {
@@ -79,7 +80,7 @@ public class SymbolTable {
 	public AbstractDescr descriptorFor(String ident) {
 		// built-in types
 		if (ident.equalsIgnoreCase("integer")) {
-			return new SimpleTypeDescr("INTEGER");
+			return new SimpleTypeDescr(TokenID.INT);
 		}
 
 		AbstractDescr d = descriptorMap.get(ident);

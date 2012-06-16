@@ -46,7 +46,7 @@ public class Interpreter {
 		System.out.println(ergTree);
 		
 		System.out.println("### generate SymbolTable:");
-		System.out.println(ergTree.compile(symbolTable));
+		ergTree.compile(symbolTable);
 		System.out.println(symbolTable);
 		
 		System.out.println("### Assembler Code:");

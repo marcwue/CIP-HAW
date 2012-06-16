@@ -1,20 +1,22 @@
 package descriptoren;
 
+import app.TokenID;
+
 public class SimpleTypeDescr extends AbstractDescr {
 
-	private String name;
+	private TokenID name;
 
 	/**
 	 * @param name
 	 */
-	public SimpleTypeDescr(String name) {
+	public SimpleTypeDescr(TokenID name) {
 		this.name = name;
 	}
 
 	/**
 	 * @return the name
 	 */
-	public String getName() {
+	public TokenID getName() {
 		return name;
 	}
 

@@ -1,7 +1,7 @@
 package aufgabe2;
 
 //Usercode
-import static aufgabe2.TokenID.*;
+import static app.TokenID.*;
 
 //Option und Declaration
 %%
@@ -17,7 +17,7 @@ import static aufgabe2.TokenID.*;
 digit 	=	[0-9]
 letter	=	[a-zA-Z]
 integer	=	{digit}({digit})*
-ident 	=	{letter}({letter}|{digit}})*
+ident 	=	{letter}({letter}|{digit}|"_"})*
 blank	=	[ \t\n\r]
 string = \"([^\\\"]|\\.)*\"
 

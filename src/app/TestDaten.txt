@@ -1,8 +1,13 @@
 MODULE Sample;
-	VAR x, y, z : integer;
+VAR i : integer;
 
-    BEGIN
+PROCEDURE p1();
+	VAR i,j,k : integer;
+	BEGIN i := 99; 
+END p1;
 
-        z := 5;
+	begin 
+		i := 100;
+		p1();
 
 END Sample
