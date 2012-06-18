@@ -57,7 +57,8 @@ public class Parser {
 
 	// ident
 	private IdentNode constIdent() {
-		return new IdentNode(read(ID, "identifier").text());
+		IdentNode fu = new IdentNode(read(ID, "identifier").text()+"");
+		return fu;
 	}
 
 	// ArrayType = = 'ARRAY' '[' IndexExpression ']' 'OF' Type
@@ -189,11 +190,11 @@ public class Parser {
 			read(CONST, "const");
 
 			IdentNode constIdent;
-			ExpressionNode exp;
+			AbstractNode exp;
 			do {
 				constIdent = constIdent();
-				read(ASSIGN, "=");
-				exp = (ExpressionNode) expression();
+				read(EQ, "=");
+				exp = expression();
 				read(SEMICOLON, ";");
 				constList.add(new ConstNode(constIdent, exp));
 			} while (test(ID));
@@ -206,7 +207,7 @@ public class Parser {
 			AbstractNode type;
 			do {
 				ident = constIdent();
-				read(ASSIGN, "=");
+				read(EQ, "=");
 				type = type();
 				read(SEMICOLON, ";");
 				typeList.add(new TypeNode(ident, type));
@@ -287,20 +288,31 @@ public class Parser {
 	// selector
 	private SelectorNode selector() {
 		IdentNode subject = constIdent();
-		List<AbstractNode> selectors = new LinkedList<AbstractNode>();
+		SelectorNode node = null;
+
+		if (test(DOT)) {
+			read(DOT, ".");
+			node = new RecordSelectorNode(subject, constIdent());
+		} else if (test(LBRAC)) {
+			read(LBRAC, "[");
+			node = new ArraySelectorNode(subject, expression());
+			read(RBRAC, "]");
+		} else {
+			failExpectation(". or [");
+		}
 
 		while (test(DOT) || test(LBRAC)) {
 			if (test(DOT)) {
 				read(DOT, ".");
-				selectors.add(constIdent());
+				node = new RecordSelectorNode(node, constIdent());
 			} else {
 				read(LBRAC, "[");
-				selectors.add(indexExpr());
+				node = new ArraySelectorNode(node, expression());
 				read(RBRAC, "]");
 			}
 		}
 
-		return new SelectorNode(subject, selectors);
+		return node;
 	}
 
 	public static void print(MyToken token) {

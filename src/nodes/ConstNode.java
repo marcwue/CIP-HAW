@@ -8,9 +8,9 @@ public class ConstNode extends AbstractNode {
 	private final AbstractNode ident;
 	private final AbstractNode exp;
 
-	public ConstNode(IdentNode ident, ExpressionNode exp) {
+	public ConstNode(IdentNode ident, AbstractNode exp2) {
 		this.ident = ident;
-		this.exp = exp;
+		this.exp = exp2;
 	}
 
 	@Override

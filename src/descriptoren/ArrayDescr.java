@@ -28,4 +28,41 @@ public class ArrayDescr extends AbstractDescr {
 	public int getSize() {
 		return basetype.getSize() * numberOfElements;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((basetype == null) ? 0 : basetype.hashCode());
+		result = prime * result + numberOfElements;
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ArrayDescr other = (ArrayDescr) obj;
+		if (basetype == null) {
+			if (other.basetype != null)
+				return false;
+		} else if (!basetype.equals(other.basetype))
+			return false;
+		if (numberOfElements != other.numberOfElements)
+			return false;
+		return true;
+	}
+	
+	
 }

@@ -45,7 +45,7 @@ public class SymbolTable {
 		return "SymbolTable [\ndescriptorMap=" + descriptorMap 
 				+ "\naddressMap=" + addressMap 
 				+ "\ncurrentAddress=" + currentAddress
-				+ "\nparentTable=" + parentTable + "\n]";
+				+ "\n]";
 	}
 
 	public void declare(String ident, AbstractDescr descr) {

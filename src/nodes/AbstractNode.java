@@ -16,10 +16,28 @@ public abstract class AbstractNode implements Serializable {
 	public AbstractNode() {
 	}
 
+	/**
+	 * @param indent
+	 * @return
+	 */
+	protected String toString(int indent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	protected String toString(int indent, String str) {
+		String indentStr = "";
+		for (int i = 0; i < indent; ++i) {
+			indentStr += " ";
+		}
+
+		return str.replaceAll("^", indentStr);
+	}
+
 	public AbstractDescr compile(SymbolTable symbolTable) {
 		return null;
 	}
-	
+
 	public AbstractDescr compileReturnAbstractNode(SymbolTable symbolTable) {
 		return null;
 	}
@@ -28,15 +46,15 @@ public abstract class AbstractNode implements Serializable {
 		return null;
 	}
 
-	public Object getValue(){
+	public Object getValue() {
 		return null;
 	}
-	
+
 	public static int getNextLabelNumber() {
 		return labelCount++;
 	}
-	
-	public int getSize(){
+
+	public int getSize() {
 		return 0;
 	}
 
