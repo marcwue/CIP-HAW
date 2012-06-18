@@ -1,7 +1,5 @@
 package descriptoren;
 
-import nodes.*;
-
 public class ArrayDescr extends AbstractDescr {
 	private static final long serialVersionUID = 1L;
 	private int numberOfElements;
@@ -10,6 +8,13 @@ public class ArrayDescr extends AbstractDescr {
 	public ArrayDescr(int numberOfElements, AbstractDescr basetype) {
 		this.numberOfElements = numberOfElements;
 		this.basetype = basetype;
+	}
+
+	public String toString() {
+		StringBuffer result = new StringBuffer();
+		result.append("ArrayDescriptor[ numberOfElements: " + numberOfElements
+				+ "\n\t" + "baseType :" + basetype + "]\n");
+		return result.toString();
 	}
 
 	public int numberOfElements() {

@@ -1,4 +1,4 @@
-package aufgabe2;
+package app;
 
 //Usercode
 import static app.TokenID.*;

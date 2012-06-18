@@ -145,7 +145,9 @@ public class Parser {
 		read(PROCEDURE, "PROCEDURE");
 		IdentNode ident = constIdent();
 		read(LPAR, "(");
-		FormalParametersNode params = new FormalParametersNode(new ArrayList<FPSectionNode>());;
+		FormalParametersNode params = new FormalParametersNode(
+				new ArrayList<FPSectionNode>());
+		;
 		if (test(VAR) || test(ID)) {
 			params = formalParameters();
 		}
@@ -160,7 +162,6 @@ public class Parser {
 		read(BEGIN);
 
 		StatementSequenceNode statementSeqNode = statementSeq();
-		System.out.println(statementSeqNode.toString());
 
 		read(END);
 		return new ProcedureBodyNode(declarations, statementSeqNode);
@@ -209,11 +210,10 @@ public class Parser {
 				type = type();
 				read(SEMICOLON, ";");
 				typeList.add(new TypeNode(ident, type));
-			} while (test(TYPE));
+			} while (test(ID));
 		}
 		if (test(VAR)) {
 			read(VAR, "VAR");
-
 			IdentListNode identList;
 			AbstractNode type;
 			do {
@@ -222,7 +222,7 @@ public class Parser {
 				type = type();
 				read(SEMICOLON, ";");
 				varListe.add(new VarNode(identList, type));
-			} while (test(VAR));
+			} while (test(ID));
 
 		}
 		while (test(PROCEDURE)) {
@@ -360,15 +360,10 @@ public class Parser {
 			resNode = repeatStatement();
 			return resNode;
 		} else if (test(ID)) {
-			if (testLookAhead(DOT) || testLookAhead(ASSIGN)) {
-				resNode = assignment();
-				return resNode;
-			}
-		}
-		if (test(ID)) {
 			if (testLookAhead(LPAR)) {
 				resNode = procedureCall();
-				return resNode;
+			} else {
+				resNode = assignment();
 			}
 		}
 		return resNode;

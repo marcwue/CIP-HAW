@@ -1,13 +1,11 @@
 MODULE Sample;
-VAR i : integer;
+VAR 
+i,j : integer;
+v : array[10] of
+     array[20] of integer;
 
-PROCEDURE p1();
-	VAR i,j,k : integer;
-	BEGIN i := 99; 
-END p1;
+Begin
+v[2][7] := 10;
 
-	begin 
-		i := 100;
-		p1();
 
 END Sample
