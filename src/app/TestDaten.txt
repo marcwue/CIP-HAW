@@ -1,19 +1,10 @@
 MODULE Sample;
 
-const
-c = 10;
-
-type
-t = array[10] of integer;
-tt = record
-	a, b : t;
-	c : integer;
-	end;
 
 var
-v, w : array[c] of tt;
+x : integer;
 
 Begin
-
+x := 13;
 
 END Sample
