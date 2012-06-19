@@ -16,7 +16,7 @@ import nodes.AbstractNode;
 
 public class Interpreter {
 
-	private final static String nodeFile = "nodeFile";
+	private final static String nodeFile = "nodeFile.txt";
 	static MyFlexScanner scanner = null;
 	static SymbolTable symbolTable = new SymbolTable();
 
@@ -61,7 +61,7 @@ public class Interpreter {
 		ObjectOutputStream os;
 		try {
 			os = new ObjectOutputStream(new FileOutputStream(nodeFile));
-			os.writeObject(ergTree.getAssemblerCode());
+			os.writeUTF(ergTree.getAssemblerCode());
 			os.flush();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -72,7 +72,7 @@ public class Interpreter {
 		}
 		
 		System.out.println("### Standalone fu");
-		String[] s = {"nodefile","1"};
+		String[] s = {nodeFile,"1"};
 		try {
 			StandaloneCG.main(s);
 		} catch (ClassNotFoundException e) {

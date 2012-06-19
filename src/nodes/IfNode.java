@@ -8,6 +8,7 @@ import cip.instructions.BranchFalseInstruction;
 import cip.instructions.JumpInstruction;
 import cip.instructions.LabelInstruction;
 import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
 
 import java.util.HashMap;
 
@@ -36,7 +37,7 @@ public class IfNode extends AbstractNode {
         this.stateSeq2 = stateSeq2;
     }
 
-    public AbstractDescr compile(HashMap<String, AbstractDescr> symbolTable) {
+    public AbstractDescr compile(SymbolTable symbolTable) {
         int l1, l2;
         l1 = CodeGen.newLabel();
         l2 = CodeGen.newLabel();
