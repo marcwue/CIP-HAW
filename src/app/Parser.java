@@ -155,7 +155,7 @@ public class Parser {
 		read(LPAR, "(");
 		FormalParametersNode params = new FormalParametersNode(
 				new ArrayList<FPSectionNode>());
-		;
+		
 		if (test(VAR) || test(ID)) {
 			params = formalParameters();
 		}
@@ -169,7 +169,7 @@ public class Parser {
 
 		read(BEGIN);
 
-		StatementSequenceNode statementSeqNode = statementSeq();
+		AbstractNode statementSeqNode = statementSeq();
 
 		read(END);
 		return new ProcedureBodyNode(declarations, statementSeqNode);
@@ -182,7 +182,6 @@ public class Parser {
 		read(SEMICOLON, ";");
 		ProcedureBodyNode body = procedureBody();
 		IdentNode procEndName = constIdent();
-		read(SEMICOLON, ";");
 
 		return new ProcedureDeclarationNode(head, body);
 	}
@@ -235,7 +234,8 @@ public class Parser {
 
 		}
 		while (test(PROCEDURE)) {
-			procListe.add(procedureHeading());
+			ProcedureDeclarationNode pdn = procedureDeclaration();
+			procListe.add(pdn);
 			read(SEMICOLON, ";");
 		}
 		return new DeclarationsNode(constList, typeList, varListe, procListe);

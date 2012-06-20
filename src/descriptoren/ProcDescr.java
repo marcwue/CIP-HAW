@@ -2,64 +2,56 @@ package descriptoren;
 
 public class ProcDescr extends AbstractDescr {
 
-	private String name;
-	private int StartAddress; 
-	private int lengthParaBlock; 
-	private int framesize;
-	private VarDescr params;
-	
-	/**
-	 * @param size
-	 * @param name
-	 * @param startAddress
-	 * @param lengthParaBlock
-	 * @param framesize
-	 * @param params
-	 */
-	public ProcDescr(int size, String name, int startAddress,
-			int lengthParaBlock, int framesize, VarDescr params) {
-		this.name = name;
-		StartAddress = startAddress;
-		this.lengthParaBlock = lengthParaBlock;
-		this.framesize = framesize;
-		this.params = params;
+	private int labelInAssembler;
+	private SymbolTable lokal;
+
+	public ProcDescr(int labelInAssembler, SymbolTable lokal) {
+		this.labelInAssembler = labelInAssembler;
+		this.lokal = lokal;
 	}
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
+	public int getLabelInAssembler() {
+		return labelInAssembler;
 	}
 
-	/**
-	 * @return the startAddress
-	 */
-	public int getStartAddress() {
-		return StartAddress;
+	public SymbolTable getLokal() {
+		return lokal;
 	}
 
-	/**
-	 * @return the lengthParaBlock
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
 	 */
-	public int getLengthParaBlock() {
-		return lengthParaBlock;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + labelInAssembler;
+		result = prime * result + ((lokal == null) ? 0 : lokal.hashCode());
+		return result;
 	}
 
-	/**
-	 * @return the framesize
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	public int getFramesize() {
-		return framesize;
-	}
-
-	/**
-	 * @return the params
-	 */
-	public VarDescr getParams() {
-		return params;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProcDescr other = (ProcDescr) obj;
+		if (labelInAssembler != other.labelInAssembler)
+			return false;
+		if (lokal == null) {
+			if (other.lokal != null)
+				return false;
+		} else if (!lokal.equals(other.lokal))
+			return false;
+		return true;
 	}
 	
 	
-	
+
 }

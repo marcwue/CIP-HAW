@@ -1,13 +1,14 @@
-module m5;
+module m;
 
-var
- r1, r2 : record
-           a,b,c : integer;
-           d : record 
-                x, y : integer
-               end;
-          end;
-begin                
+var i : integer;
 
-       
-end m5.
+PROCEDURE p1();
+	var i,j,k : integer;
+	begin 
+	i := 99; 
+end p1;
+
+begin 
+
+
+end m.

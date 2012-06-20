@@ -2,9 +2,9 @@ package nodes;
 
 public class ProcedureBodyNode extends AbstractNode {
     private final DeclarationsNode declarations;
-    private final StatementSequenceNode statseq;
+    private final AbstractNode statseq;
 
-    public ProcedureBodyNode(DeclarationsNode declarations, StatementSequenceNode statseq) {
+    public ProcedureBodyNode(DeclarationsNode declarations, AbstractNode statseq) {
         this.declarations = declarations;
         this.statseq = statseq;
     }

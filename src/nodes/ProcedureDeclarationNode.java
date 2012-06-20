@@ -13,62 +13,14 @@ public class ProcedureDeclarationNode extends AbstractNode{
 		this.body = body;
 	}
 
-	@Override
-	public AbstractDescr compile(SymbolTable symbolTable) {
-
-		SymbolTable lokal = new SymbolTable(symbolTable);
-		int label = getNextLabelNumber();
-
-		if (fparams != null) {
-			fparams.compile(lokal);
-		}
-
-		if (declarations != null) {
-			declarations.compile(lokal);
-		}
-		int allocatedMemory = linkage + lokal.size();
-		write("LABEL, " + label);
-
-		// entry Code starts here
-		write("INIT, " + allocatedMemory);
-		write("PUSHREG, RK");
-		write("PUSHREG, FP");
-		// to do: SL Register
-		// SP := SP + lokale Variablen laenge
-		write("GETSP");
-		write("SETFP");
-		write("GETSP");
-		write("PUSHI, " + lokal.getSize());
-		write("ADD");
-		write("SETSP");
-		// end of entryCode
-
-		if (statseq != null) {
-			statseq.compile(lokal);
-		} else {
-			error("Kein StatementSequenzNode");
-		}
-
-		// exitCode starts here
-		// FP := SP
-		write("GETFP");
-		write("SETSP");
-		// to do: restore SL
-		write("POPREG, FP");
-		write("POPREG, RK");
-		write("GETSP");
-		write("PUSHI, " + fparams.size());
-		write("SUB");
-		write("SETSP");
-
-		int reduceVal = allocatedMemory + fparams.size();
-		write("REDUCE, " + reduceVal);
-		write("RET");
-
-		ProcDescriptor descr = new ProcDescriptor(label, lokal);
-		symbolTable.declare(ident.getIdentName(), descr);
-		return descr;
-
+	public AbstractDescr compile(SymbolTable symbolTable){
+		this.head.compile(symbolTable);
+		this.body.compile(symbolTable);
+		return null;
+	}
+	
+	public FormalParametersNode getParams(){
+		return head.getFparams();
 	}
 
 	@Override

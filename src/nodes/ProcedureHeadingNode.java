@@ -11,10 +11,8 @@ public class ProcedureHeadingNode extends AbstractNode {
 
     @Override
     public String toString() {
-        return "ProcedureHeadingNode{" +
-                "subject=" + subject +
-                ", fparams=" + fparams +
-                '}';
+        return "ProcedureHeadingNode{" + subject + "\n" + fparams
+        ;
     }
 
     @Override

@@ -3,14 +3,18 @@
  */
 package nodes;
 
+import descriptoren.AbstractDescr;
+import descriptoren.ProcDescr;
+import descriptoren.SymbolTable;
+
 /**
  * @author Marc Wüseke
- *
+ * 
  */
 public class ProcedureCallNode extends AbstractNode {
 	IdentNode ident = null;
 	AbstractNode actualParameters = null;
-	
+
 	/**
 	 * @param ident
 	 * @param actualParameters
@@ -21,7 +25,22 @@ public class ProcedureCallNode extends AbstractNode {
 		this.actualParameters = actualParameters;
 	}
 
-	/* (non-Javadoc)
+	public AbstractDescr compile(SymbolTable symbolTable) {
+		ProcDescr procedure = (ProcDescr) symbolTable.descriptorFor(ident.getIdentName());
+
+		// Paramter auf den Stack legen
+		if (actualParameters != null) {
+			actualParameters.compile(symbolTable);
+		}
+
+		write("CALL, " + procedure.getLabelInAssembler());
+		return null;
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -30,7 +49,9 @@ public class ProcedureCallNode extends AbstractNode {
 				+ actualParameters + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -44,7 +65,9 @@ public class ProcedureCallNode extends AbstractNode {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -68,6 +91,5 @@ public class ProcedureCallNode extends AbstractNode {
 			return false;
 		return true;
 	}
-	
-	
+
 }
