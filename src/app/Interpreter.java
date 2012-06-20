@@ -72,7 +72,7 @@ public class Interpreter {
 		}
 		
 		System.out.println("### Standalone fu");
-		String[] s = {nodeFile,"1"};
+		String[] s = {nodeFile,"0"};
 		try {
 			StandaloneCG.main(s);
 		} catch (ClassNotFoundException e) {

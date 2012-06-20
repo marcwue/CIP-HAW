@@ -20,13 +20,25 @@ public class IdentListNode extends AbstractNode {
 		return null;
 	}
 
+	public AbstractDescr compileParams(SymbolTable table, AbstractDescr descriptor) {
+		for (IdentNode node : list) {
+			table.declareParams(node.getIdentName(), descriptor);
+		}
+		return null;
+	}
+
+	public int getSize() {
+		return list.size();
+	}
+
 	@Override
 	public String toString() {
 		String s = "";
 		for (IdentNode iN : list) {
 			s += "\n" + iN.toString();
 		}
-		return "IdentListNode{" + s + "\n" + '}';
+		
+		return indent() + "IdentListNode " + s + unindent();
 	}
 
 	@Override

@@ -2,8 +2,6 @@ package app;
 
 import nodes.*;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +15,7 @@ public class Parser {
 	private MyFlexScanner scanner;
 	private MyToken nextSymbol;
 	private static String inFile;
+	static String spaces = "";
 
 	// private final static String nodeFile = "nodeFile.txt";
 
@@ -25,6 +24,14 @@ public class Parser {
 		inSymbol();
 	}
 
+	public static void indent() {
+		spaces = spaces + "  ";
+	}
+
+	public static void unindent() {
+		spaces = spaces.substring(2);
+	}
+	
 	private AbstractNode program() {
 		AbstractNode tree = null;
 
@@ -181,6 +188,7 @@ public class Parser {
 	}
 
 	private DeclarationsNode declarations() {
+		
 		List<ConstNode> constList = new LinkedList<ConstNode>();
 		List<TypeNode> typeList = new LinkedList<TypeNode>();
 		List<VarNode> varListe = new LinkedList<VarNode>();
@@ -322,16 +330,15 @@ public class Parser {
 	private AbstractNode assignment() {
 
 		AssignmentNode node;
-		AbstractNode selector;
 		AbstractNode expr;
 
 		if (testLookAhead(DOT) || testLookAhead(LBRAC)) {
-			selector = selector();
+			SelectorNode selector = selector();
 			read(ASSIGN, ":=");
 			expr = expression();
 			node = new AssignmentNode(selector, expr);
 		} else {
-			selector = constIdent();
+			IdentNode selector = constIdent();
 			read(ASSIGN, ":=");
 			expr = expression();
 			node = new AssignmentNode(selector, expr);
@@ -354,7 +361,6 @@ public class Parser {
 	// Statement = [Assignment | ProcedureCall | IfStatement | PRINT
 	// Expression | WhileStatement | RepeatStatement].
 	private AbstractNode statement() {
-		// TODO ProcedureCall
 		AbstractNode resNode = null;
 
 		if (test(IF)) {
@@ -362,7 +368,6 @@ public class Parser {
 			return resNode;
 		} else if (test(PRINT)) {
 			read(PRINT, "PRINT");
-			// TODO printNode
 			resNode = new PrintNode(expression());
 			return resNode;
 		} else if (test(WHILE)) {

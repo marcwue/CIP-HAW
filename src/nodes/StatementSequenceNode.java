@@ -15,7 +15,7 @@ public class StatementSequenceNode extends AbstractNode {
 	@Override
 	public AbstractDescr compile(SymbolTable syms) {
 		for (AbstractNode n : list) {
-			n.compile(syms);
+			n.compile(syms); 
 		}
 
 		return null;
@@ -23,7 +23,11 @@ public class StatementSequenceNode extends AbstractNode {
 
 	@Override
 	public String toString() {
-		return "StatemantSequenceNode{\n" + list + '}';
+		String s = "";
+		for(AbstractNode a : list){
+			s += a.toString() + "\n";
+		}
+		return indent() + "StatemantSequenceNode\n" + s + unindent();
 	}
 
 	@Override

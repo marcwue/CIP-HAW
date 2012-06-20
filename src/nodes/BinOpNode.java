@@ -88,8 +88,7 @@ public class BinOpNode extends AbstractNode {
 	 */
 	@Override
 	public String toString() {
-		return "TermNode [token=" + token + ", left=" + left + ", right="
-				+ right + "]";
+		return indent() + "BinOpNode " + "\n" + left + getSpaces() + "  Token[" + token + "]\n" + right + "\n" + unindent();
 	}
 
 	/*

@@ -51,8 +51,7 @@ public class ArrayNode extends AbstractNode {
 
 	@Override
 	public String toString() {
-		return "ArrayTypeNode{" + "expression=" + expression + ", basetype="
-				+ basetype + '}';
+		return indent() + "ArrayTypeNode\n" + expression +"\n"+ basetype + unindent();
 	}
 
 	@Override

@@ -16,17 +16,18 @@ public class RecordTypeNode extends AbstractNode {
 	}
 
 	public AbstractDescr compile(SymbolTable table) {
-		SymbolTable symbolTable = new SymbolTable(table); // neue Symboltabelle
+		//symbotable da record unterschiedlichen inhalt hat
+		SymbolTable symbolTable = new SymbolTable(table);
+		
 		for (AbstractNode node : fieldLists) {
-			node.compile(symbolTable); // schreibe Variablen in neue
-										// Symboltabelle
+			node.compile(symbolTable);
 		}
 		return new RecordDescr(symbolTable);
 	}
 
 	@Override
 	public String toString() {
-		return "RecordTypeNode{" + "fieldLists=" + fieldLists + '}';
+		return indent() + "RecordTypeNode" + fieldLists + unindent();
 	}
 
 	@Override

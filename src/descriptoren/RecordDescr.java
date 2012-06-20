@@ -19,7 +19,7 @@ public class RecordDescr extends AbstractDescr {
 	}
 
 	public int size() {
-		return recSymbolTable.size();
+		return recSymbolTable.getSize();
 	}
 
 	public String toString() {

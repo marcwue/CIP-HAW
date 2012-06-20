@@ -4,6 +4,9 @@
 package nodes;
 
 import descriptoren.AbstractDescr;
+import descriptoren.ArrayDescr;
+import descriptoren.IntConstDescr;
+import descriptoren.RecordDescr;
 import descriptoren.SymbolTable;
 
 import java.util.HashMap;
@@ -14,46 +17,78 @@ import java.util.Map;
  */
 public class AssignmentNode extends AbstractNode {
 
-    AbstractNode selector;
-    AbstractNode expression;
+	private final AbstractNode selector;
+	private final AbstractNode expression;
 
-    /**
-     * @param expression
-     * @param selector
-     */
-    public AssignmentNode(AbstractNode selector, AbstractNode expression) {
-        this.selector = selector;
-        this.expression = expression;
-    }
+	/**
+	 * @param expression
+	 * @param selector
+	 */
+	public AssignmentNode(AbstractNode selector, AbstractNode expression) {
+		this.selector = selector;
+		this.expression = expression;
+	}
 
-    public AbstractDescr compile(SymbolTable symbolTable) {
-    	expression.compile(symbolTable);
-    	selector.compile(symbolTable);
-    	write("ASSIGN, 1");
-    	return null;
-    }
+	public AbstractDescr compile(SymbolTable symbolTable) {
+		if (selector instanceof IdentNode
+				&& symbolTable.descriptorFor(((IdentNode) selector).getIdentName()) instanceof IntConstDescr) {
+			System.out.println("Constant "
+					+ ((IdentNode) selector).getIdentName()
+					+ " cannot be overriden");
+		}
+		AbstractDescr rightDescr = expression.compile(symbolTable);
+		if (rightDescr instanceof RecordDescr
+				|| rightDescr instanceof ArrayDescr) {
+			if (((ContentNode) expression).getSubject() instanceof IdentNode) {
+				symbolTable.link(((IdentNode) selector).getIdentName(),
+						((IdentNode) ((ContentNode) expression).getSubject())
+								.getIdentName());
+			} else if (((ContentNode) expression).getSubject() instanceof ArraySelectorNode) {
+				AbstractDescr leftDescr = selector.compile(symbolTable);
 
-    @Override
-    public String toString() {
-        return "AssignmentNode{\n" +
-                "ident=" + selector + "\n" +
-                "value=" + expression + "\n" +
-                "}\n";
-    }
+				if (!leftDescr.equals(rightDescr)) {
+					System.out.println("left type (" + leftDescr
+							+ ") is not compatible with right type ("
+							+ rightDescr + ")");
+				}
 
-	/* (non-Javadoc)
+				write("ASSIGN, " + rightDescr.getSize());
+			} else {
+				System.out
+						.println("We can only handle IdentNodes and ArraySelectorNodes");
+			}
+		} else {
+			selector.compile(symbolTable);
+			write("ASSIGN, 1");
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return indent() + "AssignmentNode\n" + selector + "\n"
+				+ expression + "\n" + unindent();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((selector == null) ? 0 : selector.hashCode());
-		result = prime * result + ((expression == null) ? 0 : expression.hashCode());
+		result = prime * result
+				+ ((selector == null) ? 0 : selector.hashCode());
+		result = prime * result
+				+ ((expression == null) ? 0 : expression.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

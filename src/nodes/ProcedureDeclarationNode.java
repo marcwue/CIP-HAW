@@ -3,7 +3,7 @@ package nodes;
 import descriptoren.AbstractDescr;
 import descriptoren.SymbolTable;
 
-public class ProcedureDeclarationNode {
+public class ProcedureDeclarationNode extends AbstractNode{
 	private final ProcedureHeadingNode head;
 	private final ProcedureBodyNode body;
 
@@ -38,7 +38,7 @@ public class ProcedureDeclarationNode {
 		write("GETSP");
 		write("SETFP");
 		write("GETSP");
-		write("PUSHI, " + lokal.size());
+		write("PUSHI, " + lokal.getSize());
 		write("ADD");
 		write("SETSP");
 		// end of entryCode

@@ -3,13 +3,17 @@
  */
 package nodes;
 
+import descriptoren.AbstractDescr;
+import descriptoren.SymbolTable;
+
 /**
  * @author Marc Wüseke
- *
+ * 
  */
-public class RepeatNode extends AbstractNode{
+public class RepeatNode extends AbstractNode {
 	AbstractNode exp1 = null;
 	AbstractNode stateSeq1 = null;
+
 	/**
 	 * @param exp1
 	 * @param stateSeq1
@@ -19,15 +23,30 @@ public class RepeatNode extends AbstractNode{
 		this.exp1 = exp1;
 		this.stateSeq1 = stateSeq1;
 	}
-	/* (non-Javadoc)
+
+	public AbstractDescr compile(SymbolTable table) {
+		int label = getNextLabelNumber();
+		write("LABEL, " + label);
+		stateSeq1.compile(table);
+		exp1.compile(table);
+		write("BF, " + label);
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "RepeatStatementNode [exp1=" + exp1 + ", stateSeq1=" + stateSeq1
-				+ "]";
+		return indent() + "RepeatStatementNode " + exp1 + "\n" + stateSeq1
+				+ unindent();
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -39,7 +58,10 @@ public class RepeatNode extends AbstractNode{
 				+ ((stateSeq1 == null) ? 0 : stateSeq1.hashCode());
 		return result;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -63,6 +85,5 @@ public class RepeatNode extends AbstractNode{
 			return false;
 		return true;
 	}
-	
-	
+
 }

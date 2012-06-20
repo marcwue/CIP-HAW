@@ -45,7 +45,7 @@ public class VarNode extends AbstractNode {
 
 	@Override
 	public String toString() {
-		return "VarNode{" + "ident=" + identList + ", type=" + type + '}';
+		return indent() + "VarNode\n" + identList + "\n" + type + unindent();
 	}
 
 	@Override

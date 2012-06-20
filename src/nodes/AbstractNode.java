@@ -9,22 +9,28 @@ import descriptoren.SymbolTable;
 public abstract class AbstractNode implements Serializable {
 
 	private static final long serialVersionUID = -5560813573289386664L;
-	static int labelCount = 1;
+	static int labelCount = 0;
+	static String spaces = "";
 
 	private static String assemblerCode = "";
 
 	public AbstractNode() {
 	}
 
-	/**
-	 * @param indent
-	 * @return
-	 */
-	protected String toString(int indent) {
-		// TODO Auto-generated method stub
-		return null;
+	public static String indent(){
+		spaces += "  ";
+		return spaces;
 	}
-
+	
+	public static String unindent(){
+		spaces = spaces.substring(2);
+		return "";
+	}
+	
+	public static String getSpaces(){
+		return spaces;
+	}
+	
 	protected String toString(int indent, String str) {
 		String indentStr = "";
 		for (int i = 0; i < indent; ++i) {

@@ -25,7 +25,7 @@ public class DeclarationsNode extends AbstractNode {
 	private final List<? extends AbstractNode> proc;
 
 	int memSize = 0;
-	
+
 	/**
 	 * @param con
 	 * @param type
@@ -34,8 +34,7 @@ public class DeclarationsNode extends AbstractNode {
 	 */
 	public DeclarationsNode(List<? extends AbstractNode> con,
 			List<? extends AbstractNode> type,
-			List<? extends AbstractNode> var, 
-			List<? extends AbstractNode> proc) {
+			List<? extends AbstractNode> var, List<? extends AbstractNode> proc) {
 		super();
 		this.con = con;
 		this.type = type;
@@ -45,9 +44,20 @@ public class DeclarationsNode extends AbstractNode {
 
 	@Override
 	public String toString() {
-		return "DeclarationsNode{" + "\n" + "con=" + con + "\n" + "type="
-				+ type + "\n" + "var=" + var + "\n" + "proc=" + proc + "\n"
-				+ '}';
+		String s = "";
+		for (AbstractNode c : con) {
+			s += c.toString() + "\n";
+		}
+		for (AbstractNode c : type) {
+			s += c.toString() + "\n";
+		}
+		for (AbstractNode c : var) {
+			s += c.toString() + "\n";
+		}
+		for (AbstractNode c : proc) {
+			s += c.toString() + "\n";
+		}
+		return indent() + "DeclarationsNode\n" + s +  unindent();
 	}
 
 	@Override
@@ -83,7 +93,7 @@ public class DeclarationsNode extends AbstractNode {
 	/**
 	 * @return memSize
 	 */
-	public int size() {
+	public int getSize() {
 		return memSize;
 	}
 
@@ -105,7 +115,7 @@ public class DeclarationsNode extends AbstractNode {
 			memSize += typeNode.compile(table).getSize();
 		}
 		for (AbstractNode varNode : var) {
-			memSize += varNode.compile(table).getSize() * varNode.getSize(); 
+			memSize += varNode.compile(table).getSize() * varNode.getSize();
 			// TODO:
 			// unschön.
 			// besser:

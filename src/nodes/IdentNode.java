@@ -33,9 +33,8 @@ public class IdentNode extends AbstractNode {
 
 	@Override
     public String toString() {
-        return "IdentNode{" +
-                "identName='" + identName + '\'' +
-                "}";
+        return indent() + "IdentNode " +
+                identName + unindent();
     }
 
     @Override

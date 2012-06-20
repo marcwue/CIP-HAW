@@ -26,7 +26,7 @@ public class PrintNode extends AbstractNode {
     }
 
     protected String toString(int indent) {
-        return toString(indent, "PrintNode\n" + expr.toString(indent));
+        return indent() + "PrintNode\n" + indent + unindent();
     }
 
 	/* (non-Javadoc)

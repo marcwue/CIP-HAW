@@ -31,11 +31,11 @@ public class RecordSelectorNode extends SelectorNode {
 		this.selector = selector;
 	}
 
-	@Override
-	protected String toString(int indent) {
-		return toString(indent, "RecordSelectorNode\n")
-				+ subject.toString(indent + 1) + "\n"
-				+ selector.toString(indent + 1);
+	
+	public String toString() {
+		return indent() + "RecordSelectorNode\n"
+				+ subject + "\n"
+				+ selector + unindent();
 	}
 
 	@Override
@@ -71,15 +71,13 @@ public class RecordSelectorNode extends SelectorNode {
 	}
 
 	public AbstractDescr compile(SymbolTable table) {
+		//bei idents gleich pushi i
 		if (subject instanceof IdentNode) {
-			RecordDescr d = (RecordDescr) table
-					.descriptorFor(((IdentNode) subject).getIdentName());
+			RecordDescr d = (RecordDescr) table.descriptorFor(((IdentNode) subject).getIdentName());
 			subject.compile(table);
 			int i = d.addressOf(((IdentNode) selector).getIdentName());
 			write("PUSHI, " + i);
 			write("ADD");
-			// System.out.println("In RecordSelector hochgegeben: " +
-			// d.descriptorFor(((IdentNode)selector).getIdentName()));
 			return d.descriptorFor(((IdentNode) selector).getIdentName());
 		} else {
 			RecordDescr d = (RecordDescr) subject.compile(table);

@@ -32,8 +32,7 @@ public class VarListNode extends AbstractNode{
 		for (VarNode iN : list) {
 			s += "\n" + iN.toString();
 		}
-        return "VarListNode{" + s + "\n" +
-                '}';
+        return indent() + "VarListNode" + s + "\n" + unindent();
     }
 
     @Override

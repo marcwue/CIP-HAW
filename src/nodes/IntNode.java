@@ -28,9 +28,7 @@ public class IntNode extends AbstractNode {
 
 	@Override
     public String toString() {
-        return "IntNode{" +
-                "value=" + value +
-                "}";
+        return indent() + "IntNode(" + value + ")\n" + unindent() ;
     }
 
     @Override

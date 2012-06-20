@@ -6,6 +6,8 @@ package app;
 import java.util.HashMap;
 import java.util.Map;
 
+import nodes.AbstractNode;
+
 /**
  * @author Marc Wüseke
  *
@@ -38,4 +40,5 @@ public enum TokenID {
     public int id() {
         return ids.get(this);
     }
+
 }

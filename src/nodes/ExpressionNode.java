@@ -22,11 +22,11 @@ public class ExpressionNode extends AbstractNode{
 
     @Override
     public String toString() {
-        return "ExpressionNode{" +
-                "token=" + token +
-                ", left=" + left +
-                ", right=" + right +
-                '}';
+        return indent() + "ExpressionNode" +
+                "\n" + token +
+                "\n" + left +
+                "\n" + right + 
+                unindent();
     }
 
     @Override

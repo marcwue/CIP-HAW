@@ -32,6 +32,10 @@ public class ContentNode extends AbstractNode {
     	return subject;
     }
     
+    public String toString(){
+    	return subject.toString();
+    }
+    
     /* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

@@ -18,10 +18,11 @@ public class ModuleNode extends AbstractNode {
 	@Override
 	public AbstractDescr compile(SymbolTable syms) {
 		int label = getNextLabelNumber();
+		write("PUSHS, m");
 		write("JMP, " + label);
 		declaration.compile(syms);
 		write("LABEL, " + label);
-		write("PUSHI, " + declaration.size());
+		write("PUSHI, " + declaration.getSize());
 		write("SETSP");
 		statementSequence.compile(syms);
 
@@ -34,9 +35,11 @@ public class ModuleNode extends AbstractNode {
 
 	@Override
 	public String toString() {
-		return "ModuleNode{\n" + "ident=" + ident + "\n" + "declaration="
-				+ declaration + "\n" + "statementSequence=" + statementSequence
-				+ "\n" + '}';
+		return "ModuleNode\n" + 
+				ident + "\n" +
+				declaration + "\n" +
+				statementSequence
+				+ "\n";
 	}
 
 	@Override

@@ -37,13 +37,6 @@ public class ArraySelectorNode extends SelectorNode{
 	}
 
 	@Override
-	protected String toString(int indent) {
-		return toString(indent, "ArraySelectorNode\n")
-				+ subject.toString(indent + 1) + "\n"
-				+ selector.toString(indent + 1);
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -176,8 +169,7 @@ public class ArraySelectorNode extends SelectorNode{
 		ArrayDescr d;
 		int typeSize;
 		if (subject instanceof IdentNode) {
-			d = (ArrayDescr) table.descriptorFor(((IdentNode) subject)
-					.getIdentName());
+			d = (ArrayDescr) table.descriptorFor(((IdentNode) subject).getIdentName());
 			typeSize = d.basetype().getSize();
 			subject.compile(table);
 			selector.compile(table);
