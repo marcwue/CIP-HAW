@@ -115,12 +115,8 @@ public class DeclarationsNode extends AbstractNode {
         for (AbstractNode typeNode : type) {
             typeNode.compile(symbolTable);
         }
-        /**
-         * varNode.getSize() gab 0 zurück für var, VarNode
-         */
         for (AbstractNode varNode : var) {
             int varS = varNode.compile(symbolTable).getSize();
-            System.out.println("###" + varNode.getSize());
             memSize += varS * varNode.getSize();
 
         }

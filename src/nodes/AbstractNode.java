@@ -62,7 +62,7 @@ public abstract class AbstractNode implements Serializable {
     }
 
     public int getSize() {
-        return 0;
+        return -9999999;
     }
 
     public void write(String s) {
