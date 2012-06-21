@@ -1,7 +1,5 @@
 package descriptoren;
 
-import cip.base.CodeGen;
-
 import java.io.Serializable;
 
 /**
@@ -13,7 +11,7 @@ public abstract class AbstractDescr implements Serializable {
     protected int level;
 
     public AbstractDescr() {
-    	
+
     }
 
     public int getLevel() {
@@ -21,6 +19,6 @@ public abstract class AbstractDescr implements Serializable {
     }
 
     public int getSize() {
-        return 0;
+        return -99999999;
     }
 }
