@@ -15,7 +15,7 @@ public class VarNode extends AbstractNode {
     }
 
     public AbstractDescr compile(SymbolTable table) {
-        AbstractDescr d = null;
+        AbstractDescr d;
         if (type instanceof IdentNode) {
             String s = ((IdentNode) type).getIdentName();
             if (s.equals("integer")) {
