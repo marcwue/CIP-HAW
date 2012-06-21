@@ -4,6 +4,8 @@ import descriptoren.AbstractDescr;
 import descriptoren.SymbolTable;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 public abstract class AbstractNode implements Serializable {
 
@@ -11,7 +13,7 @@ public abstract class AbstractNode implements Serializable {
     public static int labelCount = 1;
     static String spaces = "";
 
-    private static String assemblerCode = "";
+    private static List<String> assembler = new LinkedList<>();
 
     public AbstractNode() {
     }
@@ -64,10 +66,14 @@ public abstract class AbstractNode implements Serializable {
     }
 
     public void write(String s) {
-        assemblerCode += s + "\n";
+        assembler.add(s);
     }
 
     public String getAssemblerCode() {
-        return assemblerCode;
+        String result = "";
+        for (String elem : assembler) {
+            result += elem.toString() + "\n";
+        }
+        return result;
     }
 }

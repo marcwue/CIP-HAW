@@ -23,7 +23,7 @@ public class DeclarationsNode extends AbstractNode {
     private final List<? extends AbstractNode> var;
     private final List<? extends AbstractNode> proc;
 
-    int memSize = 0;
+    private int memSize;
 
     /**
      * @param con
@@ -35,6 +35,7 @@ public class DeclarationsNode extends AbstractNode {
                             List<? extends AbstractNode> type,
                             List<? extends AbstractNode> var, List<? extends AbstractNode> proc) {
         super();
+        this.memSize = 0;
         this.con = con;
         this.type = type;
         this.var = var;
@@ -93,7 +94,7 @@ public class DeclarationsNode extends AbstractNode {
      * @return memSize
      */
     public int getSize() {
-        System.out.println(memSize);
+        System.out.println("MemSize: " + memSize);
         return memSize;
     }
 
@@ -114,9 +115,12 @@ public class DeclarationsNode extends AbstractNode {
         for (AbstractNode typeNode : type) {
             typeNode.compile(symbolTable);
         }
+        /**
+         * varNode.getSize() gab 0 zurück für var, VarNode
+         */
         for (AbstractNode varNode : var) {
             int varS = varNode.compile(symbolTable).getSize();
-
+            System.out.println("###" + varNode.getSize());
             memSize += varS * varNode.getSize();
 
         }

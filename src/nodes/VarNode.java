@@ -34,6 +34,7 @@ public class VarNode extends AbstractNode {
         return d;
     }
 
+    @Override
     public int getSize() {
         return identList.getSize();
     }

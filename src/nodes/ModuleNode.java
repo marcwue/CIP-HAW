@@ -21,7 +21,6 @@ public class ModuleNode extends AbstractNode {
         write("PUSHS, m");
         write("JMP, " + label);
         declaration.compile(systemTable);
-        System.out.println(declaration);
         write("LABEL, " + label);
         write("PUSHI, " + declaration.getSize());
         write("SETSP");

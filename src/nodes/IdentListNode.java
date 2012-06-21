@@ -32,7 +32,7 @@ public class IdentListNode extends AbstractNode {
 
         int retSize = 0;
         for (IdentNode node : list) {
-            retSize += node.getSize();
+            retSize += 1;
         }
         return retSize;
     }
