@@ -4,7 +4,6 @@ import cip.standaloneCodeGen.StandaloneCG;
 import descriptoren.SymbolTable;
 import nodes.AbstractNode;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -18,24 +17,19 @@ public class Interpreter {
     public static void main(String[] argv) {
         System.out.println("MyStandalone Version 0.1");
 
-        if (argv.length == 0) {
+        if (argv.length != 1) {
             System.out.println("Usage : java MyStandalone <inputfile>");
-        } else {
+            System.exit(-1);
+        }
 
-            for (int i = 0; i < argv.length; i++) {
-
-                try {
-                    System.out.println("### Scan:");
-                    scanner = new MyFlexScanner(new java.io.FileReader(argv[i]));
-
-                } catch (java.io.FileNotFoundException e) {
-                    System.out.println("File not found : \"" + argv[i] + "\"");
-                } catch (Exception e) {
-                    System.out.println("Unexpected exception:");
-                    e.printStackTrace();
-                }
-            }
-
+        try {
+            System.out.println("### Scan:");
+            scanner = new MyFlexScanner(new java.io.FileReader(argv[0]));
+        } catch (java.io.FileNotFoundException e) {
+            System.out.println("File not found : \"" + argv[0] + "\"");
+        } catch (Exception e) {
+            System.out.println("Unexpected exception:");
+            e.printStackTrace();
         }
 
         System.out.println("### Parse:");
@@ -59,12 +53,7 @@ public class Interpreter {
             os = new ObjectOutputStream(new FileOutputStream(nodeFile));
             os.writeUTF(ergTree.getAssemblerCode());
             os.flush();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
 
         System.out.println("### Standalone fu");
@@ -72,9 +61,7 @@ public class Interpreter {
         try {
             StandaloneCG.main(s);
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 }
