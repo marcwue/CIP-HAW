@@ -4,34 +4,33 @@ package nodes;
 import descriptoren.AbstractDescr;
 import descriptoren.SymbolTable;
 
-import java.util.HashMap;
 import java.util.List;
 
-public class VarListNode extends AbstractNode{
+public class VarListNode extends AbstractNode {
     private final List<VarNode> list;
     private int memSize = 0;
-    
+
     public VarListNode(List<VarNode> list) {
         this.list = list;
     }
 
     public AbstractDescr compile(SymbolTable symboltable) {
-        for(VarNode varNode : list) {
-        	memSize += varNode.compile(symboltable).getSize() * varNode.getSize();
+        for (VarNode varNode : list) {
+            memSize += varNode.compile(symboltable).getSize() * varNode.getSize();
         }
         return null;
     }
-    
-    public int getSize(){
-    	return memSize;
+
+    public int getSize() {
+        return memSize;
     }
 
     @Override
     public String toString() {
-    	String s = "";
-		for (VarNode iN : list) {
-			s += "\n" + iN.toString();
-		}
+        String s = "";
+        for (VarNode iN : list) {
+            s += "\n" + iN.toString();
+        }
         return indent() + "VarListNode" + s + "\n" + unindent();
     }
 

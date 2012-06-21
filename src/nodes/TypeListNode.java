@@ -1,35 +1,35 @@
 package nodes;
 
-import java.util.List;
-
 import descriptoren.AbstractDescr;
 import descriptoren.SymbolTable;
+
+import java.util.List;
 
 public class TypeListNode extends AbstractNode {
     private List<TypeNode> list;
     int memSize = 0;
-    
+
     public TypeListNode(List<TypeNode> list) {
         this.list = list;
     }
 
     public AbstractDescr compile(SymbolTable table) {
-		for (AbstractNode typeNode : list) {
-			memSize += typeNode.compile(table).getSize();
-		}
-		return null;
-	}
-    
-    public int getSize(){
-    	return memSize;
+        for (AbstractNode typeNode : list) {
+            memSize += typeNode.compile(table).getSize();
+        }
+        return null;
     }
-    
+
+    public int getSize() {
+        return memSize;
+    }
+
     @Override
     public String toString() {
-    	String s = "";
-		for (TypeNode iN : list) {
-			s += "\n" + iN.toString();
-		}
+        String s = "";
+        for (TypeNode iN : list) {
+            s += "\n" + iN.toString();
+        }
         return "TypeListNode{" + s +
                 '}';
     }

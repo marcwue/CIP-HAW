@@ -28,9 +28,9 @@ public class VarDescr extends AbstractDescr {
     public AbstractDescr getType() {
         return type;
     }
-    
-    public int getSize(){
-    	return -1;
+
+    public int getSize() {
+        return -1;
     }
 
 }

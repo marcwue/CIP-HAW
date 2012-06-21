@@ -9,24 +9,24 @@ public class IdentNode extends AbstractNode {
     public IdentNode(String identName) {
         this.identName = identName;
     }
-    
+
     /* (non-Javadoc)
-	 * @see nodes.AbstractNode#compile(java.util.HashMap)
-	 */
-	@Override
-	public AbstractDescr compile(SymbolTable symbolTable) {
-		write("PUSHI, "+symbolTable.addressOf(identName));
-		return null;
-	}
+      * @see nodes.AbstractNode#compile(java.util.HashMap)
+      */
+    @Override
+    public AbstractDescr compile(SymbolTable symbolTable) {
+        write("PUSHI, " + symbolTable.addressOf(identName));
+        return null;
+    }
 
-	/**
-	 * @return the identName
-	 */
-	public String getIdentName() {
-		return identName;
-	}
+    /**
+     * @return the identName
+     */
+    public String getIdentName() {
+        return identName;
+    }
 
-	@Override
+    @Override
     public String toString() {
         return indent() + "IdentNode " +
                 identName + unindent();

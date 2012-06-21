@@ -1,21 +1,18 @@
 /**
- * 
+ *
  */
 package app;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import nodes.AbstractNode;
-
 /**
  * @author Marc Wüseke
- *
  */
 public enum TokenID {
     //enums
 
-	WHITESPACE, BEGINSY, ENDSY, 
+    WHITESPACE, BEGINSY, ENDSY,
     MUL, PLUS, MINUS, DIV, ASSIGN,
     EQ, NEQ, LO, LOEQ, HI, HIEQ,
     DOT, COMMA, COLON, LPAR, RPAR, LBRAC, RBRAC, SEMICOLON,
@@ -24,7 +21,7 @@ public enum TokenID {
     ARRAY, RECORD, CONST, TYPE, STR,
     VAR, PROCEDURE, BEGIN, MODULE, ERROR, INT, ID, BLANK,
     BOOLEAN;
-    
+
     private static final int startValue = 256;
     private static final Map<TokenID, Integer> ids;
 

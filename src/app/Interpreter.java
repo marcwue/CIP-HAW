@@ -23,7 +23,7 @@ public class Interpreter {
         }
 
         try {
-            System.out.println("### Scan:");
+            System.out.println("\n### Scan:");
             scanner = new MyFlexScanner(new java.io.FileReader(argv[0]));
         } catch (java.io.FileNotFoundException e) {
             System.out.println("File not found : \"" + argv[0] + "\"");
@@ -32,20 +32,20 @@ public class Interpreter {
             e.printStackTrace();
         }
 
-        System.out.println("### Parse:");
+        System.out.println("\n### Parse:");
         Parser parser = new Parser(scanner);
         AbstractNode ergTree = parser.parse();
 
-        System.out.println("### Tree:");
+        System.out.println("\n### Tree:");
         System.out.println(ergTree);
 
-        System.out.println("### Compile:");
+        System.out.println("\n### Compile:");
         ergTree.compile(symbolTable);
 
-        System.out.println("### SymbolTable:");
+        System.out.println("\n### SymbolTable:");
         System.out.println(symbolTable);
 
-        System.out.println("### Code:");
+        System.out.println("\n### Code:");
         System.out.println(ergTree.getAssemblerCode());
 
         ObjectOutputStream os;

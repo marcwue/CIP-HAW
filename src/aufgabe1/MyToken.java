@@ -48,7 +48,7 @@ enum TokenID {
     END, ELSE, ELSIF, IF, WHILE, REPEAT, UNTIL,
     ARRAY, RECORD, CONST, TYPE,
     VAR, PROCEDURE, BEGIN, MODULE, ERROR, INT, ID, BLANK;
-    
+
     private static final int startValue = 256;
     private static final Map<TokenID, Integer> ids;
 

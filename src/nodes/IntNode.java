@@ -1,9 +1,5 @@
 package nodes;
 
-import java.util.HashMap;
-
-import cip.base.CodeGen;
-
 import descriptoren.AbstractDescr;
 import descriptoren.SymbolTable;
 
@@ -14,21 +10,21 @@ public class IntNode extends AbstractNode {
         this.value = value;
     }
 
-    public AbstractDescr compile(SymbolTable symbolTable){
-    	write("PUSHI, "+value);
-    	return super.compile(symbolTable); 
+    public AbstractDescr compile(SymbolTable symbolTable) {
+        write("PUSHI, " + value);
+        return super.compile(symbolTable);
     }
-    
-    /**
-	 * @return the value
-	 */
-	public Integer getValue() {
-		return value;
-	}
 
-	@Override
+    /**
+     * @return the value
+     */
+    public Integer getValue() {
+        return value;
+    }
+
+    @Override
     public String toString() {
-        return indent() + "IntNode(" + value + ")\n" + unindent() ;
+        return indent() + "IntNode(" + value + ")\n" + unindent();
     }
 
     @Override

@@ -9,7 +9,7 @@ import app.MyToken;
  * Time: 16:50
  * To change this template use File | Settings | File Templates.
  */
-public class ExpressionNode extends AbstractNode{
+public class ExpressionNode extends AbstractNode {
     MyToken token;
     AbstractNode left;
     AbstractNode right;
@@ -25,7 +25,7 @@ public class ExpressionNode extends AbstractNode{
         return indent() + "ExpressionNode" +
                 "\n" + token +
                 "\n" + left +
-                "\n" + right + 
+                "\n" + right +
                 unindent();
     }
 
