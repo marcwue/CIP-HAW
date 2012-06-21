@@ -25,12 +25,6 @@ public class DeclarationsNode extends AbstractNode {
 
     private int memSize;
 
-    /**
-     * @param con
-     * @param type
-     * @param var
-     * @param proc
-     */
     public DeclarationsNode(List<? extends AbstractNode> con,
                             List<? extends AbstractNode> type,
                             List<? extends AbstractNode> var, List<? extends AbstractNode> proc) {
