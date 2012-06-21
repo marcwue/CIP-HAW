@@ -9,7 +9,7 @@ public class IntConstDescr extends AbstractDescr {
 
 	@Override
 	public int getSize() {
-		return 0;
+		return 1;
 	}
 
 	public int value() {

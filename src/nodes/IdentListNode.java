@@ -27,8 +27,14 @@ public class IdentListNode extends AbstractNode {
 		return null;
 	}
 
+	@Override
 	public int getSize() {
-		return list.size();
+		
+		int retSize = 0;
+		for (IdentNode node : list) {
+			retSize += node.getSize();
+		}
+		return retSize;
 	}
 
 	@Override

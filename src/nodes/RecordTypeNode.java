@@ -14,7 +14,7 @@ public class RecordTypeNode extends AbstractNode {
 	public RecordTypeNode(List<FieldListNode> fieldLists) {
 		this.fieldLists = new ArrayList<FieldListNode>(fieldLists);
 	}
-
+	
 	public AbstractDescr compile(SymbolTable table) {
 		//symbotable da record unterschiedlichen inhalt hat
 		SymbolTable symbolTable = new SymbolTable(table);
@@ -25,6 +25,17 @@ public class RecordTypeNode extends AbstractNode {
 		return new RecordDescr(symbolTable);
 	}
 
+	@Override
+	public int getSize(){
+		int returnSize = 0;
+		
+		for (FieldListNode elem : fieldLists){
+			returnSize += elem.getSize();
+		}
+		
+		return returnSize;
+	}
+	
 	@Override
 	public String toString() {
 		return indent() + "RecordTypeNode" + fieldLists + unindent();
