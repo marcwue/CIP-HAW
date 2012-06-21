@@ -15,7 +15,7 @@ public class ProcedureDeclarationNode extends AbstractNode{
 
 	public AbstractDescr compile(SymbolTable symbolTable){
 		this.head.compile(symbolTable);
-		this.body.compile(symbolTable);
+		this.body.compile(symbolTable, head.getProcSymbolTable(), getParams().getSize());
 		return null;
 	}
 	
@@ -25,8 +25,7 @@ public class ProcedureDeclarationNode extends AbstractNode{
 
 	@Override
 	public String toString() {
-		return "ProcedureDeclarationNode{" + "head=" + head + ", body=" + body
-				+ '}';
+		return indent() + "ProcedureDeclarationNode" + head + "\n" + body + unindent();
 	}
 
 	@Override

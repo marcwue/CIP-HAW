@@ -1,12 +1,7 @@
 package nodes;
 
-import java.util.HashMap;
-
-import cip.base.CodeGen;
-
 import descriptoren.AbstractDescr;
 import descriptoren.SymbolTable;
-import descriptoren.VarDescr;
 
 public class IdentNode extends AbstractNode {
     private final String identName;

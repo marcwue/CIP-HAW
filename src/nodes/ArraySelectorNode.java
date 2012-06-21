@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
 import descriptoren.AbstractDescr;
 import descriptoren.ArrayDescr;
 import descriptoren.SymbolTable;

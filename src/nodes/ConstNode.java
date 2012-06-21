@@ -22,21 +22,19 @@ public class ConstNode extends AbstractNode {
 		IdentNode id = (IdentNode) ident;
 		IntConstDescr value = null;
 		if (exp instanceof BinOpNode) {
-			value = new IntConstDescr(
-					(Integer) ((BinOpNode) exp).getVal());
+			value = new IntConstDescr((Integer) ((BinOpNode) exp).getVal());
 		} else if (exp instanceof IntNode) {
 			value = new IntConstDescr(((IntNode) exp).getValue());
 		} else {
 			System.out.println("unsupported value: " + exp);
 		}
 		table.declare(id.getIdentName(), value);
-		return value; // da nur in Tabelle geschrieben wird --> kein geeigneter
-						// Rueckgabewert vorhanden
+		return value;
 	}
 
 	@Override
 	public String toString() {
-		return "ConstNode{" + "ident=" + ident + ", exp=" + exp + '}';
+		return indent() + "ConstNode" + ident + exp + unindent();
 	}
 
 	@Override

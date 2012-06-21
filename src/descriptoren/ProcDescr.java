@@ -18,6 +18,10 @@ public class ProcDescr extends AbstractDescr {
 		return lokal;
 	}
 
+	public String toString(){
+		return "  " + lokal.toString();
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

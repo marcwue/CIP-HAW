@@ -37,12 +37,10 @@ public class AssignmentNode extends AbstractNode {
 					+ " cannot be overriden");
 		}
 		AbstractDescr rightDescr = expression.compile(symbolTable);
-		if (rightDescr instanceof RecordDescr
-				|| rightDescr instanceof ArrayDescr) {
+		if (rightDescr instanceof RecordDescr || rightDescr instanceof ArrayDescr) {
 			if (((ContentNode) expression).getSubject() instanceof IdentNode) {
 				symbolTable.link(((IdentNode) selector).getIdentName(),
-						((IdentNode) ((ContentNode) expression).getSubject())
-								.getIdentName());
+						((IdentNode) ((ContentNode) expression).getSubject()).getIdentName());
 			} else if (((ContentNode) expression).getSubject() instanceof ArraySelectorNode) {
 				AbstractDescr leftDescr = selector.compile(symbolTable);
 
@@ -55,7 +53,7 @@ public class AssignmentNode extends AbstractNode {
 				write("ASSIGN, " + rightDescr.getSize());
 			} else {
 				System.out
-						.println("We can only handle IdentNodes and ArraySelectorNodes");
+						.println("nur IdentNodes und ArraySelectorNodes");
 			}
 		} else {
 			selector.compile(symbolTable);

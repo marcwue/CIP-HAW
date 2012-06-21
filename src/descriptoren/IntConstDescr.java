@@ -30,6 +30,6 @@ public class IntConstDescr extends AbstractDescr {
 	}
 
 	public String toString() {
-		return "IntConstDescriptor[Value == " + value + " ] ";
+		return "IntConstDescriptor value=" + value;
 	}
 }

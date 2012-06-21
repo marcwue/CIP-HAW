@@ -18,19 +18,18 @@ public class SymbolTable {
 	private Map<String, AbstractDescr> descriptorMap = new HashMap<String, AbstractDescr>();
 	private Map<String, Integer> addressMap = new HashMap<String, Integer>();
 	private int currentAddress = 0;
-	private int currentParameterAddress = -2; // muss spaeter geaendert werden
+	private int currentParameterAddress = -3; // muss spaeter geaendert werden
 												// -> wenn SL-Register eingebaut
 	private SymbolTable parentTable;
 
 	public SymbolTable() {
-		super();
+		this.parentTable = null;
 	}
 
 	/**
 	 * @param parentTable
 	 */
 	public SymbolTable(SymbolTable parentTable) {
-		super();
 		this.parentTable = parentTable;
 	}
 
@@ -139,6 +138,13 @@ public class SymbolTable {
 				System.out.println("Cann't link address. " + ident + " and "
 						+ toIdent + " have different types.");
 		}
+	}
+
+	public int getLevel() {
+		if (this.parentTable == null)
+			return 0;
+		else
+			return 1 + parentTable.getLevel();
 	}
 
 }

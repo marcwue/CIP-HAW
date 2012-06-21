@@ -9,7 +9,7 @@ import descriptoren.SymbolTable;
 public abstract class AbstractNode implements Serializable {
 
 	private static final long serialVersionUID = -5560813573289386664L;
-	static int labelCount = 0;
+	public static int labelCount = 1;
 	static String spaces = "";
 
 	private static String assemblerCode = "";

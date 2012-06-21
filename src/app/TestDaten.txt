@@ -1,14 +1,13 @@
-module m;
+module m3;
 
-var i : integer;
+const
+ c1 = 10;
+ c2 = 20;
+ 
+var 
+ i,j : integer;
+ 
+begin
+ print c1;
 
-PROCEDURE p1();
-	var i,j,k : integer;
-	begin 
-	i := 99; 
-end p1;
-
-begin 
-
-
-end m.
+end m3.

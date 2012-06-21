@@ -97,7 +97,7 @@ public class DeclarationsNode extends AbstractNode {
 		return memSize;
 	}
 
-	public AbstractDescr compile(SymbolTable table) {
+	public AbstractDescr compile(SymbolTable symbolTable) {
 		// wird nicht gehen wegen der getSize() auf
 		// nullPointer
 		// memSize += con.compile(table).getSize();
@@ -109,20 +109,16 @@ public class DeclarationsNode extends AbstractNode {
 		// memSize += proc.compile(table).getSize();
 
 		for (AbstractNode constNode : con) {
-			memSize += constNode.compile(table).getSize();
+			memSize += constNode.compile(symbolTable).getSize();
 		}
 		for (AbstractNode typeNode : type) {
-			memSize += typeNode.compile(table).getSize();
+			typeNode.compile(symbolTable);
 		}
 		for (AbstractNode varNode : var) {
-			memSize += varNode.compile(table).getSize() * varNode.getSize();
-			// TODO:
-			// unschön.
-			// besser:
-			// identlistdescriptor
+			memSize += varNode.compile(symbolTable).getSize() * varNode.getSize();
 		}
 		for (AbstractNode procNode : proc) {
-			procNode.compile(table);
+			procNode.compile(symbolTable);
 		}
 
 		return null;

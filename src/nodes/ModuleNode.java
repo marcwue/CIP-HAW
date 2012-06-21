@@ -16,18 +16,16 @@ public class ModuleNode extends AbstractNode {
 	}
 
 	@Override
-	public AbstractDescr compile(SymbolTable syms) {
+	public AbstractDescr compile(SymbolTable systemTable) {
 		int label = getNextLabelNumber();
 		write("PUSHS, m");
 		write("JMP, " + label);
-		declaration.compile(syms);
+		declaration.compile(systemTable);
 		write("LABEL, " + label);
 		write("PUSHI, " + declaration.getSize());
 		write("SETSP");
-		statementSequence.compile(syms);
+		statementSequence.compile(systemTable);
 
-		// module node is the outermost node in a program
-		// it has to tell the interpreter it reached the end of the code
 		write("STOP");
 
 		return null;

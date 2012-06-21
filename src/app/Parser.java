@@ -172,7 +172,10 @@ public class Parser {
 		AbstractNode statementSeqNode = statementSeq();
 
 		read(END);
-		return new ProcedureBodyNode(declarations, statementSeqNode);
+
+		IdentNode decIdent = constIdent();
+		
+		return new ProcedureBodyNode(decIdent, declarations, statementSeqNode);
 	}
 
 	// ProcedureDeclaration = ProcedureHeading ’;’
@@ -181,8 +184,6 @@ public class Parser {
 		ProcedureHeadingNode head = procedureHeading();
 		read(SEMICOLON, ";");
 		ProcedureBodyNode body = procedureBody();
-		IdentNode procEndName = constIdent();
-
 		return new ProcedureDeclarationNode(head, body);
 	}
 
