@@ -39,7 +39,8 @@ public class FPSectionNode extends AbstractNode {
         return null;
     }
 
-    public int size() {
+    @Override
+    public int getSize() {
         if (sectionType == null)
             return -1;
         IdentListNode n = (IdentListNode) node;

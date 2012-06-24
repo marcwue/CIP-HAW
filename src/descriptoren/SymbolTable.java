@@ -19,7 +19,7 @@ public class SymbolTable {
     private int currentAddress = 0;
 
     //Todo Sinn klären
-    private int currentParameterAddress = -3; // muss spaeter geaendert werden
+    private int currentParameterAddress = 0; // muss spaeter geaendert werden
     // -> wenn SL-Register eingebaut
     private SymbolTable parentTable;
 
@@ -35,11 +35,6 @@ public class SymbolTable {
         addressMap = new HashMap<>();
     }
 
-    /*
-      * (non-Javadoc)
-      *
-      * @see java.lang.Object#toString()
-      */
     @Override
     public String toString() {
         String retS = "Descriptor Map:\n";
@@ -84,7 +79,7 @@ public class SymbolTable {
 
     public void declareParams(String ident, AbstractDescr descr) {
         if (!(addressMap.containsKey(ident))) {
-            currentParameterAddress = currentParameterAddress - descr.getSize();
+            currentParameterAddress = currentParameterAddress + descr.getSize();
             addressMap.put(ident, currentParameterAddress);
             descriptorMap.put(ident, descr);
         } else {

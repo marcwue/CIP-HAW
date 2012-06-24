@@ -16,7 +16,7 @@ public class ProcDescr extends AbstractDescr {
 
     @Override
     public int getSize() {
-        return lokal.getSize();
+        return lokal.getSize() + 1;
     }
 
     public SymbolTable getLokal() {
