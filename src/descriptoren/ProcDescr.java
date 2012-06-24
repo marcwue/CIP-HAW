@@ -14,6 +14,11 @@ public class ProcDescr extends AbstractDescr {
         return labelInAssembler;
     }
 
+    @Override
+    public int getSize() {
+        return lokal.getSize();
+    }
+
     public SymbolTable getLokal() {
         return lokal;
     }
