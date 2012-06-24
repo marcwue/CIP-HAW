@@ -65,10 +65,6 @@ public class ArraySelectorNode extends SelectorNode {
         return true;
     }
 
-    public int address() {
-        return 0;
-    }
-
     /**
      * @param symbolTable
      * @return array with 2 elements (size and address of the resolved selector)
@@ -181,5 +177,13 @@ public class ArraySelectorNode extends SelectorNode {
             write("ADD");
         }
         return d.basetype();
+    }
+
+    @Override
+    public String toString() {
+        return "ArraySelectorNode{" +
+                "subject=" + subject +
+                ", selector=" + selector +
+                '}';
     }
 }
