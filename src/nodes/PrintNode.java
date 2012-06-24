@@ -24,6 +24,11 @@ public class PrintNode extends AbstractNode {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return "PrintNode\n" + " " + this.expr;
+    }
+
     protected String toString(int indent) {
         return indent() + "PrintNode\n" + indent + unindent();
     }
